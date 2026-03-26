@@ -1,0 +1,182 @@
+ <header class="site-header" id="mainHeader">
+    <div class="header-container">
+        <!-- Logo -->
+        <div class="logo" onclick="window.location.href='index.html'">
+            <div class="logo-image-wrapper">
+                <img src="images/MiniToologo.png" alt="Mini Tool Box Logo" class="logo-img">
+                <div class="logo-ring"></div>
+            </div>
+            <span class="logo-text">Mini<span class="logo-highlight">Tool Box</span></span>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <nav class="desktop-nav">
+            <a href="index.html" class="nav-link active">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            
+            <!-- Toolkit Dropdown - FIXED -->
+            <div class="toolkit-wrapper">
+                <button class="toolkit-trigger nav-link" onclick="window.toggleToolkitMenu(event)">
+                    <i class="fas fa-tools"></i>
+                    <span>Toolkit</span>
+                    <i class="fas fa-chevron-down toolkit-arrow"></i>
+                </button>
+                
+                <div class="toolkit-menu" id="toolkitMenu">
+                    <div class="toolkit-menu-header">
+                        <div class="toolkit-menu-avatar">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <span class="toolkit-menu-title">AI-Powered Tools</span>
+                    </div>
+                    
+                    <div class="toolkit-scrollable-content">
+                        <!-- Writing Tools -->
+                        <div class="toolkit-category">
+                            <h4><i class="fas fa-pen-fancy"></i> Writing Tools</h4>
+                            <a href="humanizer.html" class="toolkit-menu-item"><i class="fas fa-robot"></i><span>AI Humanizer</span></a>
+                            <a href="paraphrasing.html" class="toolkit-menu-item"><i class="fas fa-magic"></i><span>Paraphrasing Tool</span></a>
+                            <a href="sentence-rewriter.html" class="toolkit-menu-item"><i class="fas fa-pen-fancy"></i><span>Sentence Rewriter</span></a>
+                            <a href="rewording.html" class="toolkit-menu-item"><i class="fas fa-language"></i><span>Rewording Tool</span></a>
+                            <a href="summarizer.html" class="toolkit-menu-item"><i class="fas fa-compress-alt"></i><span>Summarizer</span></a>
+                        </div>
+                        
+                        <div class="toolkit-menu-divider"></div>
+                        
+                        <!-- Editing Tools -->
+                        <div class="toolkit-category">
+                            <h4><i class="fas fa-check-double"></i> Editing Tools</h4>
+                            <a href="grammar.html" class="toolkit-menu-item"><i class="fas fa-check-double"></i><span>Grammar Checker</span></a>
+                            <a href="spell-checker.html" class="toolkit-menu-item"><i class="fas fa-spell-check"></i><span>Spell Checker</span></a>
+                            <a href="word-counter.html" class="toolkit-menu-item"><i class="fas fa-calculator"></i><span>Word Counter</span></a>
+                        </div>
+                        
+                        <div class="toolkit-menu-divider"></div>
+                        
+                        <!-- Advanced Tools -->
+                        <div class="toolkit-category">
+                            <h4><i class="fas fa-globe"></i> Advanced Tools</h4>
+                            <a href="translator.html" class="toolkit-menu-item"><i class="fas fa-globe"></i><span>Translator</span></a>
+                            <a href="plagiarism.html" class="toolkit-menu-item"><i class="fas fa-shield-alt"></i><span>Plagiarism Checker</span></a>
+                            <a href="ai-detector.html" class="toolkit-menu-item"><i class="fas fa-microchip"></i><span>AI Detector</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="premium.html" class="premium-link">
+                <button class="premium-btn">
+                    <i class="fas fa-crown"></i>
+                    <span>Premium</span>
+                </button>
+            </a>
+            
+            <!-- Profile Dropdown - DYNAMIC -->
+            <div class="profile-wrapper">
+                <button class="profile-icon-container" onclick="window.toggleProfileMenu(event)" aria-label="Profile menu">
+                    <div class="avatar-circle" id="headerAvatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </button>
+                
+                <div class="profile-menu" id="profileMenu">
+                    <div class="profile-menu-header">
+                        <div class="profile-menu-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <span class="profile-menu-title" id="profileMenuName">Account</span>
+                    </div>
+                    
+                    <!-- DYNAMIC MENU ITEMS - EMPTY CONTAINER -->
+                    <div id="dynamicProfileMenu" class="dynamic-menu-container"></div>
+                    
+                    <div class="profile-menu-divider"></div>
+                    
+                    <a href="contact.html" class="profile-menu-item"><i class="fas fa-envelope"></i><span>Contact Us</span></a>
+                    
+                    <button onclick="window.toggleDarkMode(event)" class="profile-menu-item theme-toggle">
+                        <i class="fas fa-moon"></i>
+                        <span>Dark Mode</span>
+                        <span class="toggle-indicator">
+                            <i class="fas fa-toggle-off"></i>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" onclick="window.toggleMobileMenu()" aria-label="Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <div class="mobile-nav-avatar" id="mobileNavAvatar">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <span class="mobile-nav-title" id="mobileNavTitle">Menu</span>
+            <button class="mobile-nav-close" onclick="window.toggleMobileMenu()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="mobile-nav-content">
+            <a href="index.html" class="mobile-nav-link active">
+                <i class="fas fa-home"></i><span>Home</span>
+            </a>
+            
+            <!-- Mobile Toolkit Section -->
+            <div class="mobile-toolkit-section">
+                <div class="mobile-toolkit-header">
+                    <i class="fas fa-tools"></i>
+                    <span>Toolkit</span>
+                </div>
+                
+                <div class="mobile-toolkit-category">
+                    <h4>Writing Tools</h4>
+                    <a href="humanizer.html" class="mobile-nav-link toolkit-link"><i class="fas fa-robot"></i><span>AI Humanizer</span></a>
+                    <a href="paraphrasing.html" class="mobile-nav-link toolkit-link"><i class="fas fa-magic"></i><span>Paraphrasing Tool</span></a>
+                    <a href="sentence-rewriter.html" class="mobile-nav-link toolkit-link"><i class="fas fa-pen-fancy"></i><span>Sentence Rewriter</span></a>
+                    <a href="rewording.html" class="mobile-nav-link toolkit-link"><i class="fas fa-language"></i><span>Rewording Tool</span></a>
+                    <a href="summarizer.html" class="mobile-nav-link toolkit-link"><i class="fas fa-compress-alt"></i><span>Summarizer</span></a>
+                </div>
+                
+                <div class="mobile-toolkit-category">
+                    <h4>Editing Tools</h4>
+                    <a href="grammar.html" class="mobile-nav-link toolkit-link"><i class="fas fa-check-double"></i><span>Grammar Checker</span></a>
+                    <a href="spell-checker.html" class="mobile-nav-link toolkit-link"><i class="fas fa-spell-check"></i><span>Spell Checker</span></a>
+                    <a href="word-counter.html" class="mobile-nav-link toolkit-link"><i class="fas fa-calculator"></i><span>Word Counter</span></a>
+                </div>
+                
+                <div class="mobile-toolkit-category">
+                    <h4>Advanced Tools</h4>
+                    <a href="translator.html" class="mobile-nav-link toolkit-link"><i class="fas fa-globe"></i><span>Translator</span></a>
+                    <a href="plagiarism.html" class="mobile-nav-link toolkit-link"><i class="fas fa-shield-alt"></i><span>Plagiarism Checker</span></a>
+                    <a href="ai-detector.html" class="mobile-nav-link toolkit-link"><i class="fas fa-microchip"></i><span>AI Detector</span></a>
+                </div>
+            </div>
+            
+            <a href="premium.html" class="mobile-nav-link premium-link">
+                <i class="fas fa-crown"></i><span>Premium</span>
+                <span class="premium-badge">PRO</span>
+            </a>
+            
+            <div class="mobile-nav-divider"></div>
+            
+            <!-- DYNAMIC MOBILE MENU - EMPTY CONTAINER -->
+            <div id="dynamicMobileMenu" class="dynamic-menu-container"></div>
+            
+            <button onclick="window.toggleDarkMode(event)" class="mobile-nav-link theme-toggle-btn">
+                <i class="fas fa-moon"></i>
+                <span>Dark Mode</span>
+                <i class="fas fa-toggle-off toggle-icon"></i>
+            </button>
+        </div>
+    </div>
+</header>
+

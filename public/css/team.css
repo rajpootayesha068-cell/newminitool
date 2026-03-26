@@ -1,0 +1,993 @@
+/* ========================================
+    SAPPHIRE TEAM PAGE STYLES
+   ======================================== */
+
+:root {
+    --sapphire-deep: #000428;
+    --accent-cyan: #00d4ff;
+    --glass-white: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --success-color: #00ff88;
+    --warning-color: #ffaa00;
+    --team-blue: #4361ee;
+    --team-purple: #7209b7;
+}
+
+/* 1. GLOBAL RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: var(--sapphire-deep);
+    min-height: 100vh;
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
+
+/* 2. ANIMATED BACKGROUND */
+.background-wrapper {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.5;
+    animation: moveOrbs 20s infinite alternate ease-in-out;
+}
+
+.orb-1 {
+    width: 45vw; height: 45vw;
+    background: var(--accent-cyan);
+    top: -10%; left: -10%;
+}
+
+.orb-2 {
+    width: 40vw; height: 40vw;
+    background: #d4c1fa;
+    bottom: -10%; right: -5%;
+    animation-delay: -5s;
+}
+
+
+@keyframes moveOrbs {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(80px, 40px) scale(1.1); }
+}
+
+@keyframes flyUp {
+    0% { transform: translateY(110vh) scale(0); opacity: 0; }
+    50% { opacity: 0.5; }
+    100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+/* 4. MAIN CONTAINER */
+.team-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 5. TEAM HERO */
+.team-hero {
+    padding: 60px 40px;
+    text-align: center;
+    margin: 30px 0;
+    background: linear-gradient(135deg, 
+        rgba(67, 97, 238, 0.1), 
+        rgba(114, 9, 183, 0.1));
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(67, 97, 238, 0.2);
+    color: var(--team-blue);
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    border: 1px solid rgba(67, 97, 238, 0.3);
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, var(--team-blue) 40%, var(--team-purple));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    max-width: 800px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-align: left;
+}
+
+.stat-item i {
+    font-size: 2.5rem;
+    color: var(--team-blue);
+    background: rgba(67, 97, 238, 0.1);
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 6. PRICING TIERS */
+.pricing-tiers {
+    margin: 60px 0;
+}
+
+.section-title {
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #ffffff 40%, var(--accent-cyan));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    font-size: 1.2rem;
+}
+
+.tiers-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.tier-card {
+    padding: 40px 30px;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.tier-card:hover {
+    transform: translateY(-10px);
+}
+
+.tier-card.recommended {
+    border: 2px solid var(--team-blue);
+    background: linear-gradient(135deg, 
+        rgba(67, 97, 238, 0.05), 
+        rgba(114, 9, 183, 0.05));
+}
+
+.recommended-badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--team-blue), var(--team-purple));
+    color: white;
+    padding: 8px 25px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tier-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.tier-header {
+    margin-bottom: 30px;
+}
+
+.tier-header h3 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+}
+
+.tier-description {
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.tier-price {
+    margin: 30px 0;
+}
+
+.price-main {
+    margin-bottom: 15px;
+}
+
+.price {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.period {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-left: 5px;
+}
+
+.price-yearly {
+    margin-top: 15px;
+}
+
+.amount {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.note {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.discount {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--success-color);
+    color: #000;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.tier-features {
+    margin: 30px 0;
+}
+
+.tier-features h4 {
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.tier-features ul {
+    list-style: none;
+}
+
+.tier-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.tier-features li i {
+    color: var(--success-color);
+    margin-top: 3px;
+}
+
+.tier-features li i.fa-times {
+    color: var(--text-secondary);
+    opacity: 0.5;
+}
+
+.tier-select-btn {
+    width: 100%;
+    padding: 18px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: none;
+    margin-top: 30px;
+    background: transparent;
+    color: var(--text-primary);
+    border: 2px solid var(--glass-border);
+}
+
+.tier-select-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-cyan);
+}
+
+.tier-select-btn.primary {
+    background: linear-gradient(135deg, var(--team-blue), var(--team-purple));
+    color: white;
+}
+
+.tier-select-btn.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(67, 97, 238, 0.3);
+}
+
+.tier-select-btn.enterprise {
+    background: transparent;
+    color: var(--text-primary);
+    border: 2px solid var(--team-purple);
+}
+
+.tier-select-btn.enterprise:hover {
+    background: rgba(114, 9, 183, 0.1);
+    border-color: var(--team-blue);
+}
+
+.tier-select-link {
+    text-decoration: none;
+    display: block;
+}
+
+/* 7. CALCULATOR SECTION */
+.calculator-section {
+    padding: 50px;
+    margin: 60px 0;
+}
+
+.calculator-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.calculator-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.calculator-header p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.calculator-controls {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 40px;
+}
+
+.seats-selector {
+    margin-bottom: 30px;
+}
+
+.seats-selector label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.seats-input {
+    margin: 20px 0;
+}
+
+input[type="range"] {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    background: var(--team-blue);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid white;
+    box-shadow: 0 0 10px rgba(67, 97, 238, 0.5);
+}
+
+.seats-value {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.seats-value span {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--team-blue);
+}
+
+.seats-options {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.seat-option {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.seat-option:hover, .seat-option.active {
+    background: var(--team-blue);
+    color: white;
+    border-color: var(--team-blue);
+}
+
+.billing-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 25px;
+    border-radius: 50px;
+    border: 1px solid var(--glass-border);
+    margin-top: 20px;
+}
+
+.billing-toggle span {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.billing-toggle span.active {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.save-badge {
+    background: var(--success-color);
+    color: #000;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-left: 8px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--team-blue), var(--team-purple));
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider:before {
+    transform: translateX(30px);
+}
+
+.calculator-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 40px 0;
+}
+
+.result-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    padding: 25px;
+    transition: all 0.3s ease;
+}
+
+.result-card:hover {
+    border-color: var(--team-blue);
+    transform: translateY(-5px);
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.result-header h4 {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+}
+
+.result-header i {
+    font-size: 1.5rem;
+    color: var(--team-blue);
+}
+
+.result-content {
+    text-align: center;
+}
+
+.result-value {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+}
+
+.result-value.savings {
+    color: var(--success-color);
+}
+
+.result-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.result-breakdown {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.calculator-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid var(--glass-border);
+}
+
+/* 8. BUTTON STYLES */
+.primary-btn, .secondary-btn {
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    text-decoration: none;
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, var(--team-blue), var(--team-purple));
+    color: white;
+}
+
+.primary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(67, 97, 238, 0.3);
+}
+
+.primary-btn.large {
+    padding: 18px 40px;
+    font-size: 1.1rem;
+}
+
+.secondary-btn {
+    background: transparent;
+    color: var(--text-primary);
+    border: 2px solid var(--glass-border);
+}
+
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-cyan);
+}
+
+.secondary-btn.large {
+    padding: 18px 40px;
+    font-size: 1.1rem;
+}
+
+/* 9. TEAM FEATURES */
+.team-features {
+    margin: 80px 0;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.feature-card {
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    color: var(--team-blue);
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+}
+
+.feature-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* 10. TEAM TESTIMONIALS */
+.team-testimonials {
+    margin: 80px 0;
+}
+
+.testimonial-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.testimonial-card {
+    padding: 30px;
+}
+
+.company-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: var(--team-blue);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.company-logo i {
+    font-size: 1.5rem;
+}
+
+.testimonial-text {
+    font-style: italic;
+    margin-bottom: 20px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.testimonial-author {
+    border-top: 1px solid var(--glass-border);
+    padding-top: 15px;
+}
+
+.testimonial-author strong {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text-primary);
+}
+
+.testimonial-author span {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* 11. TEAM CTA */
+.team-cta {
+    padding: 60px;
+    text-align: center;
+    margin: 80px 0;
+    background: linear-gradient(135deg, 
+        rgba(67, 97, 238, 0.1), 
+        rgba(114, 9, 183, 0.1));
+}
+
+.team-cta h2 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #ffffff 40%, var(--team-blue));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.team-cta p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.cta-features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+}
+
+.feature i {
+    color: var(--success-color);
+}
+
+/* 12. ENHANCED FOOTER */
+.footer {
+    margin-top: 80px;
+    padding: 60px 40px 30px;
+    border-top: 1px solid var(--glass-border);
+    background: rgba(0, 4, 40, 0.7);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 10;
+}
+
+/* ... (footer styles same as other pages) ... */
+
+/* 13. RESPONSIVE DESIGN */
+@media (max-width: 1200px) {
+    .tiers-container {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    
+    .hero-stats {
+        gap: 30px;
+    }
+    
+    .calculator-results {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .site-header {
+        padding: 15px 20px;
+    }
+    
+    .header-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .header-right {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .hero-title {
+        font-size: 2.8rem;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .tiers-container {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .calculator-results {
+        grid-template-columns: 1fr;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+    }
+    
+    .primary-btn, .secondary-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .testimonial-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .team-hero, .calculator-section, .team-cta {
+        padding: 40px 20px;
+    }
+    
+    .hero-title {
+        font-size: 2.2rem;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .stat-item {
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .calculator-controls {
+        padding: 20px;
+    }
+    
+    .seats-options {
+        gap: 5px;
+    }
+    
+    .seat-option {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .team-cta h2 {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-header {
+        padding: 10px 15px;
+    }
+    
+    .logo {
+        font-size: 1.5rem;
+    }
+    
+    .nav-link span {
+        display: none;
+    }
+    
+    .nav-link {
+        padding: 10px;
+    }
+    
+    #premium-btn span {
+        display: none;
+    }
+    
+    #premium-btn {
+        padding: 10px 15px;
+    }
+    
+    .tier-card {
+        padding: 30px 20px;
+    }
+    
+    .price {
+        font-size: 2.8rem;
+    }
+    
+    .tier-select-btn {
+        padding: 16px;
+        font-size: 1rem;
+    }
+    
+    .team-cta {
+        padding: 40px 20px;
+    }
+    
+    .cta-features {
+        flex-direction: column;
+        gap: 15px;
+    }
+}

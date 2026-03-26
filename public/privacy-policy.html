@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Tool Box · Privacy Policy</title>
+    <!-- same clean font & icons as ToS for consistency -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f0f7fa 0%, #e6f0f5 100%);
+            font-family: 'Inter', sans-serif;
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .privacy-card {
+            max-width: 1000px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background-color: #ffffffdd; /* solid fallback */
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 40, 60, 0.3), 0 2px 10px rgba(0,0,0,0.05);
+            padding: 2.8rem 2.8rem;
+            border: 1px solid rgba(255,255,255,0.7);
+            transition: all 0.2s;
+        }
+
+        /* header section */
+        .policy-header {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid rgba(2, 136, 209, 0.25);
+            padding-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .brand-icon {
+            background: #0b2b40;
+            color: white;
+            width: 54px;
+            height: 54px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 14px 18px -8px #0369a1b3;
+        }
+
+        .title-section h1 {
+            font-size: 2.3rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            background: linear-gradient(145deg, #0b3b4e, #0277bd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .title-section .policy-meta {
+            font-size: 1rem;
+            color: #3a5e74;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 0.25rem;
+        }
+
+        .policy-meta i {
+            color: #0288d1;
+            width: 1.3rem;
+        }
+
+        .meta-badge {
+            background: #dcf0fa;
+            padding: 0.3rem 1.1rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #035c8f;
+            border: 1px solid #9bcbea;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* section styling (mirrors ToS but with a subtle variation) */
+        .policy-chapter {
+            margin: 2.2rem 0 1.8rem;
+        }
+
+        .chapter-title {
+            font-size: 1.55rem;
+            font-weight: 600;
+            color: #0a4b6e;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1.2rem;
+            border-left: 5px solid #0277bd;
+            padding-left: 1.2rem;
+        }
+
+        .chapter-title i {
+            color: #0288d1;
+            font-size: 1.6rem;
+            width: 2rem;
+        }
+
+        .content-card {
+            background: #ffffffd9;
+            padding: 1.4rem 1.8rem;
+            border-radius: 24px;
+            box-shadow: 0 4px 12px rgba(0,30,40,0.03);
+            margin-bottom: 1.2rem;
+            border: 1px solid rgba(2, 119, 189, 0.15);
+        }
+
+        .content-card p {
+            margin-bottom: 1rem;
+        }
+
+        .content-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        ul, ol {
+            margin-left: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin: 0.5rem 0;
+        }
+
+        li strong {
+            color: #065577;
+        }
+
+        .pill-list {
+            list-style: none;
+            margin-left: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .pill-list li {
+            background: #e3f0f9;
+            border-radius: 40px;
+            padding: 0.35rem 1.3rem;
+            font-size: 0.95rem;
+            border: 1px solid #b3d9f0;
+            color: #015d94;
+        }
+
+        .pill-list li i {
+            margin-right: 6px;
+            color: #0277bd;
+        }
+
+        .highlight-note {
+            background: #f0f9fe;
+            border-radius: 20px;
+            padding: 1.2rem 1.8rem;
+            border-left: 6px solid #0284c7;
+            margin: 1.2rem 0;
+        }
+
+        .contact-grid {
+            background: #ddeeff;
+            border-radius: 28px;
+            padding: 2rem 2.2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .contact-badge {
+            display: inline-flex;
+            align-items: center;
+            background: white;
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            margin: 0.4rem 0.6rem;
+            font-weight: 500;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+            border: 1px solid #aad0ed;
+            gap: 10px;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 2.2rem;
+            font-size: 0.9rem;
+            color: #4d6f87;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, #bed9ec, #eef7ff);
+            margin: 1.8rem 0;
+        }
+
+        @media (max-width: 600px) {
+            .privacy-card {
+                padding: 1.5rem 1.2rem;
+            }
+            .title-section h1 {
+                font-size: 1.9rem;
+            }
+            .brand-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 1.6rem;
+            }
+        }
+
+        a {
+            color: #0277bd;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="privacy-card">
+        <!-- header with brand and dates -->
+        <div class="policy-header">
+            <div class="brand-icon">
+                <i class="fas fa-lock"></i>
+            </div>
+            <div class="title-section">
+                <h1>Mini Tool Box · Privacy Policy</h1>
+                <div class="policy-meta">
+                    <span><i class="fas fa-calendar-check"></i> Effective: November 8, 2025</span>
+                    <span><i class="fas fa-sync-alt"></i> Last updated: November 8, 2025</span>
+                    <span class="meta-badge"><i class="fas fa-user-shield"></i> Your privacy matters</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- brief intro -->
+        <div class="content-card" style="background: #e3f1fa;">
+            <p> <strong>Mini Tool Box</strong> (“Company,” “we,” “our”) respects your privacy. This policy explains how we collect, use, disclose, and safeguard your information when you use our Service. By using Mini Tool Box, you agree to the practices described here.</p>
+        </div>
+
+        <!-- 1. Who we are (data controller) -->
+        <div class="policy-chapter">
+            <div class="chapter-title"><i class="fas fa-building"></i> 1. Who We Are (Data Controller)</div>
+            <div class="content-card">
+                <p><strong>Mini Tool Box</strong> is the data controller responsible for your personal data. For privacy-related questions:</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 1rem 0 0 0;">
+                    <span style="background:#ecf5fc; padding:0.4rem 1.4rem; border-radius: 40px;"><i class="fas fa-envelope" style="color:#01579b;"></i> support@minitoolbox.com</span>
+                    <span style="background:#ecf5fc; padding:0.4rem 1.4rem; border-radius: 40px;"><i class="fas fa-globe"></i> www.minitoolbox.com</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Information we collect (split into A/B/C with badges) -->
+        <div class="policy-chapter">
+            <div class="chapter-title"><i class="fas fa-database"></i> 2. Information We Collect</div>
+            <div class="content-card">
+                <p><strong>A. Information You Provide</strong><br>Name · Email · Account details · Payment info (via secure third parties) · Content you submit (text, files, inputs) · Communications.</p>
+                <p><strong>B. Automatically Collected</strong><br>IP address · Device & browser · OS · Usage data · Cookies · Approx. location (from IP).</p>
+                <p><strong>C. AI Tool Inputs (if applicable)</strong><br>Temporary processing to generate outputs, improve performance, detect abuse. We do not claim ownership.</p>
+                <ul class="pill-list" style="margin-top: 12px;">
+                    <li><i class="fas fa-id-card"></i> name/email</li>
+                    <li><i class="fas fa-laptop"></i> device data</li>
+                    <li><i class="fas fa-microchip"></i> AI inputs</li>
+                    <li><i class="fas fa-cookie-bite"></i> cookies</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 3. How we use your information -->
+        <div class="policy-chapter">
+            <div class="chapter-title"><i class="fas fa-tasks"></i> 3. How We Use Your Information</div>
+            <div class="content-card">
+                <ul>
+                    <li>Providing & operating tools, accounts, subscriptions</li>
+                    <li>Processing payments & support</li>
+                    <li>Improving, security, fraud prevention</li>
+                    <li>Transactional & marketing (with consent) emails</li>
+                    <li>Legal obligations</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4. Legal basis (EEA/UK) -->
+        <div class="policy-chapter">
+            <div class="chapter-title"><i class="fas fa-gavel"></i> 4. Legal Basis (EEA & UK)</div>
+            <div class="content-card">
+                <p>Contract performance, legitimate interest (analytics/security), consent (cookies/marketing), legal obligation. You may withdraw consent at any time.</p>
+            </div>
+        </div>
+
+        <!-- 5. Cookies + 6. Advertising (combined but clear) -->
+        <div class="policy-chapter">
+            <div class="chapter-title"><i class="fas fa-cookie"></i> 5. Cookies & Tracking / 6. Advertising</div>
+            <div class="content-card">
+                <p><strong>Cookies:</strong> improve experience, analyse traffic, remember preferences. Manage via browser. Disabling may affect features. We use third-party analytics/advertising providers.</p>
+                <p><strong>Advertising:</strong> We may display interest-based ads. Opt out via browser settings, DAA / NAI (where applicable). Not responsible for third-party ad practices.</p>
+            </div>
+        </div>
+
+        <!-- 7. How we share (with clear no-sale statement) -->
+        <div class="policy-chapter">
+            <div class="chapter-title"><i class="fas fa-share-alt"></i> 7. How We Share Your Information</div>
+            <div class="content-card">
+                <p><strong>Service providers:</strong> hosting, payments, analytics, security, email.</p>
+                <p><strong>Legal authorities:</strong> if required by law / protect rights.</p>
+                <p><strong>Business transfers:</strong> merger / acquisition.</p>
+                <p>🚫 <strong>We do NOT sell personal data</strong> in the traditional sense. Some jurisdictions may define ad-related sharing as a “sale” — you have rights (see §11).</p>
+            </div>
+        </div>
+
+        <!-- 8. Data security -->
+        <div class="policy-chapter">
+            <div class="chapter-title"><i class="fas fa-shield-halved"></i> 8. Data Security</div>
+            <div class="content-card">
+                <p>We implement secure servers, access controls, encryption, monitoring. However, no internet transmission is 100% secure.</p>
+            </div>
+        </div>
+
+        <!-- 9. Data retention -->
+        <div class="policy-chapter">
+            <div class="chapter-title"><i class="fas fa-clock"></i> 9. Data Retention</div>
+            <div class="content-card">
+                <p>Retained while account active, as needed to provide services, or for legal/tax purposes. After that, securely deleted or anonymised.</p>
+            </div>
+        </div>
+
+        <!-- 10. Your privacy rights -->
+        <div class="policy-chapter">
+            <div class="chapter-title"><i class="fas fa-user-lock"></i> 10. Your Privacy Rights</div>
+            <div class="content-card">
+                <p>Depending on location: access, correction, deletion, restriction, portability, objection, opt-out of targeted ads.</p>
+                <p>To exercise: <i class="fas fa-envelope"></i> <strong>support@minitoolbox.com</strong> (identity verification may be required).</p>
+            </div>
+        </div>
+
+        <!-- 11. California Privacy (CCPA/CPRA) -->
+        <div class="policy-chapter">
+            <div class="chapter-title"><i class="fas fa-california"></i> 11. California Privacy (CCPA/CPRA)</div>
+            <div class="content-card">
+                <p>CA residents have rights to: know, delete, correct inaccurate info, opt-out of sale/sharing, non-discrimination. Submit requests via email above.</p>
+            </div>
+        </div>
+
+        <!-- 12. International transfers + 13. Children’s privacy + 14. third party links (grouped) -->
+        <div class="policy-chapter">
+            <div class="chapter-title"><i class="fas fa-plane"></i> 12–14. International, Children, Links</div>
+            <div class="content-card">
+                <p><strong>International transfers:</strong> Your data may be transferred outside your country. Safeguards: Standard Contractual Clauses, data processing agreements.</p>
+                <p><strong>Children’s privacy:</strong> Not intended for under 13. If we become aware of collection, we delete it.</p>
+                <p><strong>Third-party links:</strong> We are not responsible for other sites’ privacy practices.</p>
+            </div>
+        </div>
+
+        <!-- 15. Changes to policy -->
+        <div class="policy-chapter">
+            <div class="chapter-title"><i class="fas fa-rotate"></i> 15. Changes to This Policy</div>
+            <div class="content-card">
+                <p>We may update periodically. Material changes notified via website / email (if required). Continued use = acceptance.</p>
+            </div>
+        </div>
+
+        <!-- 16. Contact Us (big friendly block) -->
+        <div class="policy-chapter">
+            <div class="chapter-title"><i class="fas fa-address-card"></i> 16. Contact Us</div>
+            <div class="contact-grid">
+                <p style="font-size: 1.2rem; margin-bottom: 1rem;">📬 Mini Tool Box <span style="color:#1c5a85;">· we’re here</span></p>
+                <div>
+                    <span class="contact-badge"><i class="fas fa-envelope"></i> support@minitoolbox.com</span>
+                    <span class="contact-badge"><i class="fas fa-globe"></i> www.minitoolbox.com</span>
+                </div>
+                <p style="margin-top: 1.4rem; opacity: 0.9;"><i class="fas fa-dove"></i> Questions? You’ll hear back quickly.</p>
+            </div>
+        </div>
+
+        <!-- small footer -->
+        <hr>
+        <div class="footer-note">
+            <i class="far fa-copyright"></i> Mini Tool Box – privacy by design. version 1.2
+        </div>
+    </div>
+</body>
+</html>

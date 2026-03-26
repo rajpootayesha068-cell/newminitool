@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-in | Paraphrasing Tool Premium</title>
+    <link rel="stylesheet" href="./css/checkout.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="checkin-page">
+        <div class="checkin-container">
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <!-- Step 1: Choose Plan -->
+            <div class="checkin-content active" id="step1">
+                <div class="checkin-step">
+                    <div class="step-header">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h3 class="step-title">Choose Your Plan</h3>
+                            <p class="step-description">Select the plan that best fits your needs</p>
+                        </div>
+                    </div>
+
+                    <div class="checkin-options">
+                        <div class="checkin-option" data-plan="monthly">
+                            <div class="option-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="option-content">
+                                <div class="option-title">Monthly Plan</div>
+                                <div class="option-description">$9.99 per month, cancel anytime</div>
+                            </div>
+                            <div class="option-check">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+
+                        <div class="checkin-option" data-plan="yearly">
+                            <div class="option-icon">
+                                <i class="fas fa-calendar-star"></i>
+                            </div>
+                            <div class="option-content">
+                                <div class="option-title">Yearly Plan</div>
+                                <div class="option-description">$4.17 per month, billed annually</div>
+                                <div class="save-badge">
+                                    Save 50%
+                                </div>
+                            </div>
+                            <div class="option-check">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+
+                        <div class="checkin-option" data-plan="lifetime">
+                            <div class="option-icon">
+                                <i class="fas fa-infinity"></i>
+                            </div>
+                            <div class="option-content">
+                                <div class="option-title">Lifetime Access</div>
+                                <div class="option-description">One-time payment, access forever</div>
+                                <div class="save-badge value-badge">
+                                    Best Value
+                                </div>
+                            </div>
+                            <div class="option-check">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkin-footer">
+                    <button class="checkin-btn" id="nextBtn1" disabled>
+                        Continue to Payment <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Payment Details -->
+            <div class="checkin-content payment-form" id="step2">
+                <div class="checkin-step">
+                    <div class="step-header">
+                        <div class="step-number">2</div>
+                        <div>
+                            <h3 class="step-title">Payment Details</h3>
+                            <p class="step-description">Enter your payment information securely</p>
+                        </div>
+                    </div>
+
+                    <form id="paymentForm">
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number</label>
+                            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                        </div>
+
+                        <div class="card-row">
+                            <div class="form-group">
+                                <label for="expiryDate">Expiry Date</label>
+                                <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" placeholder="123" maxlength="3" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Name on Card</label>
+                            <input type="text" id="name" placeholder="John Doe" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="john@example.com" required>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="saveCard">
+                            <label for="saveCard">Save card for future payments</label>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="terms" required>
+                            <label for="terms">
+                                I agree to the <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="checkin-footer">
+                    <button class="checkin-btn primary" id="payBtn">
+                        <i class="fas fa-lock"></i> Pay Now - <span id="planPrice">$9.99</span>
+                    </button>
+                    <button class="checkin-btn secondary" id="backBtn1">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: Success Screen -->
+            <div class="checkin-content success-screen" id="step3">
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h2 class="success-title">Payment Successful!</h2>
+                <p class="success-message">
+                    Congratulations! You now have <strong>Premium Access</strong> to Paraphrasing Tool. 
+                    All premium features have been unlocked for your account.
+                </p>
+                <div class="success-details">
+                    <div class="detail-row">
+                        <span>Plan:</span>
+                        <strong id="successPlan">Monthly Plan</strong>
+                    </div>
+                    <div class="detail-row">
+                        <span>Amount Paid:</span>
+                        <strong id="successAmount">$9.99</strong>
+                    </div>
+                    <div class="detail-row">
+                        <span>Transaction ID:</span>
+                        <strong class="transaction-id">#PAY-2024-001</strong>
+                    </div>
+                </div>
+                <button class="checkin-btn success-btn" id="dashboardBtn">
+                    <i class="fas fa-rocket"></i> Start Using Premium
+                </button>
+                <p class="email-note">
+                    A confirmation email has been sent to your registered email address.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/script.js"></script>
+
+</body>
+</html>

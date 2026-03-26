@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plagiarism Checker Pro | AI Writing Assistant - MiniToolBox</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="newstyle.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Background -->
+    <div id="background-wrapper">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+    
+    <!-- Main Container -->
+    <div class="main-wrapper">
+        <div class="container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <a href="index.html" class="nav-item">
+                        <i class="fas fa-eye"></i>
+                        <span>Overview</span>
+                    </a>
+                    <a href="paraphrasing.html" class="nav-item">
+                        <i class="fas fa-sync-alt"></i>
+                        <span>Paraphraser</span>
+                    </a>
+                    <a href="plagiarism.html" class="nav-item active">
+                        <i class="fas fa-search"></i>
+                        <span>Plagiarism</span>
+                    </a>
+                    <a href="humanizer.html" class="nav-item">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Humanizer</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Main Content Area -->
+            <div class="tool-card">
+                <!-- Hero Section -->
+                <div class="page-hero">
+                    <div class="hero-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>AI-Powered Plagiarism Detector</span>
+                    </div>
+                    <h1>Check Content <span class="gradient-text">Originality</span></h1>
+                    <p class="subtitle">
+                        Ensure 100% unique content with our advanced plagiarism checker scanning billions of sources in real-time.
+                    </p>
+                </div>
+
+                <!-- Input Section -->
+                <div class="input-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-edit"></i> Text to Check</h3>
+                        <div class="counter-badge">
+                            <span id="inputWords"><i class="fas fa-font"></i> <strong>0</strong>/500 words</span>
+                            <span class="separator">|</span>
+                            <span id="inputChars"><i class="fas fa-keyboard"></i> <strong>0</strong> chars</span>
+                        </div>
+                    </div>
+                    
+                    <div class="textarea-wrapper">
+                        <textarea id="inputText" 
+                            placeholder="Paste or type your text here to check for plagiarism...&#10;&#10;Example: 'Original content is essential for academic integrity and professional credibility.'" 
+                            oninput="countWords()"></textarea>
+                        <div class="textarea-footer">
+                            <span class="hint"><i class="fas fa-info-circle"></i> Max 500 words</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Limit Warning -->
+                    <div class="limit-message" id="limitMessage">
+                        <i class="fas fa-exclamation-triangle"></i> Maximum word limit reached (500 words)
+                    </div>
+                </div>
+
+                <!-- Controls Section -->
+                <div class="controls-section">
+                    <div class="controls-row">
+                        <!-- Sensitivity Mode Selector -->
+                        <div class="selector-group">
+                            <label for="checkMode">
+                                <i class="fas fa-sliders-h"></i>
+                                <span>Scan Sensitivity</span>
+                            </label>
+                            <div class="select-wrapper small">
+                                <select id="checkMode">
+                                    <option value="quick" selected>⚡ Quick Scan</option>
+                                    <option value="standard">📊 Standard Check</option>
+                                    <option value="deep">🌐 Deep Scan</option>
+                                    <option value="academic">📚 Academic Grade</option>
+                                </select>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+
+                        <!-- Language Selector -->
+                        <div class="selector-group">
+                            <label for="language">
+                                <i class="fas fa-globe"></i>
+                                <span>Language</span>
+                            </label>
+                            <div class="select-wrapper small">
+                                <select id="language">
+                                    <option value="en" selected>🇺🇸 English</option>
+                                    <option value="es">🇪🇸 Spanish</option>
+                                    <option value="fr">🇫🇷 French</option>
+                                    <option value="de">🇩🇪 German</option>
+                                    <option value="it">🇮🇹 Italian</option>
+                                    <option value="pt">🇵🇹 Portuguese</option>
+                                    <option value="ru">🇷🇺 Russian</option>
+                                    <option value="zh">🇨🇳 Chinese</option>
+                                    <option value="ar">🇸🇦 Arabic</option>
+                                    <option value="hi">🇮🇳 Hindi</option>
+                                    <option value="ur">🇵🇰 Urdu</option>
+                                </select>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    <div class="action-buttons">
+                        <button id="clearBtn" class="secondary-btn">
+                            <i class="fas fa-trash-alt"></i> Clear Text
+                        </button>
+                        <button id="checkBtn" class="primary-btn" onclick="checkPlagiarism()">
+                            <i class="fas fa-search"></i> Check Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Loading Spinner -->
+                <div class="loading-section" id="loadingSection">
+                    <div class="spinner-container">
+                        <div class="spinner"></div>
+                        <p>Scanning billions of sources...</p>
+                        <div class="scanning-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Output -->
+                <div class="results-section" id="resultsSection">
+                    <div class="results-header">
+                        <h3><i class="fas fa-chart-pie"></i> Originality Report</h3>
+                        <div class="report-meta">
+                            <span><i class="far fa-clock"></i> <span id="processingTime">1.2s</span></span>
+                            <span><i class="fas fa-database"></i> <span id="sourceCount">8.2B</span> sources</span>
+                        </div>
+                    </div>
+
+                    <!-- Progress Circle Section -->
+                    <div class="progress-section">
+                        <div class="circle-container">
+                            <div class="circle-wrapper">
+                                <svg class="progress-circle" width="180" height="180" viewBox="0 0 180 180">
+                                    <circle class="circle-bg" cx="90" cy="90" r="80"></circle>
+                                    <circle class="circle-progress" cx="90" cy="90" r="80" id="progressCircle"></circle>
+                                </svg>
+                                <div class="circle-content">
+                                    <div class="percentage" id="plagiarismPercent">0%</div>
+                                    <div class="circle-label" id="plagiarismLabel">Plagiarism</div>
+                                </div>
+                            </div>
+                            
+                            <div class="circle-stats">
+                                <div class="stat-box original-stat">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <div class="stat-value" id="originalPercent">100%</div>
+                                        <div class="stat-label">Original</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="stat-box plagiarized-stat">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <div class="stat-value" id="plagiarizedPercent">0%</div>
+                                        <div class="stat-label">Matched</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="stat-box similarity-stat">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-balance-scale"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <div class="stat-value" id="similarityPercent">0%</div>
+                                        <div class="stat-label">Similarity</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Result Message -->
+                    <div class="result-message" id="resultMessage">
+                        <div class="message-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="message-content">
+                            <h4>Ready to Check</h4>
+                            <p>Enter text and click "Check Now" to analyze originality against 8B+ sources.</p>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Stats -->
+                    <div class="detailed-stats">
+                        <div class="stat-card">
+                            <div class="stat-card-icon">
+                                <i class="fas fa-file-word"></i>
+                            </div>
+                            <div class="stat-card-content">
+                                <div class="stat-card-value" id="wordCount">0</div>
+                                <div class="stat-card-label">Words</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-card-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="stat-card-content">
+                                <div class="stat-card-value" id="matchedSources">0</div>
+                                <div class="stat-card-label">Matches</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-card-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="stat-card-content">
+                                <div class="stat-card-value" id="uniqueScore">100%</div>
+                                <div class="stat-card-label">Uniqueness</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="result-actions">
+                        <button id="copyReportBtn" class="action-btn">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                        <button id="downloadReportBtn" class="action-btn">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                        <button id="shareReportBtn" class="action-btn">
+                            <i class="fas fa-share-alt"></i> Share
+                        </button>
+                        <button id="clearAllBtn" class="action-btn danger">
+                            <i class="fas fa-trash-alt"></i> Clear
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Features Section -->
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-database feature-icon"></i>
+                        <h4>8B+ Sources</h4>
+                        <p>Web pages, academic papers, publications</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-bolt feature-icon"></i>
+                        <h4>Real-Time Scan</h4>
+                        <p>Instant results with high-speed tech</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt feature-icon"></i>
+                        <h4>Academic Grade</h4>
+                        <p>Trusted by universities worldwide</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-chart-line feature-icon"></i>
+                        <h4>Detailed Reports</h4>
+                        <p>Comprehensive analysis with citations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+
+        <!-- Premium Modal -->
+<div class="premium-modal" id="premiumModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <i class="fas fa-crown modal-icon"></i>
+            <h3>Premium Feature</h3>
+            <button class="modal-close" onclick="closeModal()">×</button>
+        </div>
+        <div class="modal-body">
+            <p>The <strong>Plagiarism Checker</strong> is available only for <strong>Premium users</strong>.</p>
+            <div class="modal-features">
+                <div class="modal-feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Unlimited words (No 500 word limit)</span>
+                </div>
+                <div class="modal-feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Check against 8B+ sources</span>
+                </div>
+                <div class="modal-feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Detailed originality reports</span>
+                </div>
+                <div class="modal-feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Citation suggestions</span>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="premium.html" class="primary-btn" style="width: 100%; justify-content: center;">
+                <i class="fas fa-crown"></i> Upgrade to Premium
+            </a>
+            <button class="secondary-btn" onclick="closeModal()" style="width: 100%;">
+                Maybe Later
+            </button>
+        </div>
+    </div>
+</div>
+<!-- <script>
+    // ===== WORD AND CHARACTER COUNTER =====
+    function countWords() {
+        const inputText = document.getElementById('inputText');
+        const text = inputText.value;
+        
+        const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+        const chars = text.length;
+        
+        document.getElementById('inputWords').innerHTML = `<i class="fas fa-font"></i> <strong>${words}</strong>/500 words`;
+        document.getElementById('inputChars').innerHTML = `<i class="fas fa-keyboard"></i> <strong>${chars}</strong> chars`;
+        
+        const limitMessage = document.getElementById('limitMessage');
+        
+        if (words > 500) {
+            limitMessage.style.display = 'flex';
+        } else {
+            limitMessage.style.display = 'none';
+        }
+    }
+    
+    // ===== ENFORCE WORD LIMIT (AUTO-TRIM) =====
+    function enforceWordLimit() {
+        const inputText = document.getElementById('inputText');
+        const text = inputText.value;
+        
+        // Count words
+        const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+        
+        // If exceeds 500 words
+        if (words > 500) {
+            // Find the position of the 500th word
+            const allWords = text.trim().split(/\s+/);
+            const first500Words = allWords.slice(0, 500).join(' ');
+            
+            // Trim the text to first 500 words
+            inputText.value = first500Words;
+            
+            // Show warning message
+            showToast('Cannot paste more than 500 words. Upgrade to Premium for unlimited words!', 'warning');
+        }
+        
+        // Update counters
+        countWords();
+    }
+    
+    // ===== CHECK PLAGIARISM (SHOWS PREMIUM MODAL) =====
+    function checkPlagiarism() {
+        const inputText = document.getElementById('inputText').value;
+        
+        if (!inputText.trim()) {
+            showToast('Please enter some text to check', 'error');
+            return;
+        }
+        
+        // Show premium modal instead of checking
+        showPremiumModal();
+    }
+    
+    // ===== PREMIUM MODAL FUNCTIONS =====
+    function showPremiumModal() {
+        const modal = document.getElementById('premiumModal');
+        if (modal) {
+            modal.classList.add('show');
+        }
+    }
+    
+    function closeModal() {
+        const modal = document.getElementById('premiumModal');
+        if (modal) {
+            modal.classList.remove('show');
+        }
+    }
+    
+    // Close modal on outside click
+    window.onclick = function(event) {
+        const modal = document.getElementById('premiumModal');
+        if (event.target === modal) {
+            closeModal();
+        }
+    }
+    
+    // ===== REPORT FUNCTIONS =====
+    function copyReport() {
+        const report = `Plagiarism Report:
+Originality: ${document.getElementById('originalPercent').textContent}
+Matched: ${document.getElementById('plagiarismPercent').textContent}
+Similarity: ${document.getElementById('similarityPercent').textContent}
+Words: ${document.getElementById('wordCount').textContent}
+Sources: ${document.getElementById('sourceCount').textContent}`;
+        
+        navigator.clipboard.writeText(report).then(() => {
+            showToast('Report copied to clipboard!', 'success');
+        });
+    }
+    
+    function downloadReport() {
+        const report = `PLAGIARISM CHECK REPORT
+Generated: ${new Date().toLocaleString()}
+-----------------------------------
+Originality: ${document.getElementById('originalPercent').textContent}
+Matched Content: ${document.getElementById('plagiarismPercent').textContent}
+Similarity Score: ${document.getElementById('similarityPercent').textContent}
+Words Analyzed: ${document.getElementById('wordCount').textContent}
+Sources Checked: ${document.getElementById('sourceCount').textContent}
+Matches Found: ${document.getElementById('matchedSources').textContent}
+Processing Time: ${document.getElementById('processingTime').textContent}
+-----------------------------------
+This is an automated report. Please review the content carefully.`;
+        
+        const blob = new Blob([report], { type: 'text/plain' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'plagiarism-report.txt';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        showToast('Report downloaded!', 'success');
+    }
+    
+    function shareReport() {
+        const report = `Plagiarism Check: ${document.getElementById('originalPercent').textContent} Original, ${document.getElementById('plagiarismPercent').textContent} Matched`;
+        
+        if (navigator.share) {
+            navigator.share({
+                title: 'Plagiarism Report',
+                text: report
+            });
+        } else {
+            copyReport();
+        }
+    }
+    
+    // ===== TOAST NOTIFICATION (UPDATED WITH WARNING) =====
+    function showToast(message, type = 'success') {
+        let toastContainer = document.querySelector('.toast-container');
+        if (!toastContainer) {
+            toastContainer = document.createElement('div');
+            toastContainer.className = 'toast-container';
+            document.body.appendChild(toastContainer);
+        }
+        
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        
+        let icon = 'fa-info-circle';
+        if (type === 'success') icon = 'fa-check-circle';
+        if (type === 'error') icon = 'fa-exclamation-circle';
+        if (type === 'warning') icon = 'fa-exclamation-triangle';
+        
+        toast.innerHTML = `
+            <i class="fas ${icon}"></i>
+            <span>${message}</span>
+        `;
+        
+        toastContainer.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => {
+                toast.remove();
+            }, 300);
+        }, 3000);
+    }
+    
+    // ===== INITIALIZATION =====
+    document.addEventListener('DOMContentLoaded', function() {
+        countWords();
+        
+        // Add event listeners for word limit enforcement
+        const inputText = document.getElementById('inputText');
+        if (inputText) {
+            inputText.addEventListener('paste', function(e) {
+                // Allow paste to happen first, then enforce limit
+                setTimeout(enforceWordLimit, 10);
+            });
+            
+            inputText.addEventListener('input', enforceWordLimit);
+        }
+        
+        // Clear button
+        document.getElementById('clearBtn').addEventListener('click', function() {
+            document.getElementById('inputText').value = '';
+            document.getElementById('resultsSection').style.display = 'none';
+            countWords();
+            showToast('Text cleared', 'success');
+        });
+        
+        // Copy button
+        document.getElementById('copyReportBtn').addEventListener('click', copyReport);
+        
+        // Download button
+        document.getElementById('downloadReportBtn').addEventListener('click', downloadReport);
+        
+        // Share button
+        document.getElementById('shareReportBtn').addEventListener('click', shareReport);
+        
+        // Clear all button
+        document.getElementById('clearAllBtn').addEventListener('click', function() {
+            document.getElementById('inputText').value = '';
+            document.getElementById('resultsSection').style.display = 'none';
+            countWords();
+            showToast('All cleared', 'success');
+        });
+    });
+</script> -->
+
+
+<!-- Javascript files -->
+    <script src="layout.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>

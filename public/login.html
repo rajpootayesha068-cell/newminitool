@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Mini Tool Box</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/newstyle.css">
+    <link rel="stylesheet" href="css/signup-login.css">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Background -->
+    <div id="background-wrapper">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <!-- ===== MAIN WRAPPER ===== -->
+    <div class="main-wrapper">
+        <!-- ===== LOGIN SECTION ===== -->
+        <section class="auth-section">
+            <div class="auth-container">
+                <!-- Left Side - Hero Text -->
+                <div class="auth-hero animate-on-scroll">
+                    <h1 class="auth-hero-title">
+                        Welcome <span class="title-gradient">Back</span>
+                    </h1>
+                    <p class="auth-hero-subtitle">
+                        Your smart writing assistant. Elevate your text with AI-driven precision and creative flair.
+                    </p>
+                    
+                    <div class="auth-features">
+                        <div class="auth-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>10+ AI Writing Tools</span>
+                        </div>
+                        <div class="auth-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Free Forever</span>
+                        </div>
+                        <div class="auth-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>No Credit Card Required</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side - Login Form -->
+                <div class="auth-card animate-on-scroll">
+                    <div class="auth-card-header">
+                        <h2>Welcome Back</h2>
+                        <p>Login to access your workspace</p>
+                    </div>
+                    
+                    <!-- 🔥 FIREBASE LOGIN FORM -->
+                    <form id="loginForm" class="auth-form">
+                        <div class="form-group">
+                            <label for="email">
+                                <i class="fas fa-envelope"></i>
+                                Email Address
+                            </label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                class="form-control" 
+                                placeholder="Enter your email"
+                                required
+                            >
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="password-header">
+                                <label for="password">
+                                    <i class="fas fa-lock"></i>
+                                    Password
+                                </label>
+                                <a href="#" class="forgot-link" id="forgotPassword">Forgot Password?</a>
+                            </div>
+                            <div class="password-input-wrapper">
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    class="form-control" 
+                                    placeholder="Enter your password"
+                                    required
+                                >
+                                <button type="button" class="password-toggle" id="togglePassword">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Error Message Display -->
+                        <div id="loginError" class="error-message" style="display: none;"></div>
+                        
+                        <!-- Success Message Display -->
+                        <div id="loginSuccess" class="success-message" style="display: none;"></div>
+                        
+                        <button type="submit" class="auth-btn" id="loginBtn">
+                            <span class="btn-text">Login</span>
+                            <i class="fas fa-arrow-right"></i>
+                            <span class="btn-loader" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i> Processing...
+                            </span>
+                        </button>
+                    </form>
+                    
+                    <div class="social-divider">
+                        <span>or continue with</span>
+                    </div>
+                    
+                    <!-- 🔥 FIREBASE GOOGLE BUTTON -->
+                    <button class="social-btn google-btn" id="googleLoginBtn">
+                        <i class="fab fa-google"></i>
+                        <span class="btn-text">Google</span>
+                        <span class="btn-loader" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </span>
+                    </button>
+                    
+                    <p class="auth-footer">
+                        New here? <a href="signup.html">Create an account</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- JavaScript Files -->
+    
+    <script type="module" src="js/script.js"></script>
+    <script src="js/layout.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

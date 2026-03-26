@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Tool Box · Terms of Service</title>
+    <!-- A clean, modern font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for subtle icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f6f9fc 0%, #edf2f7 100%);
+            font-family: 'Inter', sans-serif;
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tos-card {
+            max-width: 960px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background-color: #ffffffd9; /* fallback solid */
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 20, 30, 0.25), 0 2px 8px 0 rgba(0,0,0,0.06);
+            padding: 2.8rem 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.2s ease;
+        }
+
+        /* header section with brand */
+        .tos-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.8rem;
+            border-bottom: 2px solid rgba(14, 165, 233, 0.25);
+            padding-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .brand-icon {
+            background: #0f172a;
+            color: white;
+            width: 52px;
+            height: 52px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 12px 18px -8px rgba(2, 84, 115, 0.4);
+        }
+
+        .title-section h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #164e63, #0284c7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .title-section .subhead {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #475569;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.2rem;
+        }
+
+        .subhead i {
+            color: #0ea5e9;
+            width: 18px;
+            margin-right: 4px;
+        }
+
+        /* meta info badges */
+        .meta-badge {
+            background: #e6f0f9;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            color: #0369a1;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid #b8dff0;
+        }
+
+        /* sections styling */
+        .terms-section {
+            margin: 2rem 0 1.8rem 0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #0c4a6e;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.2rem;
+            border-left: 5px solid #0284c7;
+            padding-left: 1rem;
+        }
+
+        .section-title i {
+            color: #0ea5e9;
+            font-size: 1.5rem;
+            width: 2rem;
+        }
+
+        .card-paragraph {
+            background: #ffffffb3;
+            padding: 1.2rem 1.5rem;
+            border-radius: 24px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            margin-bottom: 1.2rem;
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            transition: background 0.2s;
+        }
+
+        .card-paragraph p {
+            margin-bottom: 1rem;
+        }
+
+        .card-paragraph p:last-child {
+            margin-bottom: 0;
+        }
+
+        ul, ol {
+            margin-left: 1.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        li {
+            margin: 0.6rem 0;
+        }
+
+        li strong {
+            color: #075985;
+        }
+
+        .badge-list {
+            list-style: none;
+            margin-left: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .badge-list li {
+            background: #ecf7ff;
+            border-radius: 30px;
+            padding: 0.3rem 1.1rem;
+            font-size: 0.95rem;
+            border: 1px solid #b7dff5;
+            color: #0369a1;
+        }
+
+        .badge-list li i {
+            margin-right: 6px;
+            color: #0284c7;
+        }
+
+        /* highlight for important notes */
+        .highlight-box {
+            background: #fef9c3;
+            border-left: 6px solid #eab308;
+            padding: 1.2rem 1.6rem;
+            border-radius: 18px;
+            margin: 1.5rem 0;
+            font-weight: 500;
+            color: #854d0e;
+            box-shadow: 0 6px 12px -8px #b45309;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, #cbd5e1, #ffffff);
+            margin: 1.8rem 0;
+        }
+
+        .contact-block {
+            background: #e6f3fa;
+            border-radius: 24px;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .contact-block i {
+            color: #0369a1;
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+
+        .contact-item {
+            display: inline-flex;
+            align-items: center;
+            background: white;
+            padding: 0.7rem 1.6rem;
+            border-radius: 60px;
+            margin: 0.5rem 0.6rem;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            border: 1px solid #b8d5e9;
+            color: #1e293b;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #54738f;
+        }
+
+        /* responsive touches */
+        @media (max-width: 600px) {
+            .tos-card {
+                padding: 1.8rem 1.2rem;
+            }
+            .title-section h1 {
+                font-size: 1.9rem;
+            }
+            .brand-icon {
+                width: 42px;
+                height: 42px;
+                font-size: 1.4rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* simple link style */
+        a {
+            color: #0284c7;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="tos-card">
+        <!-- Header with brand -->
+        <div class="tos-header">
+            <div class="brand-icon">
+                <i class="fas fa-toolbox"></i>
+            </div>
+            <div class="title-section">
+                <h1>Mini Tool Box · Terms of Service</h1>
+                <div class="subhead">
+                    <span><i class="far fa-calendar-alt"></i> Last Updated: April 8, 2025</span>
+                    <span><i class="far fa-clock"></i> Effective: April 8, 2025</span>
+                    <span class="meta-badge"><i class="fas fa-check-circle"></i> v2.1</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- brief intro -->
+        <div class="card-paragraph" style="background: #eaf3fb;">
+            <p><i class="fas fa-hand-peace" style="color:#0284c7; margin-right:8px;"></i> <strong>Welcome to Mini Tool Box!</strong> By accessing or using the Service, you agree to be legally bound by these Terms. If you do not agree, please discontinue use immediately.</p>
+        </div>
+
+        <!-- 1. Eligibility + 2. User Accounts (condensed but all info) -->
+        <div class="terms-section">
+            <div class="section-title"><i class="fas fa-user-check"></i> 1. Eligibility & 2. Accounts</div>
+            <div class="card-paragraph">
+                <p><strong>Eligibility:</strong> You must be at least 18 years old (or the legal age in your jurisdiction) to use Mini Tool Box. By using the Service, you represent and warrant that you meet this requirement.</p>
+                <p><strong>User accounts:</strong> Certain features may require registration. You agree to provide accurate information, keep your login confidential, and accept responsibility for all activity under your account. We reserve the right to suspend or terminate accounts that provide false info or violate these Terms.</p>
+            </div>
+        </div>
+
+        <!-- 3. Acceptable Use (with visual tags) -->
+        <div class="terms-section">
+            <div class="section-title"><i class="fas fa-shield-alt"></i> 3. Acceptable Use</div>
+            <div class="card-paragraph">
+                <p>You agree to use the Service only for lawful purposes. <strong>Strictly prohibited:</strong></p>
+                <ul class="badge-list">
+                    <li><i class="fas fa-ban"></i> Copy / resell</li>
+                    <li><i class="fas fa-code-branch"></i> Reverse engineer</li>
+                    <li><i class="fas fa-robot"></i> Bots / scraping</li>
+                    <li><i class="fas fa-skull-crosswalk"></i> Illegal content</li>
+                    <li><i class="fas fa-bug"></i> Disrupt / overload</li>
+                    <li><i class="fas fa-lightbulb"></i> Competing products</li>
+                </ul>
+                <p style="margin-top: 12px;">Violation may lead to investigation and legal action. We also reserve the right to take appropriate measures.</p>
+            </div>
+        </div>
+
+        <!-- 4. User Content (Input / Output) -->
+        <div class="terms-section">
+            <div class="section-title"><i class="fas fa-edit"></i> 4. User Content</div>
+            <div class="card-paragraph">
+                <p>You retain ownership of your <strong>Input</strong> (text, data, etc.). You are solely responsible for its legality and for how you use <strong>Output</strong> (processed results). We do not guarantee that Output will be accurate, complete, or error‑free. Output generated for you may be similar to content generated for others. Mini Tool Box assumes no liability for how Output is used.</p>
+            </div>
+        </div>
+
+        <!-- 5. Intellectual Property  -->
+        <div class="terms-section">
+            <div class="section-title"><i class="fas fa-copyright"></i> 5. Intellectual Property</div>
+            <div class="card-paragraph">
+                <p>All software, design, trademarks, branding, tools, and content on Mini Tool Box are owned by or licensed to the Company and protected by law. No rights are granted except as stated in these Terms. Unauthorized use may result in legal action.</p>
+            </div>
+        </div>
+
+        <!-- 6. Paid Services and Subscriptions  -->
+        <div class="terms-section">
+            <div class="section-title"><i class="fas fa-credit-card"></i> 6. Paid Services & Subscriptions</div>
+            <div class="card-paragraph">
+                <p>Some features may require payment. By purchasing a subscription:</p>
+                <ul>
+                    <li>You agree to pay all fees & taxes</li>
+                    <li>Subscriptions may auto-renew unless canceled before renewal</li>
+                    <li>All fees are non-refundable except where required by law</li>
+                    <li>We may modify pricing with prior notice</li>
+                </ul>
+                <p>Failure to pay may result in suspension or termination.</p>
+            </div>
+        </div>
+
+        <!-- 7. Third-Party Services -->
+        <div class="terms-section">
+            <div class="section-title"><i class="fas fa-external-link-alt"></i> 7. Third‑Party Services</div>
+            <div class="card-paragraph">
+                <p>The Service may contain links or integrations with third parties. We do not control and are not responsible for their content, policies, or practices. Your use is at your own risk.</p>
+            </div>
+        </div>
+
+        <!-- 8. Disclaimer of Warranties  -->
+        <div class="terms-section">
+            <div class="section-title"><i class="fas fa-exclamation-triangle"></i> 8. Disclaimer of Warranties</div>
+            <div class="card-paragraph" style="background: #fff1e6;">
+                <p><strong>THE SERVICE IS PROVIDED “AS IS” AND “AS AVAILABLE.”</strong> To the fullest extent permitted by law, Mini Tool Box disclaims all warranties, express or implied, including merchantability, fitness for a particular purpose, non‑infringement, and accuracy or reliability of results. We do not guarantee uninterrupted, secure, or error‑free operation.</p>
+            </div>
+        </div>
+
+        <!-- 9. Limitation of Liability  -->
+        <div class="terms-section">
+            <div class="section-title"><i class="fas fa-scale-balanced"></i> 9. Limitation of Liability</div>
+            <div class="card-paragraph">
+                <p>To the maximum extent permitted by law: Mini Tool Box shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, goodwill, or business opportunities. Our total liability for any claim shall not exceed the amount paid by you (if any) in the twelve (12) months preceding the claim.</p>
+            </div>
+        </div>
+
+        <!-- 10. Indemnification -->
+        <div class="terms-section">
+            <div class="section-title"><i class="fas fa-gavel"></i> 10. Indemnification</div>
+            <div class="card-paragraph">
+                <p>You agree to defend, indemnify, and hold harmless Mini Tool Box, its owners, affiliates, and partners from any claims, damages, liabilities, losses, or expenses arising from your use of the Service, your violation of these Terms, or your violation of any third‑party rights.</p>
+            </div>
+        </div>
+
+        <!-- 11. Suspension and Termination + 12. Modifications -->
+        <div class="terms-section">
+            <div class="section-title"><i class="fas fa-pause-circle"></i> 11. Suspension & Termination</div>
+            <div class="card-paragraph">
+                <p>We may suspend or terminate your access immediately, without prior notice, if you breach these Terms, your use creates legal risk or harm, or if required by law. Upon termination, your right to use the Service ceases immediately.</p>
+            </div>
+            <div style="margin-top: 0.8rem;" class="card-paragraph">
+                <div class="section-title" style="border-left-color: #f97316; margin-bottom: 0.5rem;"><i class="fas fa-pen-to-square" style="color:#f97316;"></i> 12. Modifications to Terms</div>
+                <p>We reserve the right to modify these Terms at any time. Updated versions will be posted on this page with a revised date. Continued use of the Service constitutes acceptance of the revised Terms.</p>
+            </div>
+        </div>
+
+        <!-- 13. Governing Law + 14. Severability + 15. Entire Agreement -->
+        <div class="terms-section">
+            <div class="section-title"><i class="fas fa-globe"></i> 13.–15. Governing Law & General</div>
+            <div class="card-paragraph">
+                <p><strong>Governing law:</strong> These Terms shall be governed by and interpreted in accordance with the laws of <strong>Delaware, USA</strong>, without regard to conflict of law principles. Any disputes shall be resolved exclusively in the courts located in <strong>Delaware</strong>.</p>
+                <p><strong>Severability:</strong> If any provision is found invalid, the remaining provisions will remain in full force.</p>
+                <p><strong>Entire agreement:</strong> These Terms constitute the entire agreement between you and Mini Tool Box regarding use of the Service and supersede any prior agreements.</p>
+            </div>
+        </div>
+
+        <!-- 16. Contact Information with extra attractive block -->
+        <div class="terms-section">
+            <div class="section-title"><i class="fas fa-envelope"></i> 16. Contact Information</div>
+            <div class="contact-block">
+                <p style="margin-bottom: 1.2rem; font-size: 1.2rem; font-weight: 500;">📮 We’re here to help</p>
+                <div>
+                    <span class="contact-item"><i class="fas fa-envelope"></i> support@minitoolbox.com</span>
+                    <span class="contact-item"><i class="fas fa-globe"></i> www.minitoolbox.com</span>
+                    <span class="contact-item"><i class="fas fa-map-pin"></i> Mini Tool Box, Inc.</span>
+                </div>
+                <p style="margin-top: 1.3rem;">We’ll respond as soon as possible</p>
+            </div>
+        </div>
+
+        <!-- tiny footer -->
+        <hr>
+        <div class="footer-note">
+            <i class="far fa-copyright"></i> Mini Tool Box — simple, transparent tools.All right reserved.
+        </div>
+    </div>
+</body>
+</html>

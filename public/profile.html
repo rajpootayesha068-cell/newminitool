@@ -1,0 +1,85 @@
+[<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | Mini Tool Box</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/newstyle.css">
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Background  -->
+    <div id="background-wrapper">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="profile-container">
+            <!-- LEFT PROFILE SECTION -->
+            <div class="profile-left">
+                <div class="user-box">
+                    <img id="profileAvatar" src="default-avatar.png" alt="Profile">
+                    <h3 id="profileDisplayName">AJ</h3>
+                    <p id="profileEmail">email@email.com</p>
+                </div>
+
+                <div class="profile-menu">
+                    <button class="menu-btn active">Profile</button>
+                    <button class="menu-btn">Your Plan</button>
+                </div>
+            </div>
+
+            <!-- RIGHT CONTENT -->
+            <div class="profile-right">
+                <h2>Account Information</h2>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <label>Name</label>
+                        <p id="overviewFullName">AJ</p>
+                    </div>
+
+                    <div class="info-card">
+                        <label>Email Address</label>
+                        <p id="overviewEmail">email@email.com</p>
+                    </div>
+
+                    <div class="info-card">
+                        <label>Account Type</label>
+                        <p id="overviewAccountType">Email Account</p>
+                    </div>
+
+                    <div class="info-card">
+                        <label>Member Since</label>
+                        <p id="overviewMemberSince">Jan 2026</p>
+                    </div>
+                </div>
+
+                <div class="subscription-box">
+                    <h3>Subscription</h3>
+                    <span class="plan-badge" id="overviewPlan">Free</span>
+                    <p>User since Jan 2026</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- JavaScript Files  -->
+    <script src="js/layout.js"></script>
+    <script  type="module" src="js/script.js"></script>
+</body>
+</html> 

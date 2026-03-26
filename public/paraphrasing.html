@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paraphraser Pro | AI Writing Assistant - MiniToolBox</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/newstyle.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Background Glow -->
+    <div id="background-wrapper">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+    
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <div class="container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <a href="index.html" class="nav-item">
+                        <i class="fas fa-eye"></i>
+                        <span>Overview</span>
+                    </a>
+                    <a href="paraphrasing.html" class="nav-item active">
+                        <i class="fas fa-sync-alt"></i>
+                        <span>Paraphraser</span>
+                    </a>
+                    <a href="plagiarism.html" class="nav-item">
+                        <i class="fas fa-search"></i>
+                        <span>Plagiarism</span>
+                    </a>
+                    <a href="humanizer.html" class="nav-item">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Humanizer</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="tool-card glass-card">
+                <!-- Hero Section -->
+                <section class="paraphrase-hero">
+                    <div class="hero-badge">
+                        <i class="fas fa-magic"></i>
+                        <span>AI-Powered Paraphrasing Tool</span>
+                    </div>
+                    <h1>Rewrite Anything <span class="gradient-text">Instantly</span></h1>
+                    <p class="subtitle">
+                        Transform your text with intelligent paraphrasing that preserves meaning while enhancing clarity, tone, and style.
+                    </p>
+                </section>
+
+                <!-- Input Section -->
+                <section class="input-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-edit"></i> Original Text</h3>
+                        <div class="counter-badge">
+                            <span id="inputWords"><i class="fas fa-font"></i> <strong>0</strong>/500 words</span>
+                            <span class="separator">|</span>
+                            <span id="inputChars"><i class="fas fa-keyboard"></i> <strong>0</strong> chars</span>
+                        </div>
+                    </div>
+                    <div class="textarea-wrapper">
+                        <textarea id="inputText"
+                            placeholder="Paste or type your text here...&#10;&#10;Example: 'The quick brown fox jumps over the lazy dog.'"
+                            oninput="countWords()"></textarea>
+                        <div class="textarea-footer">
+                            <span class="hint"><i class="fas fa-info-circle"></i> Max 500 words</span>
+                        </div>
+                    </div>
+                    <div class="limit-message" id="limitMessage">
+                        <i class="fas fa-exclamation-triangle"></i> Maximum word limit reached (500 words)
+                    </div>
+                </section>
+
+                <!-- Controls Section -->
+                <section class="controls-section">
+                    <div class="controls-row">
+                        <!-- Mode Selector -->
+                        <div class="selector-group">
+                            <label for="mode">
+                                <i class="fas fa-sliders-h"></i>
+                                <span>Mode</span>
+                            </label>
+                            <div class="select-wrapper small">
+                                <select id="mode" onchange="checkModeRestriction()">
+                                    <option value="simple" selected>📝 Simple (Free)</option>
+                                    <option value="formal">🏢 Formal (Free)</option>
+                                    <option value="creative">🎨 Creative (Premium)</option>
+                                    <option value="academic">📚 Academic (Premium)</option>
+                                </select>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+
+                        <!-- Language Selector -->
+                        <div class="selector-group">
+                            <label for="language">
+                                <i class="fas fa-globe"></i>
+                                <span>Language</span>
+                            </label>
+                            <div class="select-wrapper small">
+                                <select id="language">
+                                    <option value="en" selected>🇺🇸 English</option>
+                                    <option value="es">🇪🇸 Spanish</option>
+                                    <option value="fr">🇫🇷 French</option>
+                                    <option value="de">🇩🇪 German</option>
+                                    <option value="it">🇮🇹 Italian</option>
+                                    <option value="pt">🇵🇹 Portuguese</option>
+                                    <option value="nl">🇳🇱 Dutch</option>
+                                    <option value="ru">🇷🇺 Russian</option>
+                                    <option value="ja">🇯🇵 Japanese</option>
+                                    <option value="ko">🇰🇷 Korean</option>
+                                    <option value="zh">🇨🇳 Chinese</option>
+                                    <option value="ar">🇸🇦 Arabic</option>
+                                    <option value="hi">🇮🇳 Hindi</option>
+                                    <option value="ur">🇵🇰 Urdu</option>
+                                </select>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="clearBtn" class="secondary-btn">
+                            <i class="fas fa-trash-alt"></i> Clear All
+                        </button>
+                        <button id="paraphraseBtn" class="primary-btn" onclick="paraphraseText()">
+                            <i class="fas fa-sync-alt"></i> Paraphrase
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Output Section -->
+                <section class="output-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-file-alt"></i> Paraphrased Result</h3>
+                        <div class="counter-badge">
+                            <span id="outputWords"><i class="fas fa-font"></i> <strong>0</strong> words</span>
+                            <span class="separator">|</span>
+                            <span id="outputChars"><i class="fas fa-keyboard"></i> <strong>0</strong> chars</span>
+                        </div>
+                    </div>
+                    <div class="textarea-wrapper">
+                        <textarea id="outputText" placeholder="Your paraphrased text will appear here..." readonly></textarea>
+                    </div>
+                    <div class="output-actions">
+                        <button class="action-btn" onclick="copyText()" id="copyBtn">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                        <button class="action-btn" onclick="downloadText()" id="downloadBtn">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                        <button class="action-btn" onclick="shareText()" id="shareBtn">
+                            <i class="fas fa-share-alt"></i> Share
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Features Section -->
+                <section class="features-grid">
+                    <div class="feature-item glass-effect">
+                        <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                        <h4>Lightning Fast</h4>
+                        <p>Get results in milliseconds with our advanced AI engine</p>
+                    </div>
+                    <div class="feature-item glass-effect">
+                        <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h4>100% Unique</h4>
+                        <p>Plagiarism-free content that maintains original meaning</p>
+                    </div>
+                    <div class="feature-item glass-effect">
+                        <div class="feature-icon"><i class="fas fa-language"></i></div>
+                        <h4>Multi-Language</h4>
+                        <p>Supports 50+ languages for global reach</p>
+                    </div>
+                    <div class="feature-item glass-effect">
+                        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                        <h4>Quality Results</h4>
+                        <p>Improves readability and engagement scores</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Premium Modal -->
+    <div class="premium-modal" id="premiumModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-crown modal-icon"></i>
+                <h3>Premium Feature</h3>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <p>The <span id="premiumFeatureName">Creative</span> mode is available only for <strong>Premium users</strong>.</p>
+                <div class="modal-features">
+                    <div class="modal-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Access all 4 paraphrasing modes</span>
+                    </div>
+                    <div class="modal-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Unlimited words (no 500 limit)</span>
+                    </div>
+                    <div class="modal-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Priority processing</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="premium.html" class="primary-btn" style="width: 100%; justify-content: center;">
+                    <i class="fas fa-crown"></i> Upgrade to Premium
+                </a>
+                <button class="secondary-btn" onclick="closeModal()" style="width: 100%;">
+                    Maybe Later
+                </button>
+            </div>
+        </div>
+    </div>
+
+  <!--   <script>
+    // ==============================
+    // 🔹 User Type Detection (Free vs Premium)
+    // ==============================
+    let currentUserType = 'free';
+
+    async function fetchUserType() {
+        firebase.auth().onAuthStateChanged(async (user) => {
+            if (user) {
+                try {
+                    const uid = user.uid;
+                    const userDoc = await firebase.firestore().collection('users').doc(uid).get();
+
+                    if (userDoc.exists) {
+                        currentUserType = userDoc.data().type || 'free';
+                        console.log("User Type:", currentUserType);
+
+                        const modeSelect = document.getElementById('mode');
+
+                        // Reset options first 
+                        Array.from(modeSelect.options).forEach(option => {
+                            option.disabled = false;
+                            option.text = option.text.replace(" 🔒", "");
+                        });
+
+                        // Disable premium modes for free users
+                        if (currentUserType !== 'premium') {
+                            Array.from(modeSelect.options).forEach(option => {
+                                if (['creative', 'academic'].includes(option.value)) {
+                                    option.disabled = true;
+                                    option.text += " 🔒";
+                                }
+                            });
+                        }
+
+                    } else {
+                        currentUserType = 'free';
+                    }
+                } catch (error) {
+                    console.error("Error fetching user type:", error);
+                    currentUserType = 'free';
+                }
+            } else {
+                currentUserType = 'free';
+            }
+        });
+    }
+
+    // ==============================
+    // 🔹 Word Counter (Free vs Premium)
+    // ==============================
+    function countWords() {
+        const text = document.getElementById('inputText').value;
+
+        const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+        const chars = text.length;
+
+        document.getElementById('inputWords').innerHTML = `<strong>${words}</strong>/${currentUserType === 'premium' ? '∞' : '500'} words`;
+        document.getElementById('inputChars').innerHTML = `<strong>${chars}</strong> chars`;
+
+        const limitMessage = document.getElementById('limitMessage');
+        const btn = document.getElementById('paraphraseBtn');
+
+        if (words > 500 && currentUserType !== 'premium') {
+            limitMessage.style.display = 'flex';
+            btn.disabled = true;
+        } else {
+            limitMessage.style.display = 'none';
+            btn.disabled = false;
+        }
+    }
+
+    // ==============================
+    // 🔹 Mode Restriction
+    // ==============================
+    function checkModeRestriction() {
+        const modeSelect = document.getElementById('mode');
+        const selected = modeSelect.value;
+
+        if (['creative', 'academic'].includes(selected) && currentUserType !== 'premium') {
+            document.getElementById('premiumFeatureName').textContent =
+                modeSelect.options[modeSelect.selectedIndex].text;
+
+            showPremiumModal();
+            modeSelect.value = 'simple';
+        }
+    }
+
+    function showPremiumModal() {
+        document.getElementById('premiumModal').classList.add('show');
+    }
+
+    function closeModal() {
+        document.getElementById('premiumModal').classList.remove('show');
+    }
+
+    window.onclick = function(e) {
+        if (e.target === document.getElementById('premiumModal')) {
+            closeModal();
+        }
+    };
+
+    // ==============================
+    // 🔹 Paraphrasing Logic (IMPROVED MODES)
+    // ==============================
+    function paraphraseText() {
+        const text = document.getElementById('inputText').value;
+        const mode = document.getElementById('mode').value;
+        const output = document.getElementById('outputText');
+        const btn = document.getElementById('paraphraseBtn');
+
+        if (['creative', 'academic'].includes(mode) && currentUserType !== 'premium') {
+            showToast('Premium feature!', 'error');
+            return;
+        }
+
+        if (!text.trim()) {
+            showToast('Enter text first', 'error');
+            return;
+        }
+
+        const original = btn.innerHTML;
+        btn.innerHTML = 'Processing...';
+        btn.disabled = true;
+
+        setTimeout(() => {
+            const result = generateParaphrasedText(text, mode);
+            output.value = result;
+
+            const words = result.trim().split(/\s+/).length;
+            const chars = result.length;
+
+            document.getElementById('outputWords').innerHTML = `<strong>${words}</strong> words`;
+            document.getElementById('outputChars').innerHTML = `<strong>${chars}</strong> chars`;
+
+            btn.innerHTML = original;
+            btn.disabled = false;
+
+            showToast('Done!', 'success');
+        }, 1000);
+    }
+
+    function generateParaphrasedText(text, mode) {
+        const sentences = text.split(/[.!?]+/).filter(s => s.trim());
+
+        const synonymMap = {
+            quick: "fast",
+            important: "crucial",
+            big: "large",
+            small: "tiny",
+            good: "excellent",
+            bad: "poor"
+        };
+
+        const modes = {
+            simple: (s) => s,
+
+            formal: (s) => "It can be stated that " + s,
+
+            creative: (s) => "Imagine this: " + s.replace(/\b\w+\b/g, w => synonymMap[w] || w),
+
+            academic: (s) => "According to analysis, " + s + " This demonstrates a structured interpretation."
+        };
+
+        return sentences.map(s => modes[mode](s)).join('. ') + '.';
+    }
+
+    // ==============================
+    // 🔹 Utility Functions
+    // ==============================
+    function copyText() {
+        const text = document.getElementById('outputText').value;
+        if (!text.trim()) return showToast('Nothing to copy', 'error');
+
+        navigator.clipboard.writeText(text);
+        showToast('Copied!', 'success');
+    }
+
+    function downloadText() {
+        const text = document.getElementById('outputText').value;
+        if (!text.trim()) return showToast('Nothing to download', 'error');
+
+        const blob = new Blob([text], { type: 'text/plain' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'text.txt';
+        a.click();
+    }
+
+    function shareText() {
+        const text = document.getElementById('outputText').value;
+        if (!text.trim()) return showToast('Nothing to share', 'error');
+
+        navigator.share ? navigator.share({ text }) : copyText();
+    }
+
+    function showToast(msg, type='success') {
+        const t = document.createElement('div');
+        t.className = `toast ${type}`;
+        t.innerText = msg;
+        document.body.appendChild(t);
+
+        setTimeout(() => t.remove(), 2000);
+    }
+
+    // ==============================
+    // 🔹 Init
+    // ==============================
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchUserType();
+        countWords();
+
+        document.getElementById('clearBtn').onclick = () => {
+            document.getElementById('inputText').value = '';
+            document.getElementById('outputText').value = '';
+            countWords();
+        };
+
+        document.getElementById('inputText').addEventListener('input', countWords);
+    });
+</script>  -->
+
+   <!-- JavaScript Files  -->
+    <script src="js/layout.js"></script>
+    <script  type="module" src="js/script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Humanizer </title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="./css/humanizer.css"/>
+</head>
+
+  <script>
+        /* Particles script */
+        function initParticles() {
+            const particlesContainer = document.getElementById('particles');
+            if (!particlesContainer) return;
+            
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particle.style.opacity = Math.random();
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', initParticles);
+    </script>
+<body>
+
+    <!-- SAPPHIRE BACKGROUND -->
+<div class="background-wrapper">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div id="particles" class="particles-container"></div>
+</div>
+
+<!-- ===== HEADER SECTION ===== -->
+<header class="site-header">
+    <div class="header-container">
+        <!-- Logo -->
+        <div class="header-left">
+            <h1 class="logo">
+                <i class="fas fa-sync-alt logo-icon"></i>
+                <span class="logo-text">Paraphrasing<span class="logo-highlight">Tool</span></span>
+            </h1>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="header-right">
+            <a href="index.html" class="nav-link">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>  
+            <!-- Premium Button -->
+            <a href="premium.html" class="premium-link">
+                <button id="premium-btn">
+                    <i class="fas fa-crown"></i>
+                    <span>Premium</span>
+                </button>
+            </a>
+
+            <!-- Profile Dropdown -->
+            <div class="profile-wrapper">
+                <div class="profile-icon-container" onclick="toggleProfileMenu(event)">
+                    <div class="avatar-circle">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+
+                <div class="profile-menu" id="profileMenu">
+                    <a href="login.html">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Login
+                    </a>
+                    <a href="signup.html">
+                        <i class="fas fa-user-plus"></i>
+                        Signup
+                    </a>
+                    <hr />
+                    <button onclick="toggleDarkMode(event)">
+                        <i class="fas fa-moon"></i>
+                        Dark Mode
+                    </button>
+                    <a href="contact.html">
+                        <i class="fas fa-envelope"></i>
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<hr>
+   <!-- Main Content with Sidebar -->
+        <div class="container">
+            <!-- Glass Sidebar -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <a href="index.html" class="nav-item">
+                        <i class="fas fa-eye"></i>
+                        <span>Overview</span>
+                    </a>
+                    <a href="paraphrasing.html" class="nav-item active">
+                        <i class="fas fa-sync-alt"></i>
+                        <span>Paraphraser</span>
+                    </a>
+                    <a href="plagiarism.html" class="nav-item">
+                        <i class="fas fa-search"></i>
+                        <span>Plagiarism</span>
+                    </a>
+                    <a href="humanizer.html" class="nav-item">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Humanizer</span>
+                    </a>
+                   
+                </nav>
+            </aside>
+<!-- Main Area -->    
+
+</body>
+</html>
