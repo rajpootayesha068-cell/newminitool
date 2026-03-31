@@ -10,1091 +10,893 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- CSS File -->
-       <link rel="stylesheet" href="css/newstyle.css"> 
-    <script>
-// Global error handler - keeps page running even if minor errors occur
-window.onerror = function(msg, url, line) {
-    console.log('Error caught:', msg);
-    return true;
-};
-window.days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-</script>
-<script src="config.js"></script>
+    <link rel="stylesheet" href="css/newstyle.css"> 
 
+    <script>
+        // Global error handler - keeps page running even if minor errors occur
+        window.onerror = function(msg, url, line) {
+            console.log('Error caught:', msg);
+            return true;
+        };
+        // Global time/date variables to prevent "not defined" errors
+        window.days  = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+        window.hours = ['12','1','2','3','4','5','6','7','8','9','10','11',
+                        '12','1','2','3','4','5','6','7','8','9','10','11'];
+        window.months = ['January','February','March','April','May','June',
+                         'July','August','September','October','November','December'];
+    </script>
+
+    <script src="config.js"></script>
 </head>
 <body>
      
- <!-- Header -->
-<div id="header"> </div>
+    <!-- Header -->
+    <div id="header"></div>
 
-<!--  background -->
-<div id="background-wrapper">
-    <div class="glow-orb orb-1"></div>
-    <div class="glow-orb orb-2"></div>
-</div>
-<div class="animate-glow">
-    <!-- ===== MAIN WRAPPER ===== -->
-    <div class="main-wrapper">
-        
-        <!-- ===== HERO SECTION ===== -->
-        <section class="hero-section">
-            <div class="hero-container">
-                <div class="simple-hero-header">
-                    <h1 class="simple-title">
-                        Mini Tool Box <span class="highlight">Your Complete All in One AI Writing & Editing Solution</span>
-                    </h1>
-                    <p class="simple-subtitle">
-                        A mini tool box is a compact digital platform that combines essential AI powered writing and editing tools in one place. Instead of switching between multiple websites to rewrite, check grammar, count words or translate text, users can access everything from a single, efficient dashboard.
-                    </p>
-                </div>
+    <!-- background -->
+    <div id="background-wrapper">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
 
-                <!-- Description Cards -->
-                <div class="description-cards">
-                    <div class="description-card">
-                        <div class="card-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h3>Designed for Everyone</h3>
-                        <p>Writers, students, marketers and businesses - delivering speed, accuracy and high quality results through smart AI and a simple interface.</p>
-                        <span class="card-tag">Save Time</span>
-                    </div>
-
-                    <div class="description-card">
-                        <div class="card-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Boost Productivity</h3>
-                        <p>Smart AI and a simple interface saving time and boosting productivity without complexity. Access everything from a single dashboard.</p>
-                        <span class="card-tag">No Complexity</span>
-                    </div>
-
-                    <div class="description-card">
-                        <div class="card-icon">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <h3>Google Rank Ready</h3>
-                        <p>This article explains how a properly built mini tool box aligns with modern Google ranking standards and why it's essential in 2026.</p>
-                        <span class="card-tag">SEO Optimized</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== TOOLS COLLECTION SECTION ===== -->
-        <section class="tools-collection">
-            <!-- Simple Background -->
-            <div class="bg-pattern"></div>
+    <div class="animate-glow">
+        <!-- ===== MAIN WRAPPER ===== -->
+        <div class="main-wrapper">
             
-            <div class="container">
-                <!-- Section Header -->
-                <div class="section-header">
-                    <span class="section-tag">
-                        <i class="fas fa-cube"></i>
-                        AI-POWERED TOOLKIT
-                    </span>
-                    <h1 class="section-title">
-                        Essential Tools in a <span class="title-gradient">Mini Tool Box</span>
-                    </h1>
-                    <p class="section-subtitle">
-                        Discover our comprehensive suite of AI writing and editing tools designed to transform your content creation workflow
-                    </p>
-                </div>
-            
-                <!-- Card 1: AI Humanizer -->
-                <div class="tool-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                    </div>
-                    
-                    <h3 class="card-title">AI Humanizer</h3>
-                    
-                    <div class="card-content">
-                        <p>With the rise of AI generated content, many users struggle with text that sounds robotic or mechanical. An AI Humanizer inside a mini tool box solves this issue by transforming artificial sounding sentences into natural, conversational writing. This tool analyzes tone, sentence flow and structure. It adjusts vocabulary and restructures phrases to make content sound more human. Instead of simple synonym replacement, advanced AI humanizers understand context and meaning.
-                        Writers use this tool to refine AI drafts, improve blog posts and make marketing content more engaging. It also enhances readability, which is crucial for SEO. Search engines prefer content that feels authentic and helpful rather than automated or repetitive.
-
-                         <p>A high quality AI Humanizer strengthens user trust and ensures content maintains originality while improving tone and clarity.</p>     
-        
-                    </div>
-                    
-                    <div class="card-features">
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Natural Tone</span>
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Context Aware</span>
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> SEO Friendly</span>
-                    </div>
-                    
-                    <div class="card-footer">
-                        <a href="humanizer.html" class="card-btn">
-                            <i class="fas fa-arrow-right"></i>
-                            TRY HUMANIZER NOW
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Card 2: Paraphrasing Tool -->
-                <div class="tool-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-magic"></i>
-                        </div>
-                        
-                    </div>
-                    
-                    <h3 class="card-title">Paraphrasing Tool</h3>
-                    
-                    <div class="card-content">
-                        <p>A Paraphrasing Tool is one of the most demanded features in a mini tool box. It rewrites existing content while preserving the original meaning. Students use it for academic work, bloggers use it to create fresh content and marketers use it to repurpose material across platforms.</p>  
-                        Modern paraphrasing tools are AI driven. They do not simply replace words; they restructure sentences intelligently. They understand grammar, tone and context. The importance of paraphrasing goes beyond plagiarism prevention. It helps users:
-                        <ul class="content-list">
-                            <li>Improve sentence clarity</li>
-                            <li>Simplify complex language</li>
-                            <li>Enhance vocabulary</li>
-                            <li>Create SEO friendly variations</li>
-                        </ul>
-                        <p>Google rewards unique and valuable content. Therefore, a powerful paraphrasing tool supports both quality improvement and search engine optimization.</p>
-                    </div>
-                    
-                    <div class="card-features">
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Smart Rewrites</span>
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Grammar Aware</span>
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> SEO Optimized</span>
-                    </div>
-                    
-                    <div class="card-footer">
-                        <a href="paraphrasing.html" class="card-btn">
-                            <i class="fas fa-arrow-right"></i>
-                            TRY PARAPHRASING TOOL NOW
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Card 3: Sentence Rewriter -->
-                <div class="tool-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-pen-fancy"></i>
-                        </div>
-                    </div>
-                    
-                    <h3 class="card-title">Sentence Rewriter</h3>
-                    
-                    <div class="card-content">
-                        <p>Sometimes users do not want to rewrite an entire paragraph. They only need to improve a single sentence. A Sentence Rewriter focuses on refining individual lines to make them clearer and stronger. This tool is useful for academic writing, professional emails, business proposals and blog editing. It improves sentence flow, corrects grammar and adjusts tone where necessary. <p>For Example, a sentence like "The results of the experiment wer not good" can be rewritten to "The experiment yielded unsatisfactory results." This not only corrects grammar but also enhances clarity and professionalism. </p>                       
-                        <p>By offering precise control over text improvement, a sentence rewriter enhances readability and engagement. Clear and concise sentences reduce bounce rates and increase user satisfaction — two important SEO factors.</p>
-                    </div>
-                    
-                    <div class="card-features">
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Flow Improvement</span>
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Grammar Fix</span>
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Tone Adjust</span>
-                    </div>
-                    
-                    <div class="card-footer">
-                        <a href="sentence-rewriter.html" class="card-btn">
-                            <i class="fas fa-arrow-right"></i>
-                            TRY SENTENCE REWRITER NOW
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Card 4: Rewording Tool -->
-                <div class="tool-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-language"></i>
-                        </div>
-                    </div>
-                    
-                    <h3 class="card-title">Rewording Tool</h3>
-                    
-                    <div class="card-content">
-                        <p>While paraphrasing rewrites full content, a Rewording Tool focuses on improving word choice. It replaces repetitive or weak words with stronger alternatives while maintaining meaning. Content creators often struggle with repetition. Rewording tools help diversify vocabulary, making text more engaging and professional.
-                        An advanced rewording tool inside a mini tool box should provide contextual suggestions rather than random synonyms. It must understand sentence structure and maintain grammatical accuracy. This small yet powerful tool significantly improves writing quality and overall presentation.
-                    </div>
-                    
-                    <div class="card-features">
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Rich Vocabulary</span>
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Contextual</span>
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> No Repetition</span>
-                    </div>
-                    
-                    <div class="card-footer">
-                        <a href="rewording.html" class="card-btn">
-                            <i class="fas fa-arrow-right"></i>
-                            TRY REWORDING TOOL NOW
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Card 5: Summarizer -->
-                <div class="tool-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-compress-alt"></i>
-                        </div>
-                    </div>
-                    
-                    <h3 class="card-title">Summarizer</h3>
-                    
-                    <div class="card-content">
-                        <p>Information overload is common in today's digital world. Readers prefer concise summaries rather than lengthy paragraphs. A Summarizer tool extracts key ideas from long content and presents them clearly. Students use summarizers for research articles. Bloggers use them to create meta descriptions and social media captions. Professionals use them for reports and presentations.</p>
-                        
-                        <p>An AI powered summarizer understands context and identifies main ideas rather than cutting text randomly. It can generate bullet point summaries or short paragraphs based on user preference. Summaries also help improve SEO by creating optimized snippets that match search intent.</p>
-                    </div>
-                    
-                    <div class="card-features">
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Smart Extraction</span>
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Bullet Points</span>
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Key Insights</span>
-                    </div>
-                    
-                    <div class="card-footer">
-                        <a href="summarizer.html" class="card-btn">
-                            <i class="fas fa-arrow-right"></i>
-                            TRY SUMMARIZER NOW
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Card 6: Word Counter -->
-                <div class="tool-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-calculator"></i>
-                        </div>
-                    </div>
-                    
-                    <h3 class="card-title">Word Counter</h3>
-                    
-                    <div class="card-content">
-                        <p>A Word Counter is a simple yet crucial tool in a mini tool box. It calculates total words, characters, sentences and paragraphs. For SEO writers, word count is extremely important because content length influences ranking potential.
-                        Beyond counting words, advanced versions include keyword density analysis and reading time estimation. These features help writers optimize content strategically. For academic writers and social media managers, character limits matter. A word counter ensures content fits platform requirements without manual calculation. 
-                        <p>Even though it appears basic, this tool plays a major role in professional writing workflows.</p>
-                    </div>
-                    
-                    <div class="card-features">
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Real-time Count</span>
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Keyword Density</span>
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Reading Time</span>
-                    </div>
-                    
-                    <div class="card-footer">
-                        <a href="word-counter.html" class="card-btn">
-                            <i class="fas fa-arrow-right"></i>
-                            TRY WORD COUNTER NOW
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Card 7: Grammar Checker -->
-                <div class="tool-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-check-double"></i>
-                        </div>
-                    </div>
-                    
-                    <h3 class="card-title">Grammar Checker</h3>
-                    
-                    <div class="card-content">
-                        <p>Grammar mistakes can damage credibility. A Grammar Checker identifies errors in tense, punctuation, sentence structure, and clarity. Modern grammar checkers use AI to understand context. They do not only highlight mistakes but also suggest meaningful corrections. Search engines prioritize clear and readable content. Grammar errors can reduce user trust and increase bounce rate. Therefore, integrating a reliable grammar checker into a mini tool box is essential.</p>
-                        
-                        <p>This tool benefits students, bloggers, business professionals and anyone who communicates through writing.</p>
-                    </div>
-                    
-                    <div class="card-features">
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Context-Aware</span>
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Smart Fixes</span>
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Style Check</span>
-                    </div>
-                    
-                    <div class="card-footer">
-                        <a href="grammar.html" class="card-btn">
-                            <i class="fas fa-arrow-right"></i>
-                            TRY GRAMMAR CHECKER NOW
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Card 8: Spell Checker -->
-                <div class="tool-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-spell-check"></i>
-                        </div>
-                    </div>
-                    
-                    <h3 class="card-title">Spell Checker</h3>
-                    
-                    <div class="card-content">
-                        <p>Spelling mistakes may seem minor, but they affect professionalism. A Spell Checker automatically detects and corrects incorrect words.In fast typing or mobile writing, small errors are common. This tool ensures polished and clean output.When combined with grammar checking, spell correction strengthens overall writing quality and improves credibility.</p>
-                    </div>
-                    <div class="card-features">
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Auto Correct</span>
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Dictionary</span>
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Suggestions</span>
-                    </div>
-                    
-                    <div class="card-footer">
-                        <a href="spell-checker.html" class="card-btn">
-                            <i class="fas fa-arrow-right"></i>
-                            TRY SPELL CHECKER NOW
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Card 9: Translator -->
-                <div class="tool-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-globe"></i>
-                        </div>
-                    </div>
-                    <h3 class="card-title">Translator</h3>
-                    <div class="card-content">
-                        <p>The internet connects global audiences. A Translator tool allows users to convert text into multiple languages instantly.Bloggers can reach international readers. Businesses can communicate with global clients. Students can understand foreign research material. AI powered translation tools preserve meaning and context rather than translating word by word. This ensures natural and accurate results.</p>
-                        <p>Adding a translator to a mini tool box transforms it from a local utility platform into a global solution.</p>
-                    </div>
-                    
-                    <div class="card-features">
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> 100+ Languages</span>
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Context Aware</span>
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Natural Flow</span>
-                    </div>
-                    
-                    <div class="card-footer">
-                        <a href="translator.html" class="card-btn">
-                            <i class="fas fa-arrow-right"></i>
-                            TRY TRANSLATOR NOW
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Card 10: Plagiarism Checker -->
-                <div class="tool-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                    </div>
-                    
-                    <h3 class="card-title">Plagiarism Checker</h3>
-                    
-                    <div class="card-content">
-                        <p>Originality is one of the most important factors in the digital world. Whether it is academic writing, blogging, marketing content or website copy, duplicate content can harm both credibility and search engine rankings. That is why a powerful Plagiarism Checker is an essential component of a modern mini tool box. A plagiarism checker scans text against online sources to detect copied or duplicated content. It provides a similarity percentage and highlights matched sources, allowing users to identify exactly where issues exist.</p>
-                        
-                        <p>For students, this tool helps maintain academic integrity and avoid penalties. For bloggers and SEO writers, it protects against duplicate content issues that may negatively impact Google rankings. For businesses, it ensures brand authenticity and builds trust with audiences.</p>
-                        <p>An advanced plagiarism checker does more than detect exact matches. It can also identify near duplicate content and lightly modified text, which is crucial in today’s competitive SEO landscape. When combined with a paraphrasing tool, users can rewrite content and instantly verify its originality within the same mini tool box. This seamless workflow improves efficiency and ensures high quality, unique output. </p>
-                        <p>A reliable plagiarism checker should include deep web scanning, detailed similarity reports, source highlighting, fast processing and secure handling of user data.</p>
-                        <p>In a content driven environment where originality determines authority and ranking success, a plagiarism checker is not just an additional feature it is a core necessity of any comprehensive mini tool box platform.</p>
-                    </div>
-                    
-                    <div class="card-features">
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Billion+ Pages</span>
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Detailed Reports</span>
-                        <span class="feature-tag"><i class="fas fa-check-circle"></i> Real-time Scan</span>
-                    </div>
-                    
-                    <div class="card-footer">
-                        <a href="plagiarism.html" class="card-btn">
-                            <i class="fas fa-arrow-right"></i>
-                            TRY PLAGIARISM TOOL NOW
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Features Banner -->
-                <div class="features-banner">
-                    <div class="feature-block">
-                        <i class="fas fa-bolt"></i>
-                        <div class="block-text">
-                            <h4>Lightning Fast</h4>
-                            <p>Results in milliseconds</p>
-                        </div>
-                    </div>
-                    <div class="feature-block">
-                        <i class="fas fa-shield-alt"></i>
-                        <div class="block-text">
-                            <h4>100% Secure</h4>
-                            <p>Privacy guaranteed</p>
-                        </div>
-                    </div>
-                    <div class="feature-block">
-                        <i class="fas fa-infinity"></i>
-                        <div class="block-text">
-                            <h4>Unlimited Use</h4>
-                            <p>No credit card needed</p>
-                        </div>
-                    </div>
-                    <div class="feature-block">
-                        <i class="fas fa-mobile-alt"></i>
-                        <div class="block-text">
-                            <h4>Mobile Friendly</h4>
-                            <p>Works everywhere</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    
-        <!-- ===== CONCEPT SECTION ===== -->
-        <section class="concept-section">
-            <div class="concept-container">
-                <!-- Section Header -->
-                <div class="concept-header animate-on-scroll">
-                    <span class="concept-tag">📦 DIGITAL EVOLUTION</span>
-                    <h2 class="concept-title">
-                        Understanding the <span class="title-gradient">Digital Mini Tool Box</span> Concept
-                    </h2>
-                </div>
-
-                <!-- Pure Content - Full Width -->
-                <div class="concept-content-full animate-on-scroll">
-                    <div class="text-card-full">
-                        <p class="concept-paragraph">
-                            <span class="dropcap">T</span>raditionally a mini tool box was used to store small mechanical tools for quick fixes. The digital version follows the same philosophy: <span class="highlight-text">compact, efficient and practical</span>. Instead of physical tools, it offers smart writing and editing tools powered by AI.
+            <!-- ===== HERO SECTION ===== -->
+            <section class="hero-section">
+                <div class="hero-container">
+                    <div class="simple-hero-header">
+                        <h1 class="simple-title">
+                            Mini Tool Box <span class="highlight">Your Complete All in One AI Writing & Editing Solution</span>
+                        </h1>
+                        <p class="simple-subtitle">
+                            A mini tool box is a compact digital platform that combines essential AI powered writing and editing tools in one place. Instead of switching between multiple websites to rewrite, check grammar, count words or translate text, users can access everything from a single, efficient dashboard.
                         </p>
-                        
-                        <div class="concept-quote">
-                            <i class="fas fa-quote-left"></i>
-                            <p>From hardware to software - the toolbox evolved</p>
-                        </div>
-                        
-                        <p class="concept-paragraph">
-                            The purpose of a digital mini tool box is simple: provide multiple essential tools in one optimized platform. Users no longer want cluttered dashboards or complicated software. They want <span class="highlight-text">fast loading pages, accurate results and a smooth experience</span> across devices.
-                        </p>
-                        
-                        <div class="feature-highlights">
-                            <div class="highlight-item">
-                                <div class="highlight-icon">
-                                    <i class="fas fa-check-circle"></i>
-                                </div>
-                                <div class="highlight-text-content">
-                                    <h4>User Intent Focus</h4>
-                                    <p>Instant solutions for rewriting, grammar & translation</p>
-                                </div>
+                    </div>
+
+                    <!-- Description Cards -->
+                    <div class="description-cards">
+                        <div class="description-card">
+                            <div class="card-icon">
+                                <i class="fas fa-users"></i>
                             </div>
-                            <div class="highlight-item">
-                                <div class="highlight-icon">
-                                    <i class="fas fa-check-circle"></i>
-                                </div>
-                                <div class="highlight-text-content">
-                                    <h4>Google Priority</h4>
-                                    <p>Helpful content & user satisfaction driven</p>
-                                </div>
-                            </div>
+                            <h3>Designed for Everyone</h3>
+                            <p>Writers, students, marketers and businesses - delivering speed, accuracy and high quality results through smart AI and a simple interface.</p>
+                            <span class="card-tag">Save Time</span>
                         </div>
-                        
-                        <div class="concept-highlight">
-                            <p class="concept-paragraph">
-                                A well optimized mini tool box focuses on user intent. When someone searches for rewriting tools, grammar correction or translation support, they want instant solutions. Google now prioritizes helpful content and user satisfaction. Therefore, a mini tool box website must <span class="bold-text">deliver value quickly and clearly</span>.
-                            </p>
+
+                        <div class="description-card">
+                            <div class="card-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3>Boost Productivity</h3>
+                            <p>Smart AI and a simple interface saving time and boosting productivity without complexity. Access everything from a single dashboard.</p>
+                            <span class="card-tag">No Complexity</span>
+                        </div>
+
+                        <div class="description-card">
+                            <div class="card-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3>Google Rank Ready</h3>
+                            <p>This article explains how a properly built mini tool box aligns with modern Google ranking standards and why it's essential in 2026.</p>
+                            <span class="card-tag">SEO Optimized</span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- ===== GOOGLE STANDARDS SECTION ===== -->
-        <section class="google-standards">
-            <div class="standards-container">
+            <!-- ===== TOOLS COLLECTION SECTION ===== -->
+            <section class="tools-collection">
+                <!-- Simple Background -->
+                <div class="bg-pattern"></div>
                 
-                <!-- Section Header -->
-                <div class="section-header animate-on-scroll">
-                    <span class="header-tag">📊 SEO & RANKINGS</span>
-                    <h2 class="header-title">Why a <span class="text-gradient">Mini Tool Box</span> Aligns with Modern Google Standards</h2>
-                </div>
-
-                <div class="standards-grid">
-                    
-                    <!-- Left Column - Main Content -->
-                    <div class="content-column animate-on-scroll">
-                        <!-- Intro Text -->
-                        <div class="intro-card">
-                            <p class="intro-text">Search engines now prioritize helpful, user focused content. A mini tool box supports these standards by delivering exceptional value through every interaction.</p>
+                <div class="container">
+                    <!-- Section Header -->
+                    <div class="section-header">
+                        <span class="section-tag">
+                            <i class="fas fa-cube"></i>
+                            AI-POWERED TOOLKIT
+                        </span>
+                        <h1 class="section-title">
+                            Essential Tools in a <span class="title-gradient">Mini Tool Box</span>
+                        </h1>
+                        <p class="section-subtitle">
+                            Discover our comprehensive suite of AI writing and editing tools designed to transform your content creation workflow
+                        </p>
+                    </div>
+                
+                    <!-- Card 1: AI Humanizer -->
+                    <div class="tool-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
                         </div>
+                        <h3 class="card-title">AI Humanizer</h3>
+                        <div class="card-content">
+                            <p>With the rise of AI generated content, many users struggle with text that sounds robotic or mechanical. An AI Humanizer inside a mini tool box solves this issue by transforming artificial sounding sentences into natural, conversational writing. This tool analyzes tone, sentence flow and structure. It adjusts vocabulary and restructures phrases to make content sound more human. Instead of simple synonym replacement, advanced AI humanizers understand context and meaning.
+                            Writers use this tool to refine AI drafts, improve blog posts and make marketing content more engaging. It also enhances readability, which is crucial for SEO. Search engines prefer content that feels authentic and helpful rather than automated or repetitive.</p>
+                            <p>A high quality AI Humanizer strengthens user trust and ensures content maintains originality while improving tone and clarity.</p>
+                        </div>
+                        <div class="card-features">
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Natural Tone</span>
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Context Aware</span>
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> SEO Friendly</span>
+                        </div>
+                        <div class="card-footer">
+                            <a href="humanizer.html" class="card-btn">
+                                <i class="fas fa-arrow-right"></i>
+                                TRY HUMANIZER NOW
+                            </a>
+                        </div>
+                    </div>
 
-                        <!-- Key Points List -->
-                        <div class="points-container">
-                            <h3>Key Ranking Factors:</h3>
+                    <!-- Card 2: Paraphrasing Tool -->
+                    <div class="tool-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-magic"></i>
+                            </div>
+                        </div>
+                        <h3 class="card-title">Paraphrasing Tool</h3>
+                        <div class="card-content">
+                            <p>A Paraphrasing Tool is one of the most demanded features in a mini tool box. It rewrites existing content while preserving the original meaning. Students use it for academic work, bloggers use it to create fresh content and marketers use it to repurpose material across platforms.</p>
+                            <p>Modern paraphrasing tools are AI driven. They do not simply replace words; they restructure sentences intelligently. They understand grammar, tone and context. The importance of paraphrasing goes beyond plagiarism prevention. It helps users:</p>
+                            <ul class="content-list">
+                                <li>Improve sentence clarity</li>
+                                <li>Simplify complex language</li>
+                                <li>Enhance vocabulary</li>
+                                <li>Create SEO friendly variations</li>
+                            </ul>
+                            <p>Google rewards unique and valuable content. Therefore, a powerful paraphrasing tool supports both quality improvement and search engine optimization.</p>
+                        </div>
+                        <div class="card-features">
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Smart Rewrites</span>
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Grammar Aware</span>
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> SEO Optimized</span>
+                        </div>
+                        <div class="card-footer">
+                            <a href="paraphrasing.html" class="card-btn">
+                                <i class="fas fa-arrow-right"></i>
+                                TRY PARAPHRASING TOOL NOW
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Sentence Rewriter -->
+                    <div class="tool-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-pen-fancy"></i>
+                            </div>
+                        </div>
+                        <h3 class="card-title">Sentence Rewriter</h3>
+                        <div class="card-content">
+                            <p>Sometimes users do not want to rewrite an entire paragraph. They only need to improve a single sentence. A Sentence Rewriter focuses on refining individual lines to make them clearer and stronger. This tool is useful for academic writing, professional emails, business proposals and blog editing. It improves sentence flow, corrects grammar and adjusts tone where necessary.</p>
+                            <p>For Example, a sentence like "The results of the experiment were not good" can be rewritten to "The experiment yielded unsatisfactory results." This not only corrects grammar but also enhances clarity and professionalism.</p>
+                            <p>By offering precise control over text improvement, a sentence rewriter enhances readability and engagement. Clear and concise sentences reduce bounce rates and increase user satisfaction — two important SEO factors.</p>
+                        </div>
+                        <div class="card-features">
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Flow Improvement</span>
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Grammar Fix</span>
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Tone Adjust</span>
+                        </div>
+                        <div class="card-footer">
+                            <a href="sentence-rewriter.html" class="card-btn">
+                                <i class="fas fa-arrow-right"></i>
+                                TRY SENTENCE REWRITER NOW
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Rewording Tool -->
+                    <div class="tool-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-language"></i>
+                            </div>
+                        </div>
+                        <h3 class="card-title">Rewording Tool</h3>
+                        <div class="card-content">
+                            <p>While paraphrasing rewrites full content, a Rewording Tool focuses on improving word choice. It replaces repetitive or weak words with stronger alternatives while maintaining meaning. Content creators often struggle with repetition. Rewording tools help diversify vocabulary, making text more engaging and professional.</p>
+                            <p>An advanced rewording tool inside a mini tool box should provide contextual suggestions rather than random synonyms. It must understand sentence structure and maintain grammatical accuracy. This small yet powerful tool significantly improves writing quality and overall presentation.</p>
+                        </div>
+                        <div class="card-features">
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Rich Vocabulary</span>
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Contextual</span>
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> No Repetition</span>
+                        </div>
+                        <div class="card-footer">
+                            <a href="rewording.html" class="card-btn">
+                                <i class="fas fa-arrow-right"></i>
+                                TRY REWORDING TOOL NOW
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 5: Summarizer -->
+                    <div class="tool-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-compress-alt"></i>
+                            </div>
+                        </div>
+                        <h3 class="card-title">Summarizer</h3>
+                        <div class="card-content">
+                            <p>Information overload is common in today's digital world. Readers prefer concise summaries rather than lengthy paragraphs. A Summarizer tool extracts key ideas from long content and presents them clearly. Students use summarizers for research articles. Bloggers use them to create meta descriptions and social media captions. Professionals use them for reports and presentations.</p>
+                            <p>An AI powered summarizer understands context and identifies main ideas rather than cutting text randomly. It can generate bullet point summaries or short paragraphs based on user preference. Summaries also help improve SEO by creating optimized snippets that match search intent.</p>
+                        </div>
+                        <div class="card-features">
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Smart Extraction</span>
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Bullet Points</span>
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Key Insights</span>
+                        </div>
+                        <div class="card-footer">
+                            <a href="summarizer.html" class="card-btn">
+                                <i class="fas fa-arrow-right"></i>
+                                TRY SUMMARIZER NOW
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 6: Word Counter -->
+                    <div class="tool-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                        </div>
+                        <h3 class="card-title">Word Counter</h3>
+                        <div class="card-content">
+                            <p>A Word Counter is a simple yet crucial tool in a mini tool box. It calculates total words, characters, sentences and paragraphs. For SEO writers, word count is extremely important because content length influences ranking potential.</p>
+                            <p>Beyond counting words, advanced versions include keyword density analysis and reading time estimation. These features help writers optimize content strategically. For academic writers and social media managers, character limits matter. A word counter ensures content fits platform requirements without manual calculation.</p>
+                            <p>Even though it appears basic, this tool plays a major role in professional writing workflows.</p>
+                        </div>
+                        <div class="card-features">
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Real-time Count</span>
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Keyword Density</span>
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Reading Time</span>
+                        </div>
+                        <div class="card-footer">
+                            <a href="word-counter.html" class="card-btn">
+                                <i class="fas fa-arrow-right"></i>
+                                TRY WORD COUNTER NOW
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 7: Grammar Checker -->
+                    <div class="tool-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-check-double"></i>
+                            </div>
+                        </div>
+                        <h3 class="card-title">Grammar Checker</h3>
+                        <div class="card-content">
+                            <p>Grammar mistakes can damage credibility. A Grammar Checker identifies errors in tense, punctuation, sentence structure, and clarity. Modern grammar checkers use AI to understand context. They do not only highlight mistakes but also suggest meaningful corrections. Search engines prioritize clear and readable content. Grammar errors can reduce user trust and increase bounce rate. Therefore, integrating a reliable grammar checker into a mini tool box is essential.</p>
+                            <p>This tool benefits students, bloggers, business professionals and anyone who communicates through writing.</p>
+                        </div>
+                        <div class="card-features">
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Context-Aware</span>
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Smart Fixes</span>
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Style Check</span>
+                        </div>
+                        <div class="card-footer">
+                            <a href="grammar.html" class="card-btn">
+                                <i class="fas fa-arrow-right"></i>
+                                TRY GRAMMAR CHECKER NOW
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 8: Spell Checker -->
+                    <div class="tool-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-spell-check"></i>
+                            </div>
+                        </div>
+                        <h3 class="card-title">Spell Checker</h3>
+                        <div class="card-content">
+                            <p>Spelling mistakes may seem minor, but they affect professionalism. A Spell Checker automatically detects and corrects incorrect words. In fast typing or mobile writing, small errors are common. This tool ensures polished and clean output. When combined with grammar checking, spell correction strengthens overall writing quality and improves credibility.</p>
+                        </div>
+                        <div class="card-features">
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Auto Correct</span>
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Dictionary</span>
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Suggestions</span>
+                        </div>
+                        <div class="card-footer">
+                            <a href="spell-checker.html" class="card-btn">
+                                <i class="fas fa-arrow-right"></i>
+                                TRY SPELL CHECKER NOW
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 9: Translator -->
+                    <div class="tool-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                        </div>
+                        <h3 class="card-title">Translator</h3>
+                        <div class="card-content">
+                            <p>The internet connects global audiences. A Translator tool allows users to convert text into multiple languages instantly. Bloggers can reach international readers. Businesses can communicate with global clients. Students can understand foreign research material. AI powered translation tools preserve meaning and context rather than translating word by word. This ensures natural and accurate results.</p>
+                            <p>Adding a translator to a mini tool box transforms it from a local utility platform into a global solution.</p>
+                        </div>
+                        <div class="card-features">
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> 100+ Languages</span>
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Context Aware</span>
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Natural Flow</span>
+                        </div>
+                        <div class="card-footer">
+                            <a href="translator.html" class="card-btn">
+                                <i class="fas fa-arrow-right"></i>
+                                TRY TRANSLATOR NOW
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 10: Plagiarism Checker -->
+                    <div class="tool-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                        </div>
+                        <h3 class="card-title">Plagiarism Checker</h3>
+                        <div class="card-content">
+                            <p>Originality is one of the most important factors in the digital world. Whether it is academic writing, blogging, marketing content or website copy, duplicate content can harm both credibility and search engine rankings. That is why a powerful Plagiarism Checker is an essential component of a modern mini tool box. A plagiarism checker scans text against online sources to detect copied or duplicated content. It provides a similarity percentage and highlights matched sources, allowing users to identify exactly where issues exist.</p>
+                            <p>For students, this tool helps maintain academic integrity and avoid penalties. For bloggers and SEO writers, it protects against duplicate content issues that may negatively impact Google rankings. For businesses, it ensures brand authenticity and builds trust with audiences.</p>
+                            <p>An advanced plagiarism checker does more than detect exact matches. It can also identify near duplicate content and lightly modified text, which is crucial in today's competitive SEO landscape. When combined with a paraphrasing tool, users can rewrite content and instantly verify its originality within the same mini tool box.</p>
+                            <p>A reliable plagiarism checker should include deep web scanning, detailed similarity reports, source highlighting, fast processing and secure handling of user data.</p>
+                            <p>In a content driven environment where originality determines authority and ranking success, a plagiarism checker is not just an additional feature it is a core necessity of any comprehensive mini tool box platform.</p>
+                        </div>
+                        <div class="card-features">
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Billion+ Pages</span>
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Detailed Reports</span>
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Real-time Scan</span>
+                        </div>
+                        <div class="card-footer">
+                            <a href="plagiarism.html" class="card-btn">
+                                <i class="fas fa-arrow-right"></i>
+                                TRY PLAGIARISM TOOL NOW
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Features Banner -->
+                    <div class="features-banner">
+                        <div class="feature-block">
+                            <i class="fas fa-bolt"></i>
+                            <div class="block-text">
+                                <h4>Lightning Fast</h4>
+                                <p>Results in milliseconds</p>
+                            </div>
+                        </div>
+                        <div class="feature-block">
+                            <i class="fas fa-shield-alt"></i>
+                            <div class="block-text">
+                                <h4>100% Secure</h4>
+                                <p>Privacy guaranteed</p>
+                            </div>
+                        </div>
+                        <div class="feature-block">
+                            <i class="fas fa-infinity"></i>
+                            <div class="block-text">
+                                <h4>Unlimited Use</h4>
+                                <p>No credit card needed</p>
+                            </div>
+                        </div>
+                        <div class="feature-block">
+                            <i class="fas fa-mobile-alt"></i>
+                            <div class="block-text">
+                                <h4>Mobile Friendly</h4>
+                                <p>Works everywhere</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+            <!-- ===== CONCEPT SECTION ===== -->
+            <section class="concept-section">
+                <div class="concept-container">
+                    <div class="concept-header animate-on-scroll">
+                        <span class="concept-tag">📦 DIGITAL EVOLUTION</span>
+                        <h2 class="concept-title">
+                            Understanding the <span class="title-gradient">Digital Mini Tool Box</span> Concept
+                        </h2>
+                    </div>
+
+                    <div class="concept-content-full animate-on-scroll">
+                        <div class="text-card-full">
+                            <p class="concept-paragraph">
+                                <span class="dropcap">T</span>raditionally a mini tool box was used to store small mechanical tools for quick fixes. The digital version follows the same philosophy: <span class="highlight-text">compact, efficient and practical</span>. Instead of physical tools, it offers smart writing and editing tools powered by AI.
+                            </p>
                             
-                            <div class="points-list">
-                                <!-- Point 1 -->
-                                <div class="point-item">
-                                    <div class="point-icon">
+                            <div class="concept-quote">
+                                <i class="fas fa-quote-left"></i>
+                                <p>From hardware to software - the toolbox evolved</p>
+                            </div>
+                            
+                            <p class="concept-paragraph">
+                                The purpose of a digital mini tool box is simple: provide multiple essential tools in one optimized platform. Users no longer want cluttered dashboards or complicated software. They want <span class="highlight-text">fast loading pages, accurate results and a smooth experience</span> across devices.
+                            </p>
+                            
+                            <div class="feature-highlights">
+                                <div class="highlight-item">
+                                    <div class="highlight-icon">
                                         <i class="fas fa-check-circle"></i>
                                     </div>
-                                    <div class="point-content">
-                                        <span class="point-title">Providing real value</span>
-                                        <div class="progress-bar">
-                                            <div class="progress-fill" style="width: 98%"></div>
-                                        </div>
+                                    <div class="highlight-text-content">
+                                        <h4>User Intent Focus</h4>
+                                        <p>Instant solutions for rewriting, grammar & translation</p>
                                     </div>
-                                    <span class="point-value">98%</span>
                                 </div>
-
-                                <!-- Point 2 -->
-                                <div class="point-item">
-                                    <div class="point-icon">
-                                        <i class="fas fa-bolt"></i>
+                                <div class="highlight-item">
+                                    <div class="highlight-icon">
+                                        <i class="fas fa-check-circle"></i>
                                     </div>
-                                    <div class="point-content">
-                                        <span class="point-title">Solving user problems quickly</span>
-                                        <div class="progress-bar">
-                                            <div class="progress-fill" style="width: 95%"></div>
-                                        </div>
+                                    <div class="highlight-text-content">
+                                        <h4>Google Priority</h4>
+                                        <p>Helpful content & user satisfaction driven</p>
                                     </div>
-                                    <span class="point-value">95%</span>
-                                </div>
-
-                                <!-- Point 3 -->
-                                <div class="point-item">
-                                    <div class="point-icon">
-                                        <i class="fas fa-file-alt"></i>
-                                    </div>
-                                    <div class="point-content">
-                                        <span class="point-title">Improving content quality</span>
-                                        <div class="progress-bar">
-                                            <div class="progress-fill" style="width: 96%"></div>
-                                        </div>
-                                    </div>
-                                    <span class="point-value">96%</span>
-                                </div>
-
-                                <!-- Point 4 -->
-                                <div class="point-item">
-                                    <div class="point-icon">
-                                        <i class="fas fa-book-open"></i>
-                                    </div>
-                                    <div class="point-content">
-                                        <span class="point-title">Enhancing readability</span>
-                                        <div class="progress-bar">
-                                            <div class="progress-fill" style="width: 94%"></div>
-                                        </div>
-                                    </div>
-                                    <span class="point-value">94%</span>
-                                </div>
-
-                                <!-- Point 5 -->
-                                <div class="point-item">
-                                    <div class="point-icon">
-                                        <i class="fas fa-copy"></i>
-                                    </div>
-                                    <div class="point-content">
-                                        <span class="point-title">Reducing duplication</span>
-                                        <div class="progress-bar">
-                                            <div class="progress-fill" style="width: 92%"></div>
-                                        </div>
-                                    </div>
-                                    <span class="point-value">92%</span>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Column - Metrics & Additional Content -->
-                    <div class="metrics-column animate-on-scroll">
-                        
-                        <!-- User Experience Metrics -->
-                        <div class="metrics-grid">
-                            <div class="metric-card">
-                                <div class="metric-icon">
-                                    <i class="fas fa-tachometer-alt"></i>
-                                </div>
-                                <h4>Page Speed</h4>
-                                <div class="metric-meter">
-                                    <div class="meter-fill" style="width: 98%"></div>
-                                </div>
-                                <span class="metric-value">98/100</span>
-                            </div>
-
-                            <div class="metric-card">
-                                <div class="metric-icon">
-                                    <i class="fas fa-mobile-alt"></i>
-                                </div>
-                                <h4>Mobile Responsive</h4>
-                                <div class="metric-meter">
-                                    <div class="meter-fill" style="width: 100%"></div>
-                                </div>
-                                <span class="metric-value">100/100</span>
-                            </div>
-
-                            <div class="metric-card">
-                                <div class="metric-icon">
-                                    <i class="fas fa-clock"></i>
-                                </div>
-                                <h4>Engagement Time</h4>
-                                <div class="metric-meter">
-                                    <div class="meter-fill" style="width: 85%"></div>
-                                </div>
-                                <span class="metric-value">+85%</span>
-                            </div>
-                        </div>
-
-                        <!-- Additional Content Blocks -->
-                        <div class="content-blocks">
-                            <div class="content-block">
-                                <div class="block-icon">
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p>Additionally, Google considers user experience metrics such as page speed, mobile responsiveness, and engagement time. A lightweight and well structured mini tool box naturally performs well in these areas.</p>
-                            </div>
-
-                            <div class="content-block highlight-block">
-                                <div class="block-icon">
-                                    <i class="fas fa-chart-line"></i>
-                                </div>
-                                <p>When users find multiple tools in one place, they spend more time exploring. This increases dwell time and improves ranking signals.</p>
-                            </div>
-                        </div>
-
-                        <!-- Overall Score Card -->
-                        <div class="score-card">
-                            <div class="score-circle">
-                                <span class="score-number">95</span>
-                                <span class="score-label">Google<br>Score</span>
-                            </div>
-                            <div class="score-info">
-                                <h4>Excellent Compliance</h4>
-                                <p>Your content meets 95% of Google's ranking factors</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== TESTIMONIALS SECTION ===== -->
-        <section class="testimonials-section">
-            <div class="testimonials-container">
-                <!-- Section Header -->
-                <div class="section-header animate-on-scroll">
-                    <span class="header-tag">💬 USER STORIES</span>
-                    <h2 class="section-title">Trusted by <span class="text-gradient">Writers Worldwide</span></h2>
-                    <p class="section-subtitle">Join millions of satisfied users who trust our Mini Tool Box</p>
-                </div>
-
-                <!-- Carousel with 3 Items -->
-                <div class="carousel-container">
-                    <!-- Arrows -->
-                    <button class="carousel-arrow prev-arrow" id="prevBtn">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    
-                    <button class="carousel-arrow next-arrow" id="nextBtn">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-
-                    <!-- Carousel Track -->
-                    <div class="carousel-viewport">
-                        <div class="carousel-track" id="carouselTrack">
                             
-                            <!-- Testimonial 1 -->
-                            <div class="testimonial-card">
-                                <div class="card-inner">
-                                    <div class="profile-image">
-                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Alex Johnson">
-                                        <div class="image-ring"></div>
-                                    </div>
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <p class="testimonial-text">"This Mini Tool Box has transformed how I write academic papers. The AI humanizer makes my content sound so natural, and having all tools in one place saves me hours!"</p>
-                                    <div class="author-info">
-                                        <strong class="author-name">Alex Johnson</strong>
-                                        <span class="author-title">UNIVERSITY STUDENT</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Testimonial 2 -->
-                            <div class="testimonial-card">
-                                <div class="card-inner">
-                                    <div class="profile-image">
-                                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Miller">
-                                        <div class="image-ring"></div>
-                                    </div>
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <p class="testimonial-text">"As a content creator, I used to switch between 5 different websites. Now everything I need is right here. Fast, accurate, and incredibly reliable."</p>
-                                    <div class="author-info">
-                                        <strong class="author-name">Sarah Miller</strong>
-                                        <span class="author-title">CONTENT WRITER</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Testimonial 3 -->
-                            <div class="testimonial-card">
-                                <div class="card-inner">
-                                    <div class="profile-image">
-                                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="David Chen">
-                                        <div class="image-ring"></div>
-                                    </div>
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <p class="testimonial-text">"The summarizer and paraphrasing tools are game-changers! I can research faster and repurpose content without worrying about duplication."</p>
-                                    <div class="author-info">
-                                        <strong class="author-name">David Chen</strong>
-                                        <span class="author-title">SEO SPECIALIST</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Testimonial 4 -->
-                            <div class="testimonial-card">
-                                <div class="card-inner">
-                                    <div class="profile-image">
-                                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emily Roberts">
-                                        <div class="image-ring"></div>
-                                    </div>
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <p class="testimonial-text">"The grammar checker catches mistakes other tools miss. And the word counter with keyword density helps me optimize every post perfectly."</p>
-                                    <div class="author-info">
-                                        <strong class="author-name">Emily Roberts</strong>
-                                        <span class="author-title">FREELANCE WRITER</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Testimonial 5 -->
-                            <div class="testimonial-card">
-                                <div class="card-inner">
-                                    <div class="profile-image">
-                                        <img src="https://randomuser.me/api/portraits/women/50.jpg" alt="Priya Patel">
-                                        <div class="image-ring"></div>
-                                    </div>
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <p class="testimonial-text">"The translator is incredibly accurate. It helps me communicate with international clients while preserving the meaning and tone of my messages."</p>
-                                    <div class="author-info">
-                                        <strong class="author-name">Priya Patel</strong>
-                                        <span class="author-title">CONTENT MANAGER</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Testimonial 6 -->
-                            <div class="testimonial-card">
-                                <div class="card-inner">
-                                    <div class="profile-image">
-                                        <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Carlos Mendez">
-                                        <div class="image-ring"></div>
-                                    </div>
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                    </div>
-                                    <p class="testimonial-text">"Excellent for non-native English speakers. The rewording tool helps me find better word choices, and the sentence rewriter improves my professional emails."</p>
-                                    <div class="author-info">
-                                        <strong class="author-name">Carlos Mendez</strong>
-                                        <span class="author-title">BUSINESS PROFESSIONAL</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Dots -->
-                    <div class="carousel-dots" id="carouselDots">
-                        <span class="dot active"></span>
-                        <span class="dot"></span>
-                        <span class="dot"></span>
-                        <span class="dot"></span>
-                        <span class="dot"></span>
-                        <span class="dot"></span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== FAQ SECTION ===== -->
-        <section class="faq-section">
-            <!-- Background Decoration -->
-            <div class="faq-bg">
-                <div class="bg-shape shape-1"></div>
-                <div class="bg-shape shape-2"></div>
-                <div class="bg-shape shape-3"></div>
-            </div>
-
-            <div class="faq-container">
-                <!-- Section Header -->
-                <div class="section-header animate-on-scroll">
-                    <span class="header-tag">📌 GOT QUESTIONS?</span>
-                    <h2 class="section-title">Frequently Asked <span class="text-gradient">Questions</span></h2>
-                    <p class="section-subtitle">Everything you need to know about Mini Tool Box</p>
-                </div>
-
-                <!-- FAQ Grid -->
-                <div class="faq-grid">
-                    <!-- FAQ Item 1 -->
-                    <div class="faq-item animate-on-scroll">
-                        <button class="faq-question">
-                            <span class="question-text">
-                                <i class="fas fa-shield-alt"></i>
-                                Is a mini tool box safe to use for sensitive or confidential content?
-                            </span>
-                            <span class="question-icon">
-                                <i class="fas fa-chevron-down"></i>
-                            </span>
-                        </button>
-                        <div class="faq-answer">
-                            <div class="answer-content">
-                                <p>A reliable mini tool box should use secure encryption protocols and avoid storing user data permanently. If the platform follows strict privacy policies and does not share content with third parties, it can be safely used for professional and academic purposes. Always check the privacy policy before uploading confidential material.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 2 -->
-                    <div class="faq-item animate-on-scroll">
-                        <button class="faq-question">
-                            <span class="question-text">
-                                <i class="fas fa-cloud"></i>
-                                Does a mini tool box require installation or can it be used online?
-                            </span>
-                            <span class="question-icon">
-                                <i class="fas fa-chevron-down"></i>
-                            </span>
-                        </button>
-                        <div class="faq-answer">
-                            <div class="answer-content">
-                                <p>Most modern mini tool box platforms are fully web based and do not require installation. Users can access tools directly from a browser on desktop, tablet or mobile devices, making them more convenient and accessible from anywhere.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 3 -->
-                    <div class="faq-item animate-on-scroll">
-                        <button class="faq-question">
-                            <span class="question-text">
-                                <i class="fas fa-user-edit"></i>
-                                Can a mini tool box replace professional human editors?
-                            </span>
-                            <span class="question-icon">
-                                <i class="fas fa-chevron-down"></i>
-                            </span>
-                        </button>
-                        <div class="faq-answer">
-                            <div class="answer-content">
-                                <p>While AI tools significantly improve writing quality and speed, they may not fully replace experienced human editors in complex or highly specialized content. However, they can reduce editing time and handle the majority of routine corrections effectively.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 4 -->
-                    <div class="faq-item animate-on-scroll">
-                        <button class="faq-question">
-                            <span class="question-text">
-                                <i class="fas fa-palette"></i>
-                                How does a mini tool box handle different writing tones and styles?
-                            </span>
-                            <span class="question-icon">
-                                <i class="fas fa-chevron-down"></i>
-                            </span>
-                        </button>
-                        <div class="faq-answer">
-                            <div class="answer-content">
-                                <p>Advanced AI systems analyze context and intent to adjust tone, whether formal, casual, academic or persuasive. This flexibility allows users to tailor content according to their audience without manually rewriting everything.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 5 -->
-                    <div class="faq-item animate-on-scroll">
-                        <button class="faq-question">
-                            <span class="question-text">
-                                <i class="fas fa-text-height"></i>
-                                Is there a limit to how much text can be processed at once?
-                            </span>
-                            <span class="question-icon">
-                                <i class="fas fa-chevron-down"></i>
-                            </span>
-                        </button>
-                        <div class="faq-answer">
-                            <div class="answer-content">
-                                <p>Many platforms set character or word limits per session, especially in free versions. Premium versions often allow larger text inputs and faster processing speeds for long form content.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 6 -->
-                    <div class="faq-item animate-on-scroll">
-                        <button class="faq-question">
-                            <span class="question-text">
-                                <i class="fas fa-briefcase"></i>
-                                Can a mini tool box be integrated into business workflows?
-                            </span>
-                            <span class="question-icon">
-                                <i class="fas fa-chevron-down"></i>
-                            </span>
-                        </button>
-                        <div class="faq-answer">
-                            <div class="answer-content">
-                                <p>Yes, some advanced platforms offer API access or integration options that allow businesses to connect tools with content management systems, marketing software or internal applications for streamlined operations.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 7 -->
-                    <div class="faq-item animate-on-scroll">
-                        <button class="faq-question">
-                            <span class="question-text">
-                                <i class="fas fa-eye"></i>
-                                How often should content be reviewed after using AI tools?
-                            </span>
-                            <span class="question-icon">
-                                <i class="fas fa-chevron-down"></i>
-                            </span>
-                        </button>
-                        <div class="faq-answer">
-                            <div class="answer-content">
-                                <p>Even though AI tools are highly advanced, a quick manual review is recommended. This ensures that the final output aligns perfectly with the intended message, brand voice and audience expectations.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 8 -->
-                    <div class="faq-item animate-on-scroll">
-                        <button class="faq-question">
-                            <span class="question-text">
-                                <i class="fas fa-balance-scale"></i>
-                                What factors should be considered before choosing a mini tool box platform?
-                            </span>
-                            <span class="question-icon">
-                                <i class="fas fa-chevron-down"></i>
-                            </span>
-                        </button>
-                        <div class="faq-answer">
-                            <div class="answer-content">
-                                <p>Users should evaluate speed, accuracy, mobile compatibility, security standards, user interface design and feature depth. Choosing a platform that balances performance with simplicity ensures long term usability and efficiency.</p>
+                            <div class="concept-highlight">
+                                <p class="concept-paragraph">
+                                    A well optimized mini tool box focuses on user intent. When someone searches for rewriting tools, grammar correction or translation support, they want instant solutions. Google now prioritizes helpful content and user satisfaction. Therefore, a mini tool box website must <span class="bold-text">deliver value quickly and clearly</span>.
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- ===== CONCLUSION SECTION ===== -->
-        <section class="conclusion-section">
-            <!-- Animated Background -->
-            <div class="conclusion-bg">
-                <div class="gradient-orb orb-1"></div>
-                <div class="gradient-orb orb-2"></div>
-                <div class="gradient-orb orb-3"></div>
-            </div>
-
-            <div class="conclusion-container">
-                <!-- Main Content Card -->
-                <div class="conclusion-card animate-on-scroll">
-                    <!-- Decorative Elements -->
-                    <div class="card-glow"></div>
-                    <div class="card-particles">
-                        <span class="particle"></span>
-                        <span class="particle"></span>
-                        <span class="particle"></span>
-                        <span class="particle"></span>
+            <!-- ===== GOOGLE STANDARDS SECTION ===== -->
+            <section class="google-standards">
+                <div class="standards-container">
+                    <div class="section-header animate-on-scroll">
+                        <span class="header-tag">📊 SEO & RANKINGS</span>
+                        <h2 class="header-title">Why a <span class="text-gradient">Mini Tool Box</span> Aligns with Modern Google Standards</h2>
                     </div>
 
-                    <!-- Header Badge -->
-                    <div class="conclusion-badge">
-                        <span class="badge-icon">✨</span>
-                        <span class="badge-text">YOUR SUCCESS STARTS HERE</span>
-                    </div>
+                    <div class="standards-grid">
+                        <div class="content-column animate-on-scroll">
+                            <div class="intro-card">
+                                <p class="intro-text">Search engines now prioritize helpful, user focused content. A mini tool box supports these standards by delivering exceptional value through every interaction.</p>
+                            </div>
 
-                    <!-- Main Heading -->
-                    <h2 class="conclusion-title">
-                        The Future of <span class="title-gradient">AI Writing</span> is Here
-                    </h2>
+                            <div class="points-container">
+                                <h3>Key Ranking Factors:</h3>
+                                <div class="points-list">
+                                    <div class="point-item">
+                                        <div class="point-icon"><i class="fas fa-check-circle"></i></div>
+                                        <div class="point-content">
+                                            <span class="point-title">Providing real value</span>
+                                            <div class="progress-bar"><div class="progress-fill" style="width: 98%"></div></div>
+                                        </div>
+                                        <span class="point-value">98%</span>
+                                    </div>
+                                    <div class="point-item">
+                                        <div class="point-icon"><i class="fas fa-bolt"></i></div>
+                                        <div class="point-content">
+                                            <span class="point-title">Solving user problems quickly</span>
+                                            <div class="progress-bar"><div class="progress-fill" style="width: 95%"></div></div>
+                                        </div>
+                                        <span class="point-value">95%</span>
+                                    </div>
+                                    <div class="point-item">
+                                        <div class="point-icon"><i class="fas fa-file-alt"></i></div>
+                                        <div class="point-content">
+                                            <span class="point-title">Improving content quality</span>
+                                            <div class="progress-bar"><div class="progress-fill" style="width: 96%"></div></div>
+                                        </div>
+                                        <span class="point-value">96%</span>
+                                    </div>
+                                    <div class="point-item">
+                                        <div class="point-icon"><i class="fas fa-book-open"></i></div>
+                                        <div class="point-content">
+                                            <span class="point-title">Enhancing readability</span>
+                                            <div class="progress-bar"><div class="progress-fill" style="width: 94%"></div></div>
+                                        </div>
+                                        <span class="point-value">94%</span>
+                                    </div>
+                                    <div class="point-item">
+                                        <div class="point-icon"><i class="fas fa-copy"></i></div>
+                                        <div class="point-content">
+                                            <span class="point-title">Reducing duplication</span>
+                                            <div class="progress-bar"><div class="progress-fill" style="width: 92%"></div></div>
+                                        </div>
+                                        <span class="point-value">92%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                    <!-- First Paragraph with Highlight -->
-                    <div class="conclusion-paragraph highlight-block">
-                        <p>
-                            <span class="dropcap">A</span> modern mini tool box is a <span class="text-highlight">compact yet powerful digital platform</span> that integrates essential AI writing and editing tools into one seamless experience. By combining <span class="tool-chip">AI Humanizer</span> <span class="tool-chip">Paraphrasing Tool</span> <span class="tool-chip">Sentence Rewriter</span> <span class="tool-chip">Rewording Tool</span> <span class="tool-chip">Summarizer</span> <span class="tool-chip">Word Counter</span> <span class="tool-chip">Grammar Checker</span> <span class="tool-chip">Spell Checker</span> <span class="tool-chip">Translator</span> and <span class="tool-chip">Plagiarism Checker</span>, it becomes a complete ecosystem for content creation and improvement.
-                        </p>
-                    </div>
+                        <div class="metrics-column animate-on-scroll">
+                            <div class="metrics-grid">
+                                <div class="metric-card">
+                                    <div class="metric-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                    <h4>Page Speed</h4>
+                                    <div class="metric-meter"><div class="meter-fill" style="width: 98%"></div></div>
+                                    <span class="metric-value">98/100</span>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-icon"><i class="fas fa-mobile-alt"></i></div>
+                                    <h4>Mobile Responsive</h4>
+                                    <div class="metric-meter"><div class="meter-fill" style="width: 100%"></div></div>
+                                    <span class="metric-value">100/100</span>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-icon"><i class="fas fa-clock"></i></div>
+                                    <h4>Engagement Time</h4>
+                                    <div class="metric-meter"><div class="meter-fill" style="width: 85%"></div></div>
+                                    <span class="metric-value">+85%</span>
+                                </div>
+                            </div>
 
-                    <!-- Second Paragraph with Benefits -->
-                    <div class="conclusion-paragraph">
-                        <p>
-                            When built with proper <span class="text-highlight">SEO structure, high performance and user first design</span>, a mini tool box can attract consistent traffic, improve engagement and generate long term revenue.
-                        </p>
-                    </div>
+                            <div class="content-blocks">
+                                <div class="content-block">
+                                    <div class="block-icon"><i class="fas fa-star"></i></div>
+                                    <p>Additionally, Google considers user experience metrics such as page speed, mobile responsiveness, and engagement time. A lightweight and well structured mini tool box naturally performs well in these areas.</p>
+                                </div>
+                                <div class="content-block highlight-block">
+                                    <div class="block-icon"><i class="fas fa-chart-line"></i></div>
+                                    <p>When users find multiple tools in one place, they spend more time exploring. This increases dwell time and improves ranking signals.</p>
+                                </div>
+                            </div>
 
-                    <!-- Feature Badges -->
-                    <div class="feature-badges">
-                        <div class="badge-item">
-                            <i class="fas fa-robot"></i>
-                            <span>10+ AI Tools</span>
+                            <div class="score-card">
+                                <div class="score-circle">
+                                    <span class="score-number">95</span>
+                                    <span class="score-label">Google<br>Score</span>
+                                </div>
+                                <div class="score-info">
+                                    <h4>Excellent Compliance</h4>
+                                    <p>Your content meets 95% of Google's ranking factors</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="badge-item">
-                            <i class="fas fa-bolt"></i>
-                            <span>Instant Results</span>
-                        </div>
-                        <div class="badge-item">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>100% Secure</span>
-                        </div>
-                        <div class="badge-item">
-                            <i class="fas fa-mobile-alt"></i>
-                            <span>Mobile Friendly</span>
-                        </div>
-                        <div class="badge-item">
-                            <i class="fas fa-globe"></i>
-                            <span>50+ Languages</span>
-                        </div>
-                    </div>
-
-                    <!-- CTA Buttons -->
-                    <div class="conclusion-cta">
-                        <a href="#tools" class="cta-button primary">
-                            <span>Start Creating Now</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                        <a href="#demo" class="cta-button secondary">
-                            <i class="fas fa-play"></i>
-                            <span>Watch Demo</span>
-                        </a>
                     </div>
                 </div>
-            </div>
-        </section>
-    </div> 
- <div id="footer"></div>
-</div>
+            </section>
 
-   <!-- JavaScript Files  -->
+            <!-- ===== TESTIMONIALS SECTION ===== -->
+            <section class="testimonials-section">
+                <div class="testimonials-container">
+                    <div class="section-header animate-on-scroll">
+                        <span class="header-tag">💬 USER STORIES</span>
+                        <h2 class="section-title">Trusted by <span class="text-gradient">Writers Worldwide</span></h2>
+                        <p class="section-subtitle">Join millions of satisfied users who trust our Mini Tool Box</p>
+                    </div>
+
+                    <div class="carousel-container">
+                        <button class="carousel-arrow prev-arrow" id="prevBtn">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="carousel-arrow next-arrow" id="nextBtn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+
+                        <div class="carousel-viewport">
+                            <div class="carousel-track" id="carouselTrack">
+                                
+                                <div class="testimonial-card">
+                                    <div class="card-inner">
+                                        <div class="profile-image">
+                                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Alex Johnson">
+                                            <div class="image-ring"></div>
+                                        </div>
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        </div>
+                                        <p class="testimonial-text">"This Mini Tool Box has transformed how I write academic papers. The AI humanizer makes my content sound so natural, and having all tools in one place saves me hours!"</p>
+                                        <div class="author-info">
+                                            <strong class="author-name">Alex Johnson</strong>
+                                            <span class="author-title">UNIVERSITY STUDENT</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="testimonial-card">
+                                    <div class="card-inner">
+                                        <div class="profile-image">
+                                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Miller">
+                                            <div class="image-ring"></div>
+                                        </div>
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        </div>
+                                        <p class="testimonial-text">"As a content creator, I used to switch between 5 different websites. Now everything I need is right here. Fast, accurate, and incredibly reliable."</p>
+                                        <div class="author-info">
+                                            <strong class="author-name">Sarah Miller</strong>
+                                            <span class="author-title">CONTENT WRITER</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="testimonial-card">
+                                    <div class="card-inner">
+                                        <div class="profile-image">
+                                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="David Chen">
+                                            <div class="image-ring"></div>
+                                        </div>
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        </div>
+                                        <p class="testimonial-text">"The summarizer and paraphrasing tools are game-changers! I can research faster and repurpose content without worrying about duplication."</p>
+                                        <div class="author-info">
+                                            <strong class="author-name">David Chen</strong>
+                                            <span class="author-title">SEO SPECIALIST</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="testimonial-card">
+                                    <div class="card-inner">
+                                        <div class="profile-image">
+                                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emily Roberts">
+                                            <div class="image-ring"></div>
+                                        </div>
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        </div>
+                                        <p class="testimonial-text">"The grammar checker catches mistakes other tools miss. And the word counter with keyword density helps me optimize every post perfectly."</p>
+                                        <div class="author-info">
+                                            <strong class="author-name">Emily Roberts</strong>
+                                            <span class="author-title">FREELANCE WRITER</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="testimonial-card">
+                                    <div class="card-inner">
+                                        <div class="profile-image">
+                                            <img src="https://randomuser.me/api/portraits/women/50.jpg" alt="Priya Patel">
+                                            <div class="image-ring"></div>
+                                        </div>
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        </div>
+                                        <p class="testimonial-text">"The translator is incredibly accurate. It helps me communicate with international clients while preserving the meaning and tone of my messages."</p>
+                                        <div class="author-info">
+                                            <strong class="author-name">Priya Patel</strong>
+                                            <span class="author-title">CONTENT MANAGER</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="testimonial-card">
+                                    <div class="card-inner">
+                                        <div class="profile-image">
+                                            <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Carlos Mendez">
+                                            <div class="image-ring"></div>
+                                        </div>
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </div>
+                                        <p class="testimonial-text">"Excellent for non-native English speakers. The rewording tool helps me find better word choices, and the sentence rewriter improves my professional emails."</p>
+                                        <div class="author-info">
+                                            <strong class="author-name">Carlos Mendez</strong>
+                                            <span class="author-title">BUSINESS PROFESSIONAL</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="carousel-dots" id="carouselDots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== FAQ SECTION ===== -->
+            <section class="faq-section">
+                <div class="faq-bg">
+                    <div class="bg-shape shape-1"></div>
+                    <div class="bg-shape shape-2"></div>
+                    <div class="bg-shape shape-3"></div>
+                </div>
+
+                <div class="faq-container">
+                    <div class="section-header animate-on-scroll">
+                        <span class="header-tag">📌 GOT QUESTIONS?</span>
+                        <h2 class="section-title">Frequently Asked <span class="text-gradient">Questions</span></h2>
+                        <p class="section-subtitle">Everything you need to know about Mini Tool Box</p>
+                    </div>
+
+                    <div class="faq-grid">
+                        <div class="faq-item animate-on-scroll">
+                            <button class="faq-question">
+                                <span class="question-text"><i class="fas fa-shield-alt"></i> Is a mini tool box safe to use for sensitive or confidential content?</span>
+                                <span class="question-icon"><i class="fas fa-chevron-down"></i></span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="answer-content">
+                                    <p>A reliable mini tool box should use secure encryption protocols and avoid storing user data permanently. If the platform follows strict privacy policies and does not share content with third parties, it can be safely used for professional and academic purposes. Always check the privacy policy before uploading confidential material.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item animate-on-scroll">
+                            <button class="faq-question">
+                                <span class="question-text"><i class="fas fa-cloud"></i> Does a mini tool box require installation or can it be used online?</span>
+                                <span class="question-icon"><i class="fas fa-chevron-down"></i></span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="answer-content">
+                                    <p>Most modern mini tool box platforms are fully web based and do not require installation. Users can access tools directly from a browser on desktop, tablet or mobile devices, making them more convenient and accessible from anywhere.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item animate-on-scroll">
+                            <button class="faq-question">
+                                <span class="question-text"><i class="fas fa-user-edit"></i> Can a mini tool box replace professional human editors?</span>
+                                <span class="question-icon"><i class="fas fa-chevron-down"></i></span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="answer-content">
+                                    <p>While AI tools significantly improve writing quality and speed, they may not fully replace experienced human editors in complex or highly specialized content. However, they can reduce editing time and handle the majority of routine corrections effectively.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item animate-on-scroll">
+                            <button class="faq-question">
+                                <span class="question-text"><i class="fas fa-palette"></i> How does a mini tool box handle different writing tones and styles?</span>
+                                <span class="question-icon"><i class="fas fa-chevron-down"></i></span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="answer-content">
+                                    <p>Advanced AI systems analyze context and intent to adjust tone, whether formal, casual, academic or persuasive. This flexibility allows users to tailor content according to their audience without manually rewriting everything.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item animate-on-scroll">
+                            <button class="faq-question">
+                                <span class="question-text"><i class="fas fa-text-height"></i> Is there a limit to how much text can be processed at once?</span>
+                                <span class="question-icon"><i class="fas fa-chevron-down"></i></span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="answer-content">
+                                    <p>Many platforms set character or word limits per session, especially in free versions. Premium versions often allow larger text inputs and faster processing speeds for long form content.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item animate-on-scroll">
+                            <button class="faq-question">
+                                <span class="question-text"><i class="fas fa-briefcase"></i> Can a mini tool box be integrated into business workflows?</span>
+                                <span class="question-icon"><i class="fas fa-chevron-down"></i></span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="answer-content">
+                                    <p>Yes, some advanced platforms offer API access or integration options that allow businesses to connect tools with content management systems, marketing software or internal applications for streamlined operations.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item animate-on-scroll">
+                            <button class="faq-question">
+                                <span class="question-text"><i class="fas fa-eye"></i> How often should content be reviewed after using AI tools?</span>
+                                <span class="question-icon"><i class="fas fa-chevron-down"></i></span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="answer-content">
+                                    <p>Even though AI tools are highly advanced, a quick manual review is recommended. This ensures that the final output aligns perfectly with the intended message, brand voice and audience expectations.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item animate-on-scroll">
+                            <button class="faq-question">
+                                <span class="question-text"><i class="fas fa-balance-scale"></i> What factors should be considered before choosing a mini tool box platform?</span>
+                                <span class="question-icon"><i class="fas fa-chevron-down"></i></span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="answer-content">
+                                    <p>Users should evaluate speed, accuracy, mobile compatibility, security standards, user interface design and feature depth. Choosing a platform that balances performance with simplicity ensures long term usability and efficiency.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== CONCLUSION SECTION ===== -->
+            <section class="conclusion-section">
+                <div class="conclusion-bg">
+                    <div class="gradient-orb orb-1"></div>
+                    <div class="gradient-orb orb-2"></div>
+                    <div class="gradient-orb orb-3"></div>
+                </div>
+
+                <div class="conclusion-container">
+                    <div class="conclusion-card animate-on-scroll">
+                        <div class="card-glow"></div>
+                        <div class="card-particles">
+                            <span class="particle"></span>
+                            <span class="particle"></span>
+                            <span class="particle"></span>
+                            <span class="particle"></span>
+                        </div>
+
+                        <div class="conclusion-badge">
+                            <span class="badge-icon">✨</span>
+                            <span class="badge-text">YOUR SUCCESS STARTS HERE</span>
+                        </div>
+
+                        <h2 class="conclusion-title">
+                            The Future of <span class="title-gradient">AI Writing</span> is Here
+                        </h2>
+
+                        <div class="conclusion-paragraph highlight-block">
+                            <p>
+                                <span class="dropcap">A</span> modern mini tool box is a <span class="text-highlight">compact yet powerful digital platform</span> that integrates essential AI writing and editing tools into one seamless experience. By combining <span class="tool-chip">AI Humanizer</span> <span class="tool-chip">Paraphrasing Tool</span> <span class="tool-chip">Sentence Rewriter</span> <span class="tool-chip">Rewording Tool</span> <span class="tool-chip">Summarizer</span> <span class="tool-chip">Word Counter</span> <span class="tool-chip">Grammar Checker</span> <span class="tool-chip">Spell Checker</span> <span class="tool-chip">Translator</span> and <span class="tool-chip">Plagiarism Checker</span>, it becomes a complete ecosystem for content creation and improvement.
+                            </p>
+                        </div>
+
+                        <div class="conclusion-paragraph">
+                            <p>
+                                When built with proper <span class="text-highlight">SEO structure, high performance and user first design</span>, a mini tool box can attract consistent traffic, improve engagement and generate long term revenue.
+                            </p>
+                        </div>
+
+                        <div class="feature-badges">
+                            <div class="badge-item"><i class="fas fa-robot"></i><span>10+ AI Tools</span></div>
+                            <div class="badge-item"><i class="fas fa-bolt"></i><span>Instant Results</span></div>
+                            <div class="badge-item"><i class="fas fa-shield-alt"></i><span>100% Secure</span></div>
+                            <div class="badge-item"><i class="fas fa-mobile-alt"></i><span>Mobile Friendly</span></div>
+                            <div class="badge-item"><i class="fas fa-globe"></i><span>50+ Languages</span></div>
+                        </div>
+
+                        <div class="conclusion-cta">
+                            <a href="#tools" class="cta-button primary">
+                                <span>Start Creating Now</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <a href="#demo" class="cta-button secondary">
+                                <i class="fas fa-play"></i>
+                                <span>Watch Demo</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div><!-- end main-wrapper -->
+    </div><!-- end animate-glow -->
+
+    <div id="footer"></div>
+
+    <!-- ===== JavaScript Files (ORDER MATTERS) ===== -->
     <script src="js/layout.js"></script>
-    <script type="module" src="js/script.js"></script>
     <script src="js/main.js"></script>
+    <script type="module" src="js/script.js"></script>
 
 </body>
 </html>

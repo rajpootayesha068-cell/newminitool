@@ -24,15 +24,9 @@
     font-family: 'Inter', sans-serif;
 }
 
-body {
-    background: var(--sapphire-deep);
-    min-height: 100vh;
-    color: var(--text-primary);
-    overflow-x: hidden;
-}
 
 /* 2. ANIMATED BACKGROUND */
-.background-wrapper {
+#background-wrapper {
     position: fixed;
     inset: 0;
     z-index: -1;
@@ -49,28 +43,37 @@ body {
 }
 
 .orb-1 {
-    width: 45vw; height: 45vw;
+    width: 45vw;
+    height: 45vw;
     background: var(--accent-cyan);
-    top: -10%; left: -10%;
+    top: -10%;
+    left: -10%;
 }
 
 .orb-2 {
-    width: 40vw; height: 40vw;
+    width: 40vw;
+    height: 40vw;
     background: #d4c1fa;
-    bottom: -10%; right: -5%;
+    bottom: -10%;
+    right: -5%;
     animation-delay: -5s;
 }
 
-
 @keyframes moveOrbs {
-    from { transform: translate(0, 0) scale(1); }
-    to { transform: translate(80px, 40px) scale(1.1); }
+    from {
+        transform: translate(0, 0) scale(1);
+    }
+    to {
+        transform: translate(80px, 40px) scale(1.1);
+    }
 }
 
-@keyframes flyUp {
-    0% { transform: translateY(110vh) scale(0); opacity: 0; }
-    50% { opacity: 0.5; }
-    100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+/* 3. GLASS CARD STYLES */
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
 }
 
 /* 4. MAIN CONTAINER */
@@ -80,14 +83,17 @@ body {
     padding: 20px;
 }
 
+.main-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
 /* 5. TEAM HERO */
 .team-hero {
     padding: 60px 40px;
     text-align: center;
     margin: 30px 0;
-    background: linear-gradient(135deg, 
-        rgba(67, 97, 238, 0.1), 
-        rgba(114, 9, 183, 0.1));
+    background: linear-gradient(135deg, rgba(67, 97, 238, 0.1), rgba(114, 9, 183, 0.1));
 }
 
 .hero-badge {
@@ -196,6 +202,10 @@ body {
     padding: 40px 30px;
     position: relative;
     transition: transform 0.3s ease;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
 }
 
 .tier-card:hover {
@@ -204,9 +214,7 @@ body {
 
 .tier-card.recommended {
     border: 2px solid var(--team-blue);
-    background: linear-gradient(135deg, 
-        rgba(67, 97, 238, 0.05), 
-        rgba(114, 9, 183, 0.05));
+    background: linear-gradient(135deg, rgba(67, 97, 238, 0.05), rgba(114, 9, 183, 0.05));
 }
 
 .recommended-badge {
@@ -386,6 +394,10 @@ body {
 .calculator-section {
     padding: 50px;
     margin: 60px 0;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
 }
 
 .calculator-header {
@@ -481,7 +493,8 @@ input[type="range"]::-webkit-slider-thumb {
     transition: all 0.3s ease;
 }
 
-.seat-option:hover, .seat-option.active {
+.seat-option:hover,
+.seat-option.active {
     background: var(--team-blue);
     color: white;
     border-color: var(--team-blue);
@@ -539,7 +552,7 @@ input[type="range"]::-webkit-slider-thumb {
     right: 0;
     bottom: 0;
     background: linear-gradient(135deg, var(--team-blue), var(--team-purple));
-    transition: .4s;
+    transition: 0.4s;
     border-radius: 34px;
 }
 
@@ -551,11 +564,11 @@ input[type="range"]::-webkit-slider-thumb {
     left: 4px;
     bottom: 4px;
     background-color: white;
-    transition: .4s;
+    transition: 0.4s;
     border-radius: 50%;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
     transform: translateX(30px);
 }
 
@@ -633,7 +646,8 @@ input:checked + .slider:before {
 }
 
 /* 8. BUTTON STYLES */
-.primary-btn, .secondary-btn {
+.primary-btn,
+.secondary-btn {
     padding: 14px 28px;
     border-radius: 12px;
     font-weight: 600;
@@ -694,6 +708,10 @@ input:checked + .slider:before {
     padding: 30px;
     text-align: center;
     transition: transform 0.3s ease;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
 }
 
 .feature-card:hover {
@@ -731,6 +749,10 @@ input:checked + .slider:before {
 
 .testimonial-card {
     padding: 30px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
 }
 
 .company-logo {
@@ -775,9 +797,8 @@ input:checked + .slider:before {
     padding: 60px;
     text-align: center;
     margin: 80px 0;
-    background: linear-gradient(135deg, 
-        rgba(67, 97, 238, 0.1), 
-        rgba(114, 9, 183, 0.1));
+    background: linear-gradient(135deg, rgba(67, 97, 238, 0.1), rgba(114, 9, 183, 0.1));
+    border-radius: 24px;
 }
 
 .team-cta h2 {
@@ -825,169 +846,149 @@ input:checked + .slider:before {
     color: var(--success-color);
 }
 
-/* 12. ENHANCED FOOTER */
-.footer {
-    margin-top: 80px;
-    padding: 60px 40px 30px;
-    border-top: 1px solid var(--glass-border);
-    background: rgba(0, 4, 40, 0.7);
-    backdrop-filter: blur(10px);
-    position: relative;
-    z-index: 10;
-}
-
-/* ... (footer styles same as other pages) ... */
-
-/* 13. RESPONSIVE DESIGN */
+/* 12. RESPONSIVE DESIGN */
 @media (max-width: 1200px) {
     .tiers-container {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
-    
+
     .hero-stats {
         gap: 30px;
     }
-    
+
     .calculator-results {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 992px) {
-    .site-header {
-        padding: 15px 20px;
-    }
-    
-    .header-container {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .header-right {
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-    
     .hero-title {
         font-size: 2.8rem;
     }
-    
+
     .section-title {
         font-size: 2.2rem;
     }
-    
+
     .tiers-container {
         grid-template-columns: 1fr;
         max-width: 500px;
         margin-left: auto;
         margin-right: auto;
     }
-    
+
     .calculator-results {
         grid-template-columns: 1fr;
     }
-    
+
     .cta-buttons {
         flex-direction: column;
     }
-    
-    .primary-btn, .secondary-btn {
+
+    .primary-btn,
+    .secondary-btn {
         width: 100%;
         justify-content: center;
     }
-    
+
     .features-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .testimonial-cards {
         grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 768px) {
-    .team-hero, .calculator-section, .team-cta {
+    .team-hero,
+    .calculator-section,
+    .team-cta {
         padding: 40px 20px;
     }
-    
+
     .hero-title {
         font-size: 2.2rem;
     }
-    
+
     .hero-stats {
         flex-direction: column;
         align-items: center;
         gap: 20px;
     }
-    
+
     .stat-item {
         justify-content: center;
         text-align: center;
     }
-    
+
     .calculator-controls {
         padding: 20px;
     }
-    
+
     .seats-options {
         gap: 5px;
     }
-    
+
     .seat-option {
         padding: 8px 15px;
         font-size: 0.9rem;
     }
-    
+
     .team-cta h2 {
         font-size: 2.2rem;
     }
-}
 
-@media (max-width: 480px) {
-    .site-header {
-        padding: 10px 15px;
-    }
-    
-    .logo {
-        font-size: 1.5rem;
-    }
-    
-    .nav-link span {
-        display: none;
-    }
-    
-    .nav-link {
-        padding: 10px;
-    }
-    
-    #premium-btn span {
-        display: none;
-    }
-    
-    #premium-btn {
-        padding: 10px 15px;
-    }
-    
     .tier-card {
         padding: 30px 20px;
     }
-    
+
     .price {
         font-size: 2.8rem;
     }
-    
+
     .tier-select-btn {
         padding: 16px;
         font-size: 1rem;
     }
-    
+}
+
+@media (max-width: 480px) {
+    .hero-badge {
+        font-size: 0.9rem;
+        padding: 8px 18px;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .calculator-header h2 {
+        font-size: 1.8rem;
+    }
+
     .team-cta {
         padding: 40px 20px;
     }
-    
+
+    .team-cta h2 {
+        font-size: 1.8rem;
+    }
+
     .cta-features {
         flex-direction: column;
         gap: 15px;
+    }
+
+    .result-value {
+        font-size: 2rem;
     }
 }
