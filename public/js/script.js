@@ -47,23 +47,43 @@ let userCollection = null;
 let currentUserType = 'free';
 
 // ========================================
-// ========== API BASE URL (Vercel safe) ==========
-// FIX: No more localhost hardcoding — set your deployed backend URL below.
-// Set VITE_API_BASE (or equivalent) in your Vercel environment variables,
-// OR replace the fallback string with your actual backend URL.
+// ========== API BASE URL (Railway) ==========
+// HOW TO USE:
+//   Option A — config.js (recommended for plain HTML/CSS/JS):
+//     Create public/config.js with:
+//       const CONFIG = { API_URL: "https://your-app.up.railway.app" };
+//     Then include <script src="config.js"></script> in every HTML file.
+//
+//   Option B — hardcode directly:
+//     Replace the fallback string below with your Railway URL.
+//
+//   Option C — Vite / bundler:
+//     Set VITE_API_BASE in your .env and it will be picked up automatically.
 // ========================================
-const API_BASE = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE)
-    ? import.meta.env.VITE_API_BASE
-    : (window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://your-backend.vercel.app');
+const API_BASE = (() => {
+    // 1. Vite/bundler env variable
+    if (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE) {
+        return import.meta.env.VITE_API_BASE;
+    }
+    // 2. config.js global (plain HTML deployment — Netlify / Vercel / GitHub Pages)
+    if (typeof CONFIG !== 'undefined' && CONFIG.API_URL) {
+        return CONFIG.API_URL;
+    }
+    // 3. Local dev fallback
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return 'http://localhost:3000';
+    }
+    // 4. ⚠️ REPLACE THIS with your actual Railway URL before deploying
+    return 'https://minitoolbackend-production.up.railway.app';
+})();
 
 const PARAPHRASE_API_URL = `${API_BASE}/paraphrase`;
 const PLAGIARISM_API_URL = `${API_BASE}/plagiarism`;
 
+console.log("🔗 API Base URL:", API_BASE);
+
 // ========================================
 // ========== DATABASE FUNCTIONS ==========
-// FIX: Merged users into ONE collection "users" with authMethod field.
-// This avoids the double-collection lookup everywhere and prevents
-// duplicate profiles when same email is used with Google + email auth.
 // ========================================
 
 async function saveUserToDatabase(uid, data) {
@@ -88,13 +108,12 @@ async function getUserFromDatabase(uid) {
     }
 }
 
-// FIX: increment is a function that must be called as increment(1)
 async function recordLoginActivity(uid) {
     try {
         const userRef = doc(db, "users", uid);
         await updateDoc(userRef, {
             lastLogin: new Date().toISOString(),
-            loginCount: increment(1)   // ← was: increment (bug — function ref, not call)
+            loginCount: increment(1)
         });
         console.log(`✅ Login activity recorded`);
     } catch (error) {
@@ -231,7 +250,6 @@ async function handleLogin(event) {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        // FIX: renamed to fetchedData to avoid shadowing the global `userData`
         const fetchedData = await getUserFromDatabase(user.uid);
         await recordLoginActivity(user.uid);
 
@@ -239,7 +257,7 @@ async function handleLogin(event) {
             uid: user.uid,
             email: user.email,
             displayName: user.displayName,
-            plan: fetchedData?.plan || 'free',   // ← was always 'free' for no reason
+            plan: fetchedData?.plan || 'free',
             authMethod: 'email'
         }));
 
@@ -278,7 +296,6 @@ async function handleGoogleLogin() {
         let existingData = await getUserFromDatabase(user.uid);
 
         if (!existingData) {
-            // New Google user — create profile
             existingData = {
                 fullName: user.displayName || 'Google User',
                 firstName: user.displayName?.split(' ')[0] || '',
@@ -300,7 +317,6 @@ async function handleGoogleLogin() {
             console.log("✅ Existing Google user login recorded");
         }
 
-        // FIX: plan now reads from Firestore, not hardcoded 'free'
         localStorage.setItem('user', JSON.stringify({
             uid: user.uid,
             email: user.email,
@@ -439,7 +455,6 @@ window.toggleMobileMenu = function() {
     }
 };
 
-// FIX: Use addEventListener instead of window.onclick to avoid overwriting other handlers
 document.addEventListener('click', function(e) {
     const profileMenu = document.getElementById('profileMenu');
     const profileBtn = document.querySelector('.profile-icon-container');
@@ -451,7 +466,6 @@ document.addEventListener('click', function(e) {
     if (toolkitMenu && toolkitBtn && !toolkitMenu.contains(e.target) && !toolkitBtn.contains(e.target)) {
         toolkitMenu.classList.remove('show');
     }
-    // Modal close on outside click
     const modal = document.getElementById('premiumModal');
     if (modal && e.target === modal) closeModal();
 });
@@ -501,7 +515,6 @@ async function loadUserProfile() {
     try {
         showLoading(true);
 
-        // FIX: single collection lookup now
         const userDoc = await getDoc(doc(db, "users", currentUser.uid));
 
         if (userDoc.exists()) {
@@ -717,7 +730,6 @@ function setupAvatarUpload() {
     });
 }
 
-// FIX: Google users now properly re-authenticate before deletion
 async function deleteAccount() {
     const confirmed = confirm(
         '⚠️ Are you sure you want to delete your account?\n\nThis action cannot be undone.'
@@ -728,7 +740,6 @@ async function deleteAccount() {
     setButtonLoading(btn, true);
 
     try {
-        // Re-authenticate based on auth method
         if (userData?.authMethod === 'google') {
             const provider = new GoogleAuthProvider();
             await reauthenticateWithPopup(currentUser, provider);
@@ -739,7 +750,6 @@ async function deleteAccount() {
             await reauthenticateWithCredential(currentUser, credential);
         }
 
-        // Delete avatar from storage if it exists
         if (currentUser.photoURL && currentUser.photoURL.includes('firebasestorage')) {
             try {
                 const storageRef = ref(storage, `avatars/${currentUser.uid}`);
@@ -818,7 +828,6 @@ function setupEventListeners() {
     setupAvatarUpload();
 }
 
-// FIX: Unified setButtonLoading (was duplicated as setLoading + setButtonLoading)
 function setButtonLoading(btn, isLoading) {
     if (!btn) return;
     btn.disabled = isLoading;
@@ -830,7 +839,6 @@ function setButtonLoading(btn, isLoading) {
     }
 }
 
-// Keep setLoading as alias for login/signup buttons which use a different inner structure
 function setLoading(btn, isLoading) {
     if (!btn) return;
     btn.disabled = isLoading;
@@ -953,10 +961,8 @@ function updateUIForLoggedOut() {
 
 // ========================================
 // ========== PARAPHRASING TOOL ==========
-// FIX: Rewrote fetchParaphraseUserType to use modular SDK (was using legacy firebase.auth())
 // ========================================
 
-// FIX: Shared helper to get user type — avoids duplicate code in paraphrase + plagiarism
 async function resolveCurrentUserType() {
     return new Promise((resolve) => {
         onAuthStateChanged(auth, async (user) => {
@@ -1100,7 +1106,6 @@ async function paraphraseText() {
     }
 }
 
-// FIX: Extracted duplicate output stat update into one shared helper
 function updateOutputStats(page, text) {
     const words = text.trim() ? text.trim().split(/\s+/).length : 0;
     const chars = text.length;
@@ -1148,7 +1153,6 @@ function generateFallbackParaphrasedText(text, mode) {
     return result;
 }
 
-// FIX: clipboard now properly awaited and has error handling
 async function copyParaphraseText() {
     const text = document.getElementById('outputText')?.value || '';
     if (!text.trim()) { showParaphraseToast('Nothing to copy', 'error'); return; }
@@ -1236,8 +1240,6 @@ function initParaphrasingTool() {
 
 // ========================================
 // ========== PLAGIARISM CHECKER ==========
-// FIX: Rewrote fetchPlagiarismUserType to use modular SDK
-// FIX: Simulation mode now clearly labels results as demo data
 // ========================================
 
 async function fetchPlagiarismUserType() {
@@ -1323,7 +1325,6 @@ async function checkPlagiarism() {
 
     } catch (error) {
         console.error('❌ Plagiarism API Error:', error);
-        // FIX: clearly label simulated results as demo, not real results
         showPlagiarismToast('Server offline — showing demo results only', 'warning');
         const demoPlague = Math.floor(Math.random() * 30);
         displayPlagiarismResults(demoPlague, 100 - demoPlague, Math.floor(Math.random() * 20), Math.floor(Math.random() * 50), words, null, true);
@@ -1560,10 +1561,5 @@ window.shareReport = sharePlagiarismReport;
 window.enforceWordLimit = enforceWordLimit;
 
 console.log("✅ All functions exported successfully!");
-
-
-
-
-
 
 

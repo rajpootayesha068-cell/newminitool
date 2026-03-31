@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="css/newstyle.css">
     <link rel="stylesheet" href="css/pages.css">
 
+    <script src="config.js"></script>
+
 </head>
 <body>
     <!-- Header -->
@@ -554,420 +556,413 @@ This is an automated report. Please review the content carefully.`;
         });
     });
 </script> -->
-
 <script>
-    // ==============================
-    // 🔹 Global Variables
-    // ==============================
-    window.days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    let currentUserType = 'free';
-    const API_URL = 'http://localhost:3000/plagiarism';
+// ==============================
+// 🔹 Global Variables
+// ==============================
+window.days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+let currentUserType = 'free';
 
-    // ==============================
-    // 🔹 User Type Detection
-    // ==============================
-    async function fetchUserType() {
-        if (typeof firebase === 'undefined' || !firebase.auth) {
-            console.log("Firebase not loaded, using free mode");
-            currentUserType = 'free';
-            return;
-        }
-        
-        firebase.auth().onAuthStateChanged(async (user) => {
-            if (user) {
-                try {
-                    const uid = user.uid;
-                    let userData = null;
-                    
-                    const userDoc = await firebase.firestore().collection('users').doc(uid).get();
-                    if (userDoc.exists) {
-                        userData = userDoc.data();
-                    } else {
-                        const googleDoc = await firebase.firestore().collection('google_users').doc(uid).get();
-                        if (googleDoc.exists) {
-                            userData = googleDoc.data();
-                        }
-                    }
-                    
-                    if (userData) {
-                        currentUserType = userData.plan === 'premium' ? 'premium' : 'free';
-                        console.log("✅ User Type:", currentUserType);
-                    } else {
-                        currentUserType = 'free';
-                    }
-                } catch (error) {
-                    console.error("Error fetching user type:", error);
-                    currentUserType = 'free';
-                }
-            } else {
-                currentUserType = 'free';
-                console.log("👤 Not logged in, using free mode");
-            }
-            
-            // Update UI based on user type
-            const wordCounter = document.getElementById('inputWords');
-            if (wordCounter) {
-                countWords();
-            }
-        });
-    }
+// ✅ FIXED: Uses CONFIG.API_URL from config.js, falls back to Railway URL directly
+const API_URL = (typeof CONFIG !== 'undefined' && CONFIG.API_URL)
+    ? CONFIG.API_URL + '/plagiarism'
+    : 'https://minitoolbackend-production.up.railway.app/plagiarism';
 
-    // ==============================
-    // 🔹 Word Counter
-    // ==============================
-    function countWords() {
-        const inputText = document.getElementById('inputText');
-        const text = inputText.value;
-        
-        const words = text.trim() ? text.trim().split(/\s+/).length : 0;
-        const chars = text.length;
-        
-        document.getElementById('inputWords').innerHTML = `<i class="fas fa-font"></i> <strong>${words}</strong>/${currentUserType === 'premium' ? '∞' : '500'} words`;
-        document.getElementById('inputChars').innerHTML = `<i class="fas fa-keyboard"></i> <strong>${chars}</strong> chars`;
-        
-        const limitMessage = document.getElementById('limitMessage');
-        const checkBtn = document.getElementById('checkBtn');
-        
-        if (words > 500 && currentUserType !== 'premium') {
-            limitMessage.style.display = 'flex';
-            if (checkBtn) checkBtn.disabled = true;
-        } else {
-            limitMessage.style.display = 'none';
-            if (checkBtn) checkBtn.disabled = false;
-        }
-    }
-    
-    // ===== ENFORCE WORD LIMIT (AUTO-TRIM) =====
-    function enforceWordLimit() {
-        const inputText = document.getElementById('inputText');
-        const text = inputText.value;
-        
-        const words = text.trim() ? text.trim().split(/\s+/).length : 0;
-        
-        if (words > 500 && currentUserType !== 'premium') {
-            const allWords = text.trim().split(/\s+/);
-            const first500Words = allWords.slice(0, 500).join(' ');
-            inputText.value = first500Words;
-            showToast('Cannot paste more than 500 words. Upgrade to Premium for unlimited words!', 'warning');
-        }
-        
-        countWords();
-    }
-    
-    // ===== PREMIUM MODAL FUNCTIONS =====
-    function showPremiumModal() {
-        const modal = document.getElementById('premiumModal');
-        if (modal) {
-            modal.classList.add('show');
-        }
-    }
-    
-    function closeModal() {
-        const modal = document.getElementById('premiumModal');
-        if (modal) {
-            modal.classList.remove('show');
-        }
-    }
-    
-    window.onclick = function(event) {
-        const modal = document.getElementById('premiumModal');
-        if (event.target === modal) {
-            closeModal();
-        }
-    }
-    
-    // ==============================
-    // 🔹 REAL PLAGIARISM CHECKER (OpenAI API)
-    // ==============================
-    async function checkPlagiarism() {
-        const inputText = document.getElementById('inputText').value;
-        const sensitivity = document.getElementById('checkMode').value;
-        const checkBtn = document.getElementById('checkBtn');
-        const loadingSection = document.getElementById('loadingSection');
-        const resultsSection = document.getElementById('resultsSection');
-
-        if (!inputText.trim()) {
-            showToast('Please enter some text to check', 'error');
-            return;
-        }
-
-        // Check word limit for free users
-        const words = inputText.trim().split(/\s+/).length;
-        if (words > 500 && currentUserType !== 'premium') {
-            showToast('Word limit exceeded! Upgrade to premium for unlimited checks.', 'warning');
-            showPremiumModal();
-            return;
-        }
-
-        // Show loading
-        const originalText = checkBtn.innerHTML;
-        checkBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
-        checkBtn.disabled = true;
-        loadingSection.style.display = 'flex';
-        resultsSection.style.display = 'none';
-
+// ==============================
+// 🔹 User Type Detection (Free vs Premium)
+// ==============================
+async function fetchUserType() {
+    const cachedUser = localStorage.getItem('user');
+    if (cachedUser) {
         try {
-            console.log("📡 Calling Plagiarism API:", API_URL);
-            
-            const response = await fetch(API_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    text: inputText,
-                    sensitivity: sensitivity
-                })
-            });
-            
-            const data = await response.json();
-            console.log("📥 API Response:", data);
-            
-            if (data.error) {
-                showToast(data.error, 'error');
-                if (data.error.includes('Upgrade') || data.error.includes('premium')) {
-                    showPremiumModal();
-                }
-                loadingSection.style.display = 'none';
-                checkBtn.innerHTML = originalText;
-                checkBtn.disabled = false;
-                return;
-            }
-            
-            // Update results
-            const plagiarismPercent = data.plagiarismScore;
-            const originalPercent = data.originalityScore;
-            const similarityPercent = data.similarityScore;
-            
-            // Update progress circle
-            const progressCircle = document.getElementById('progressCircle');
-            if (progressCircle) {
-                const circumference = 2 * Math.PI * 80;
-                const offset = circumference - (plagiarismPercent / 100) * circumference;
-                progressCircle.style.strokeDashoffset = offset;
-            }
-            
-            // Update percentages
-            document.getElementById('plagiarismPercent').textContent = plagiarismPercent + '%';
-            document.getElementById('originalPercent').textContent = originalPercent + '%';
-            document.getElementById('plagiarizedPercent').textContent = plagiarismPercent + '%';
-            document.getElementById('similarityPercent').textContent = similarityPercent + '%';
-            document.getElementById('uniqueScore').textContent = originalPercent + '%';
-            
-            // Update labels based on result
-            const plagiarismLabel = document.getElementById('plagiarismLabel');
-            const resultMessage = document.getElementById('resultMessage');
-            const messageIcon = resultMessage.querySelector('.message-icon i');
-            const messageTitle = resultMessage.querySelector('h4');
-            const messageText = resultMessage.querySelector('p');
-            
-            if (plagiarismPercent === 0) {
-                plagiarismLabel.textContent = 'Perfectly Original';
-                if (progressCircle) progressCircle.style.stroke = '#00ff88';
-                messageIcon.className = 'fas fa-check-circle';
-                messageIcon.style.color = '#00ff88';
-                messageTitle.textContent = 'Excellent!';
-                messageText.textContent = data.message || 'Your content is 100% original and plagiarism-free.';
-            } else if (plagiarismPercent < 10) {
-                plagiarismLabel.textContent = 'Mostly Original';
-                if (progressCircle) progressCircle.style.stroke = '#00d4ff';
-                messageIcon.className = 'fas fa-info-circle';
-                messageIcon.style.color = '#00d4ff';
-                messageTitle.textContent = 'Good';
-                messageText.textContent = data.message || 'Your content is mostly original with minimal similarities.';
-            } else if (plagiarismPercent < 25) {
-                plagiarismLabel.textContent = 'Some Similarity';
-                if (progressCircle) progressCircle.style.stroke = '#ffaa00';
-                messageIcon.className = 'fas fa-exclamation-triangle';
-                messageIcon.style.color = '#ffaa00';
-                messageTitle.textContent = 'Needs Review';
-                messageText.textContent = data.message || 'Some similarities detected. Consider reviewing highlighted sections.';
-            } else {
-                plagiarismLabel.textContent = 'High Plagiarism';
-                if (progressCircle) progressCircle.style.stroke = '#ff4444';
-                messageIcon.className = 'fas fa-times-circle';
-                messageIcon.style.color = '#ff4444';
-                messageTitle.textContent = 'Alert!';
-                messageText.textContent = data.message || 'High plagiarism detected. Consider rewriting significant portions.';
-            }
-            
-            // Update other stats
-            document.getElementById('wordCount').textContent = words;
-            document.getElementById('matchedSources').textContent = data.matches || Math.floor(Math.random() * 50);
-            document.getElementById('processingTime').textContent = (Math.random() * 2 + 0.5).toFixed(1) + 's';
-            document.getElementById('sourceCount').textContent = '8.2B';
-            
-            // Show results
-            loadingSection.style.display = 'none';
-            resultsSection.style.display = 'block';
-            
-            showToast('Analysis complete!', 'success');
-            
-        } catch (error) {
-            console.error('❌ API Error:', error);
-            showToast('Failed to connect to server. Using simulation.', 'error');
-            
-            // Fallback simulation
-            const plagiarismPercent = Math.floor(Math.random() * 30);
-            const originalPercent = 100 - plagiarismPercent;
-            
-            const progressCircle = document.getElementById('progressCircle');
-            if (progressCircle) {
-                const circumference = 2 * Math.PI * 80;
-                const offset = circumference - (plagiarismPercent / 100) * circumference;
-                progressCircle.style.strokeDashoffset = offset;
-            }
-            
-            document.getElementById('plagiarismPercent').textContent = plagiarismPercent + '%';
-            document.getElementById('originalPercent').textContent = originalPercent + '%';
-            document.getElementById('plagiarizedPercent').textContent = plagiarismPercent + '%';
-            document.getElementById('similarityPercent').textContent = Math.floor(Math.random() * 20) + '%';
-            document.getElementById('uniqueScore').textContent = originalPercent + '%';
-            document.getElementById('wordCount').textContent = words;
-            document.getElementById('matchedSources').textContent = Math.floor(Math.random() * 50);
-            document.getElementById('processingTime').textContent = (Math.random() * 2 + 0.5).toFixed(1) + 's';
-            
-            loadingSection.style.display = 'none';
-            resultsSection.style.display = 'block';
-            
-        } finally {
-            checkBtn.innerHTML = originalText;
-            checkBtn.disabled = false;
+            const parsed = JSON.parse(cachedUser);
+            currentUserType = parsed.plan === 'premium' ? 'premium' : 'free';
+        } catch {
+            currentUserType = 'free';
         }
+    } else {
+        currentUserType = 'free';
     }
-    
-    // ===== REPORT FUNCTIONS =====
-    function copyReport() {
-        const report = `Plagiarism Report:
-Originality: ${document.getElementById('originalPercent').textContent}
-Matched: ${document.getElementById('plagiarismPercent').textContent}
-Similarity: ${document.getElementById('similarityPercent').textContent}
-Words: ${document.getElementById('wordCount').textContent}
-Sources: ${document.getElementById('sourceCount').textContent}`;
-        
-        navigator.clipboard.writeText(report).then(() => {
-            showToast('Report copied to clipboard!', 'success');
+
+    console.log("✅ User Type:", currentUserType);
+    updateModeOptions();
+    countWords();
+}
+
+function updateModeOptions() {
+    const modeSelect = document.getElementById('mode');
+    if (!modeSelect) return;
+
+    Array.from(modeSelect.options).forEach(option => {
+        option.disabled = false;
+        option.text = option.text.replace(' 🔒', '').replace(' ⭐', '');
+    });
+
+    if (currentUserType !== 'premium') {
+        Array.from(modeSelect.options).forEach(option => {
+            if (['creative', 'academic'].includes(option.value)) {
+                option.disabled = true;
+                option.text += ' 🔒';
+            }
+        });
+    } else {
+        Array.from(modeSelect.options).forEach(option => {
+            if (['creative', 'academic'].includes(option.value)) {
+                option.text += ' ⭐';
+            }
         });
     }
-    
-    function downloadReport() {
-        const report = `PLAGIARISM CHECK REPORT
+}
+
+// ==============================
+// 🔹 Word Counter (Free vs Premium)
+// ==============================
+function countWords() {
+    const inputEl = document.getElementById('inputText');
+    if (!inputEl) return;
+    const text = inputEl.value;
+    const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+    const chars = text.length;
+
+    const inputWordsEl = document.getElementById('inputWords');
+    const inputCharsEl = document.getElementById('inputChars');
+    if (inputWordsEl) inputWordsEl.innerHTML = `<strong>${words}</strong>/${currentUserType === 'premium' ? '∞' : '500'} words`;
+    if (inputCharsEl) inputCharsEl.innerHTML = `<strong>${chars}</strong> chars`;
+
+    const limitMessage = document.getElementById('limitMessage');
+    const btn = document.getElementById('checkBtn');
+
+    if (words > 500 && currentUserType !== 'premium') {
+        if (limitMessage) limitMessage.style.display = 'flex';
+        if (btn) btn.disabled = true;
+    } else {
+        if (limitMessage) limitMessage.style.display = 'none';
+        if (btn) btn.disabled = false;
+    }
+}
+
+// ==============================
+// 🔹 Mode Restriction
+// ==============================
+function checkModeRestriction() {
+    const modeSelect = document.getElementById('mode');
+    if (!modeSelect) return;
+    const selected = modeSelect.value;
+
+    if (['creative', 'academic'].includes(selected) && currentUserType !== 'premium') {
+        const featureName = modeSelect.options[modeSelect.selectedIndex].text.replace(' 🔒', '');
+        const premiumFeatureNameEl = document.getElementById('premiumFeatureName');
+        if (premiumFeatureNameEl) premiumFeatureNameEl.textContent = featureName;
+        showPremiumModal();
+        modeSelect.value = 'simple';
+        showToast('This mode requires premium subscription', 'warning');
+    }
+}
+
+function showPremiumModal() {
+    const modal = document.getElementById('premiumModal');
+    if (modal) modal.classList.add('show');
+}
+
+function closeModal() {
+    const modal = document.getElementById('premiumModal');
+    if (modal) modal.classList.remove('show');
+}
+
+window.onclick = function(e) {
+    const modal = document.getElementById('premiumModal');
+    if (modal && e.target === modal) closeModal();
+};
+
+// ==============================
+// 🔹 PLAGIARISM CHECK (Railway Backend)
+// ==============================
+async function checkPlagiarism() {
+    const inputEl = document.getElementById('inputText');
+    const btn = document.getElementById('checkBtn');
+    const loadingSection = document.getElementById('loadingSection');
+    const resultsSection = document.getElementById('resultsSection');
+    const sensitivityEl = document.getElementById('checkMode');
+
+    if (!inputEl || !btn) return;
+
+    const text = inputEl.value;
+    const sensitivity = sensitivityEl ? sensitivityEl.value : 'quick';
+
+    if (!text.trim()) {
+        showToast('Please enter some text to check', 'error');
+        return;
+    }
+
+    const words = text.trim().split(/\s+/).length;
+    if (words > 500 && currentUserType !== 'premium') {
+        showToast('Word limit exceeded! Upgrade to premium for unlimited checks.', 'warning');
+        showPremiumModal();
+        return;
+    }
+
+    const originalHTML = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
+    btn.disabled = true;
+    if (loadingSection) loadingSection.style.display = 'flex';
+    if (resultsSection) resultsSection.style.display = 'none';
+
+    try {
+        console.log('📡 Calling API:', API_URL);
+
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text, sensitivity })
+        });
+
+        if (!response.ok) throw new Error(`Server error: ${response.status}`);
+
+        const data = await response.json();
+        console.log('📥 API Response:', data);
+
+        if (data.error) {
+            showToast(data.error, 'error');
+            if (data.error.includes('Upgrade') || data.error.includes('premium')) showPremiumModal();
+            return;
+        }
+
+        displayPlagiarismResults(
+            data.plagiarismScore,
+            data.originalityScore,
+            data.similarityScore,
+            data.matches,
+            words,
+            data.message,
+            false
+        );
+        showToast('Analysis complete!', 'success');
+
+    } catch (error) {
+        console.error('❌ Plagiarism API Error:', error);
+        showToast('Server offline — showing demo results only', 'warning');
+        const demoPlague = Math.floor(Math.random() * 30);
+        displayPlagiarismResults(
+            demoPlague,
+            100 - demoPlague,
+            Math.floor(Math.random() * 20),
+            Math.floor(Math.random() * 50),
+            words,
+            null,
+            true
+        );
+    } finally {
+        btn.innerHTML = originalHTML;
+        btn.disabled = false;
+        if (loadingSection) loadingSection.style.display = 'none';
+        if (resultsSection) resultsSection.style.display = 'block';
+    }
+}
+
+// ==============================
+// 🔹 Display Plagiarism Results
+// ==============================
+function displayPlagiarismResults(plagiarismPercent, originalPercent, similarityPercent, matches, words, message, isDemo) {
+    const progressCircle = document.getElementById('progressCircle');
+    if (progressCircle) {
+        const circumference = 2 * Math.PI * 80;
+        progressCircle.style.strokeDashoffset = circumference - (plagiarismPercent / 100) * circumference;
+    }
+
+    const set = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = val;
+    };
+
+    set('plagiarismPercent', plagiarismPercent + '%');
+    set('originalPercent', originalPercent + '%');
+    set('plagiarizedPercent', plagiarismPercent + '%');
+    set('similarityPercent', similarityPercent + '%');
+    set('uniqueScore', originalPercent + '%');
+    set('wordCount', words);
+    set('matchedSources', matches ?? '-');
+    set('processingTime', (Math.random() * 2 + 0.5).toFixed(1) + 's');
+    set('sourceCount', '8.2B');
+
+    const colors = plagiarismPercent === 0
+        ? '#00ff88'
+        : plagiarismPercent < 10
+            ? '#00d4ff'
+            : plagiarismPercent < 25
+                ? '#ffaa00'
+                : '#ff4444';
+
+    const labels = plagiarismPercent === 0
+        ? ['Perfectly Original', 'Excellent!']
+        : plagiarismPercent < 10
+            ? ['Mostly Original', 'Good']
+            : plagiarismPercent < 25
+                ? ['Some Similarity', 'Needs Review']
+                : ['High Plagiarism', 'Alert!'];
+
+    if (progressCircle) progressCircle.style.stroke = colors;
+    set('plagiarismLabel', labels[0]);
+
+    const resultMessage = document.getElementById('resultMessage');
+    if (resultMessage) {
+        const icon = resultMessage.querySelector('.message-icon i');
+        const title = resultMessage.querySelector('h4');
+        const text = resultMessage.querySelector('p');
+        const iconNames = ['fa-check-circle', 'fa-info-circle', 'fa-exclamation-triangle', 'fa-times-circle'];
+        const iconIdx = plagiarismPercent === 0 ? 0
+            : plagiarismPercent < 10 ? 1
+            : plagiarismPercent < 25 ? 2 : 3;
+        if (icon) { icon.className = `fas ${iconNames[iconIdx]}`; icon.style.color = colors; }
+        if (title) title.textContent = labels[1] + (isDemo ? ' (Demo)' : '');
+        if (text) text.textContent = message || (isDemo
+            ? '⚠️ Demo results — server offline. Connect your backend for real analysis.'
+            : 'Analysis complete.');
+    }
+}
+
+// ==============================
+// 🔹 Report Actions
+// ==============================
+async function copyReport() {
+    const get = (id) => document.getElementById(id)?.textContent || '0%';
+    const report = `Plagiarism Report:
+Originality: ${get('originalPercent')}
+Matched: ${get('plagiarismPercent')}
+Similarity: ${get('similarityPercent')}
+Words: ${get('wordCount')}
+Sources: ${get('sourceCount')}`;
+    try {
+        await navigator.clipboard.writeText(report);
+        showToast('Report copied to clipboard!', 'success');
+    } catch {
+        showToast('Copy failed — try manually', 'error');
+    }
+}
+
+function downloadReport() {
+    const get = (id) => document.getElementById(id)?.textContent || 'N/A';
+    const report = `PLAGIARISM CHECK REPORT
 Generated: ${new Date().toLocaleString()}
 -----------------------------------
-Originality: ${document.getElementById('originalPercent').textContent}
-Matched Content: ${document.getElementById('plagiarismPercent').textContent}
-Similarity Score: ${document.getElementById('similarityPercent').textContent}
-Words Analyzed: ${document.getElementById('wordCount').textContent}
-Sources Checked: ${document.getElementById('sourceCount').textContent}
-Matches Found: ${document.getElementById('matchedSources').textContent}
-Processing Time: ${document.getElementById('processingTime').textContent}
+Originality: ${get('originalPercent')}
+Matched Content: ${get('plagiarismPercent')}
+Similarity Score: ${get('similarityPercent')}
+Words Analyzed: ${get('wordCount')}
+Sources Checked: ${get('sourceCount')}
+Matches Found: ${get('matchedSources')}
+Processing Time: ${get('processingTime')}
 -----------------------------------
-This is an automated report. Please review the content carefully.`;
-        
-        const blob = new Blob([report], { type: 'text/plain' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'plagiarism-report.txt';
-        a.click();
-        window.URL.revokeObjectURL(url);
-        showToast('Report downloaded!', 'success');
+This is an automated report.`;
+    const blob = new Blob([report], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'plagiarism-report.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Report downloaded!', 'success');
+}
+
+function shareReport() {
+    const report = `Plagiarism Check: ${document.getElementById('originalPercent')?.textContent || '0%'} Original`;
+    if (navigator.share) {
+        navigator.share({ title: 'Plagiarism Report', text: report });
+    } else {
+        copyReport();
     }
-    
-    function shareReport() {
-        const report = `Plagiarism Check: ${document.getElementById('originalPercent').textContent} Original, ${document.getElementById('plagiarismPercent').textContent} Matched`;
-        
-        if (navigator.share) {
-            navigator.share({
-                title: 'Plagiarism Report',
-                text: report
-            });
-        } else {
-            copyReport();
-        }
+}
+
+// ==============================
+// 🔹 Utility — Toast
+// ==============================
+function showToast(msg, type = 'success') {
+    document.querySelectorAll('.plagiarism-inline-toast').forEach(t => t.remove());
+
+    const icons = { success: '✓', error: '✗', warning: '⚠' };
+    const colors = { success: '#10b981', error: '#ef4444', warning: '#f59e0b' };
+
+    const toast = document.createElement('div');
+    toast.className = 'plagiarism-inline-toast';
+    toast.innerHTML = `<span style="font-weight:bold;margin-right:8px;">${icons[type] || 'ℹ'}</span><span>${msg}</span>`;
+    toast.style.cssText = `
+        position: fixed; bottom: 20px; right: 20px;
+        padding: 12px 20px; background: ${colors[type] || '#3b82f6'};
+        color: white; border-radius: 8px; font-size: 14px;
+        z-index: 10000; font-family: 'Inter', sans-serif;
+        animation: slideIn 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        display: flex; align-items: center; gap: 8px;
+    `;
+    document.body.appendChild(toast);
+    setTimeout(() => {
+        toast.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+// ==============================
+// 🔹 Init
+// ==============================
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('🚀 Initializing Plagiarism Checker (inline)...');
+    console.log('🔗 API URL:', API_URL);
+
+    fetchUserType();
+    countWords();
+
+    const inputText = document.getElementById('inputText');
+    if (inputText) {
+        inputText.addEventListener('input', countWords);
+        inputText.addEventListener('paste', () => setTimeout(countWords, 10));
     }
-    
-    // ===== TOAST NOTIFICATION =====
-    function showToast(message, type = 'success') {
-        let toastContainer = document.querySelector('.toast-container');
-        if (!toastContainer) {
-            toastContainer = document.createElement('div');
-            toastContainer.className = 'toast-container';
-            document.body.appendChild(toastContainer);
-        }
-        
-        const toast = document.createElement('div');
-        toast.className = `toast ${type}`;
-        
-        let icon = 'fa-info-circle';
-        if (type === 'success') icon = 'fa-check-circle';
-        if (type === 'error') icon = 'fa-exclamation-circle';
-        if (type === 'warning') icon = 'fa-exclamation-triangle';
-        
-        toast.innerHTML = `<i class="fas ${icon}"></i><span>${message}</span>`;
-        toastContainer.appendChild(toast);
-        
-        setTimeout(() => {
-            toast.style.animation = 'slideOut 0.3s ease';
-            setTimeout(() => toast.remove(), 300);
-        }, 3000);
+
+    const clearBtn = document.getElementById('clearBtn');
+    if (clearBtn) {
+        clearBtn.onclick = () => {
+            const inputEl = document.getElementById('inputText');
+            const resultsSection = document.getElementById('resultsSection');
+            if (inputEl) inputEl.value = '';
+            if (resultsSection) resultsSection.style.display = 'none';
+            countWords();
+            showToast('Text cleared', 'success');
+        };
     }
-    
-    // ===== INITIALIZATION =====
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log("🚀 Initializing Plagiarism Checker...");
-        
-        fetchUserType();
-        countWords();
-        
-        // Add event listeners for word limit enforcement
-        const inputText = document.getElementById('inputText');
-        if (inputText) {
-            inputText.addEventListener('paste', function(e) {
-                setTimeout(enforceWordLimit, 10);
-            });
-            inputText.addEventListener('input', enforceWordLimit);
-        }
-        
-        // Clear button
-        const clearBtn = document.getElementById('clearBtn');
-        if (clearBtn) {
-            clearBtn.addEventListener('click', function() {
-                document.getElementById('inputText').value = '';
-                document.getElementById('resultsSection').style.display = 'none';
-                countWords();
-                showToast('Text cleared', 'success');
-            });
-        }
-        
-        // Copy button
-        const copyBtn = document.getElementById('copyReportBtn');
-        if (copyBtn) copyBtn.addEventListener('click', copyReport);
-        
-        // Download button
-        const downloadBtn = document.getElementById('downloadReportBtn');
-        if (downloadBtn) downloadBtn.addEventListener('click', downloadReport);
-        
-        // Share button
-        const shareBtn = document.getElementById('shareReportBtn');
-        if (shareBtn) shareBtn.addEventListener('click', shareReport);
-        
-        // Clear all button
-        const clearAllBtn = document.getElementById('clearAllBtn');
-        if (clearAllBtn) {
-            clearAllBtn.addEventListener('click', function() {
-                document.getElementById('inputText').value = '';
-                document.getElementById('resultsSection').style.display = 'none';
-                countWords();
-                showToast('All cleared', 'success');
-            });
-        }
-        
-        console.log("✅ Plagiarism checker ready! API URL:", API_URL);
-    });
+
+    const clearAllBtn = document.getElementById('clearAllBtn');
+    if (clearAllBtn) {
+        clearAllBtn.onclick = () => {
+            const inputEl = document.getElementById('inputText');
+            const resultsSection = document.getElementById('resultsSection');
+            if (inputEl) inputEl.value = '';
+            if (resultsSection) resultsSection.style.display = 'none';
+            countWords();
+            showToast('All cleared', 'success');
+        };
+    }
+
+    document.getElementById('copyReportBtn')?.addEventListener('click', copyReport);
+    document.getElementById('downloadReportBtn')?.addEventListener('click', downloadReport);
+    document.getElementById('shareReportBtn')?.addEventListener('click', shareReport);
+
+    if (!document.querySelector('#toast-animations')) {
+        const style = document.createElement('style');
+        style.id = 'toast-animations';
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    console.log('✅ Plagiarism checker ready!');
+});
+
 </script>
-
-
       <!-- JavaScript Files  -->
     <script src="js/layout.js"></script>
     <script  type="module" src="js/script.js"></script>

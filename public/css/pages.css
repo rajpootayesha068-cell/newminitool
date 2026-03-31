@@ -9,29 +9,6 @@
     (Common for both pages)
    ======================================== */
 
-:root {
-    --sapphire-deep: #000428;
-    --sapphire-primary: #0066cc;
-    --sapphire-secondary: #0099ff;
-    --sapphire-accent: #00ccff;
-    --accent-cyan: #00d4ff;
-    --glass-white: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --text-primary: #ffffff;
-    --text-secondary: #b3d9ff;
-    --text-muted: #94a3b8;
-    --card-bg: rgba(255, 255, 255, 0.03);
-    --gradient-primary: linear-gradient(135deg, #0066cc, #0099ff, #00ccff);
-    --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.2);
-    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.3);
-    --shadow-glow: 0 0 30px rgba(0, 212, 255, 0.3);
-    
-    /* Status Colors - Used only in plagiarism page */
-    --success-color: #00ff88;
-    --warning-color: #ffaa00;
-    --danger-color: #ff4444;
-}
 
 /* ===== MAIN CONTAINER ===== */
 .main-wrapper {
