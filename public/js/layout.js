@@ -29,7 +29,7 @@ async function loadComponent(id, file) {
   }
 }
 
-// Wait for DOM to be ready
+// // Wait for DOM to be ready
 document.addEventListener('DOMContentLoaded', function() {
   console.log("📦 Layout.js initializing...");
   
@@ -48,3 +48,5 @@ window.reloadComponents = function() {
   loadComponent("footer", "Global Component/footer.html");
   loadComponent("background-wrapper", "Global Component/background.html");
 };
+
+

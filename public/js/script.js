@@ -19,6 +19,8 @@ import {
     reauthenticateWithPopup,
     EmailAuthProvider,
     GoogleAuthProvider
+
+
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
@@ -1475,7 +1477,14 @@ window.loadComponent = function(componentId, filePath) {
     if (!element) return;
     fetch(filePath)
         .then(r => r.text())
-        .then(data => { element.innerHTML = data; })
+        .then(data => {
+            element.innerHTML = data;
+            // ✅ If header just loaded, now it's safe to check auth state
+            if (componentId === 'header') {
+                loadTheme();
+                checkAuthState();
+            }
+        })
         .catch(err => console.log('Error loading component:', err));
 };
 
@@ -1507,10 +1516,40 @@ function initializeScrollAnimations() {
 // ========================================
 // ========== MAIN INIT ==========
 // ========================================
+// document.addEventListener('DOMContentLoaded', function() {
+//     console.log("✅ MiniToolBox Master JS Loaded");
+//     loadTheme();
+   
+//     setupForgotPasswordHandler();
+//     initializeScrollAnimations();
+
+//     document.getElementById('signupForm')?.addEventListener('submit', handleSignup);
+//     document.getElementById('loginForm')?.addEventListener('submit', handleLogin);
+
+//     const googleBtn = document.getElementById('googleLoginBtn') || document.getElementById('googleSignupBtn');
+//     if (googleBtn) {
+//         googleBtn.addEventListener('click', handleGoogleLogin);
+//         console.log("✅ Google button handler attached");
+//     }
+
+//     document.getElementById('logoutBtn')?.addEventListener('click', window.handleLogout);
+
+//     document.querySelectorAll('.password-toggle').forEach(btn => {
+//         btn.addEventListener('click', function() {
+//             const wrapper = this.closest('.password-input-wrapper');
+//             if (!wrapper) return;
+//             const input = wrapper.querySelector('input');
+//             if (input) togglePassword(input.id, this);
+//         });
+//     });
+
+//     if (window.location.pathname.includes('paraphrasing.html')) initParaphrasingTool();
+//     if (window.location.pathname.includes('plagiarism.html')) initPlagiarismChecker();
+// });
 document.addEventListener('DOMContentLoaded', function() {
     console.log("✅ MiniToolBox Master JS Loaded");
     loadTheme();
-    checkAuthState();
+    // ❌ checkAuthState(); → yeh line delete karo
     setupForgotPasswordHandler();
     initializeScrollAnimations();
 
@@ -1520,7 +1559,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const googleBtn = document.getElementById('googleLoginBtn') || document.getElementById('googleSignupBtn');
     if (googleBtn) {
         googleBtn.addEventListener('click', handleGoogleLogin);
-        console.log("✅ Google button handler attached");
     }
 
     document.getElementById('logoutBtn')?.addEventListener('click', window.handleLogout);
@@ -1537,7 +1575,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.location.pathname.includes('paraphrasing.html')) initParaphrasingTool();
     if (window.location.pathname.includes('plagiarism.html')) initPlagiarismChecker();
 });
-
 // ========================================
 // ========== GLOBAL EXPORTS ==========
 // ========================================
@@ -1561,5 +1598,3 @@ window.shareReport = sharePlagiarismReport;
 window.enforceWordLimit = enforceWordLimit;
 
 console.log("✅ All functions exported successfully!");
-
-

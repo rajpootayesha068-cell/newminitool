@@ -774,7 +774,131 @@ body {
     0% { transform: translateX(-100%) rotate(45deg); }
     100% { transform: translateX(100%) rotate(45deg); }
 }
+/* Mobile Dropdown Menu Improvements */
+@media (max-width: 728px) {
+    /* Make dropdown menu scrollable and size-appropriate */
+    .dropdown-menu,
+    .nav-links.active,
+    .mobile-menu {
+        max-height: 80vh; /* Limit height to 80% of viewport */
+        overflow-y: auto; /* Enable scrolling */
+        overflow-x: hidden;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--bg-primary, #fff);
+        border-radius: 0 0 12px 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        padding: 1rem;
+        margin: 0;
+    }
 
+    /* Style the scrollbar for better visibility */
+    .dropdown-menu::-webkit-scrollbar,
+    .nav-links.active::-webkit-scrollbar,
+    .mobile-menu::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .dropdown-menu::-webkit-scrollbar-track,
+    .nav-links.active::-webkit-scrollbar-track,
+    .mobile-menu::-webkit-scrollbar-track {
+        background: var(--bg-secondary, #f0f0f0);
+        border-radius: 10px;
+    }
+
+    .dropdown-menu::-webkit-scrollbar-thumb,
+    .nav-links.active::-webkit-scrollbar-thumb,
+    .mobile-menu::-webkit-scrollbar-thumb {
+        background: var(--accent-color, #6366f1);
+        border-radius: 10px;
+    }
+
+    /* Make menu items more compact for mobile */
+    .dropdown-menu a,
+    .nav-links.active a,
+    .mobile-menu a {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        display: block;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    /* Add spacing between menu items */
+    .dropdown-menu a:not(:last-child),
+    .nav-links.active a:not(:last-child),
+    .mobile-menu a:not(:last-child) {
+        margin-bottom: 0.5rem;
+    }
+
+    /* Optional: Add a header to the dropdown menu */
+    .dropdown-menu::before,
+    .nav-links.active::before,
+    .mobile-menu::before {
+        content: "Menu";
+        display: block;
+        padding: 0.75rem 1rem;
+        font-weight: 600;
+        font-size: 1.1rem;
+        border-bottom: 2px solid var(--accent-color, #6366f1);
+        margin-bottom: 0.75rem;
+        color: var(--text-primary, #333);
+    }
+
+    /* Adjust hamburger menu button */
+    .hamburger {
+        display: block;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    /* Ensure overlay works properly */
+    .menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .menu-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* For very small screens (below 480px) */
+    @media (max-width: 480px) {
+        .dropdown-menu,
+        .nav-links.active,
+        .mobile-menu {
+            max-height: 85vh;
+            top: 60px;
+            padding: 0.75rem;
+        }
+
+        .dropdown-menu a,
+        .nav-links.active a,
+        .mobile-menu a {
+            padding: 0.6rem 0.875rem;
+            font-size: 0.95rem;
+        }
+
+        .dropdown-menu::before,
+        .nav-links.active::before,
+        .mobile-menu::before {
+            padding: 0.6rem 0.875rem;
+            font-size: 1rem;
+        }
+    }
+}
 /* ========================================
    MOBILE MENU STYLES
    ======================================== */
@@ -3199,5 +3323,55 @@ a { text-decoration: none; }
         box-shadow: none;
         border: 1px solid #ddd;
         background: white;
+    }
+}
+
+
+/* ========================================
+   FIX: MOBILE MENU SCROLLING & SIZING
+   ======================================== */
+@media (max-width: 728px) {
+    /* Fix mobile nav content height and scrolling */
+    .mobile-nav-content {
+        max-height: calc(100vh - 80px) !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        padding-bottom: 2rem !important;
+    }
+
+    /* Style scrollbar for visibility */
+    .mobile-nav-content::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .mobile-nav-content::-webkit-scrollbar-track {
+        background: var(--border-color);
+        border-radius: 10px;
+    }
+
+    .mobile-nav-content::-webkit-scrollbar-thumb {
+        background: var(--sapphire-primary);
+        border-radius: 10px;
+    }
+
+    /* Make toolkit section scrollable if needed */
+    .mobile-toolkit-section {
+        max-height: 45vh;
+        overflow-y: auto;
+    }
+
+    .mobile-toolkit-section::-webkit-scrollbar {
+        width: 3px;
+    }
+}
+
+/* Extra compact for very small screens */
+@media (max-width: 480px) {
+    .mobile-nav-content {
+        max-height: calc(100vh - 70px) !important;
+    }
+    
+    .mobile-toolkit-section {
+        max-height: 40vh;
     }
 }
