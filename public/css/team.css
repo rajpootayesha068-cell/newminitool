@@ -21,7 +21,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+/* Faster text rendering */
+  font-family: system-ui, -apple-system, Arial, sans-serif;
 }
 
 

@@ -87,7 +87,8 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+/* Faster text rendering */
+    font-family: system-ui, -apple-system, Arial, sans-serif;
     background: var(--bg-gradient);
     color: var(--text-primary);
     line-height: 1.6;

@@ -931,6 +931,11 @@ function checkAuthState() {
         } else {
             currentUser = null;
             updateUIForLoggedOut();
+
+            // ✅ Redirect to login if on profile page with no user
+            if (window.location.pathname.includes('profile.html')) {
+                window.location.href = 'login.html';
+            }
         }
     });
 }
@@ -1549,7 +1554,7 @@ function initializeScrollAnimations() {
 document.addEventListener('DOMContentLoaded', function() {
     console.log("✅ MiniToolBox Master JS Loaded");
     loadTheme();
-    // ❌ checkAuthState(); → yeh line delete karo
+    checkAuthState();
     setupForgotPasswordHandler();
     initializeScrollAnimations();
 

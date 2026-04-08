@@ -15,8 +15,12 @@
     <link rel="stylesheet" href="css/newstyle.css">
     <link rel="stylesheet" href="css/pages.css">
 
-    <script src="config.js"></script>
-
+ <!-- <script src="config.js"></script> -->
+       <script>
+  window.CONFIG = {
+    API_URL: "https://minitoolbackend-production.up.railway.app/"
+  };
+</script>
 </head>
 <body>
     <!-- Header -->
@@ -556,7 +560,8 @@ This is an automated report. Please review the content carefully.`;
         });
     });
 </script> -->
-<script>
+<!-- <script>
+
 // ==============================
 // 🔹 Global Variables
 // ==============================
@@ -964,7 +969,473 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </script>
       <!-- JavaScript Files  -->
-   <script src="js/layout.js"></script>
+   
+   <script>
+
+// ==============================
+// 🔹 Global Variables
+// ==============================
+window.days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+let currentUserType = 'free';
+
+const API_URL = (typeof CONFIG !== 'undefined' && CONFIG.API_URL)
+    ? CONFIG.API_URL + '/plagiarism'
+    : 'https://minitoolbackend-production.up.railway.app/plagiarism';
+
+// ==============================
+// 🔹 User Type Detection
+// ==============================
+async function fetchUserType() {
+    const cachedUser = localStorage.getItem('user');
+    if (cachedUser) {
+        try {
+            const parsed = JSON.parse(cachedUser);
+            currentUserType = parsed.plan === 'premium' ? 'premium' : 'free';
+        } catch {
+            currentUserType = 'free';
+        }
+    } else {
+        currentUserType = 'free';
+    }
+
+    console.log("✅ User Type:", currentUserType);
+    countWords();
+}
+
+// ==============================
+// 🔹 Word Counter
+// ==============================
+function countWords() {
+    const inputEl = document.getElementById('inputText');
+    if (!inputEl) return;
+    const text = inputEl.value;
+    const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+    const chars = text.length;
+
+    const inputWordsEl = document.getElementById('inputWords');
+    const inputCharsEl = document.getElementById('inputChars');
+    if (inputWordsEl) inputWordsEl.innerHTML = `<strong>${words}</strong>/${currentUserType === 'premium' ? '∞' : '500'} words`;
+    if (inputCharsEl) inputCharsEl.innerHTML = `<strong>${chars}</strong> chars`;
+
+    const limitMessage = document.getElementById('limitMessage');
+    const btn = document.getElementById('checkBtn');
+
+    if (words > 500 && currentUserType !== 'premium') {
+        if (limitMessage) limitMessage.style.display = 'flex';
+        if (btn) btn.disabled = true;
+    } else {
+        if (limitMessage) limitMessage.style.display = 'none';
+        if (btn) btn.disabled = false;
+    }
+}
+
+// ==============================
+// 🔹 Premium Modal
+// ==============================
+function showPremiumModal() {
+    const modal = document.getElementById('premiumModal');
+    if (modal) modal.classList.add('show');
+}
+
+function closeModal() {
+    const modal = document.getElementById('premiumModal');
+    if (modal) modal.classList.remove('show');
+}
+
+window.onclick = function(e) {
+    const modal = document.getElementById('premiumModal');
+    if (modal && e.target === modal) closeModal();
+};
+
+// ==============================
+// 🔹 Plagiarism Check
+// ==============================
+async function checkPlagiarism() {
+    const inputEl        = document.getElementById('inputText');
+    const btn            = document.getElementById('checkBtn');
+    const loadingSection = document.getElementById('loadingSection');
+    const resultsSection = document.getElementById('resultsSection');
+    const sensitivityEl  = document.getElementById('checkMode');
+
+    if (!inputEl || !btn) return;
+
+    const text        = inputEl.value;
+    const sensitivity = sensitivityEl ? sensitivityEl.value : 'quick';
+
+    if (!text.trim()) {
+        showToast('Please enter some text to check', 'error');
+        return;
+    }
+
+    const words = text.trim().split(/\s+/).length;
+    if (words > 500 && currentUserType !== 'premium') {
+        showToast('Word limit exceeded! Upgrade to premium for unlimited checks.', 'warning');
+        showPremiumModal();
+        return;
+    }
+
+    const originalHTML = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
+    btn.disabled = true;
+    if (loadingSection) loadingSection.style.display = 'flex';
+    if (resultsSection) resultsSection.style.display = 'none';
+
+    try {
+        console.log('📡 Calling API:', API_URL);
+
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text, sensitivity })
+        });
+
+        if (!response.ok) throw new Error(`Server error: ${response.status}`);
+
+        const data = await response.json();
+        console.log('📥 API Response:', data);
+
+        if (data.error) {
+            showToast(data.error, 'error');
+            if (data.error.includes('Upgrade') || data.error.includes('premium')) showPremiumModal();
+            return;
+        }
+
+        displayPlagiarismResults(
+            data.plagiarismScore,
+            data.originalityScore,
+            data.similarityScore,
+            data.matches,
+            words,
+            data.message,
+            false
+        );
+        showToast('Analysis complete!', 'success');
+
+    } catch (error) {
+        console.error('❌ Plagiarism API Error:', error);
+        showToast('Server offline — showing demo results only', 'warning');
+        const demoPlague = Math.floor(Math.random() * 30);
+        displayPlagiarismResults(
+            demoPlague,
+            100 - demoPlague,
+            Math.floor(Math.random() * 20),
+            Math.floor(Math.random() * 50),
+            words,
+            null,
+            true
+        );
+    } finally {
+        btn.innerHTML = originalHTML;
+        btn.disabled = false;
+        if (loadingSection) loadingSection.style.display = 'none';
+        if (resultsSection) resultsSection.style.display = 'block';
+    }
+}
+
+// ==============================
+// 🔹 Display Results
+// ==============================
+function displayPlagiarismResults(plagiarismPercent, originalPercent, similarityPercent, matches, words, message, isDemo) {
+    const progressCircle = document.getElementById('progressCircle');
+    if (progressCircle) {
+        const circumference = 2 * Math.PI * 80;
+        progressCircle.style.strokeDashoffset = circumference - (plagiarismPercent / 100) * circumference;
+    }
+
+    const set = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = val;
+    };
+
+    set('plagiarismPercent',  plagiarismPercent  + '%');
+    set('originalPercent',    originalPercent    + '%');
+    set('plagiarizedPercent', plagiarismPercent  + '%');
+    set('similarityPercent',  similarityPercent  + '%');
+    set('uniqueScore',        originalPercent    + '%');
+    set('wordCount',          words);
+    set('matchedSources',     matches ?? '-');
+    set('processingTime',     (Math.random() * 2 + 0.5).toFixed(1) + 's');
+    set('sourceCount',        '8.2B');
+
+    const colors =
+        plagiarismPercent === 0  ? '#00ff88' :
+        plagiarismPercent < 10   ? '#00d4ff' :
+        plagiarismPercent < 25   ? '#ffaa00' : '#ff4444';
+
+    const labels =
+        plagiarismPercent === 0  ? ['Perfectly Original', 'Excellent!']  :
+        plagiarismPercent < 10   ? ['Mostly Original',    'Good']         :
+        plagiarismPercent < 25   ? ['Some Similarity',    'Needs Review'] :
+                                   ['High Plagiarism',    'Alert!'];
+
+    if (progressCircle) progressCircle.style.stroke = colors;
+    set('plagiarismLabel', labels[0]);
+
+    const resultMessage = document.getElementById('resultMessage');
+    if (resultMessage) {
+        const icon  = resultMessage.querySelector('.message-icon i');
+        const title = resultMessage.querySelector('h4');
+        const text  = resultMessage.querySelector('p');
+        const iconNames = ['fa-check-circle', 'fa-info-circle', 'fa-exclamation-triangle', 'fa-times-circle'];
+        const iconIdx =
+            plagiarismPercent === 0  ? 0 :
+            plagiarismPercent < 10   ? 1 :
+            plagiarismPercent < 25   ? 2 : 3;
+        if (icon)  { icon.className = `fas ${iconNames[iconIdx]}`; icon.style.color = colors; }
+        if (title) title.textContent = labels[1] + (isDemo ? ' (Demo)' : '');
+        if (text)  text.textContent  = message || (isDemo
+            ? '⚠️ Demo results — server offline. Connect your backend for real analysis.'
+            : 'Analysis complete.');
+    }
+}
+
+// ==============================
+// 🔹 Report Actions
+// ==============================
+async function copyReport() {
+    const get = (id) => document.getElementById(id)?.textContent || '0%';
+    const report =
+`Plagiarism Report:
+Originality: ${get('originalPercent')}
+Matched: ${get('plagiarismPercent')}
+Similarity: ${get('similarityPercent')}
+Words: ${get('wordCount')}
+Sources: ${get('sourceCount')}`;
+    try {
+        await navigator.clipboard.writeText(report);
+        showToast('Report copied to clipboard!', 'success');
+    } catch {
+        showToast('Copy failed — try manually', 'error');
+    }
+}
+
+function downloadReport() {
+    const get = (id) => document.getElementById(id)?.textContent || 'N/A';
+    const report =
+`PLAGIARISM CHECK REPORT
+Generated: ${new Date().toLocaleString()}
+-----------------------------------
+Originality: ${get('originalPercent')}
+Matched Content: ${get('plagiarismPercent')}
+Similarity Score: ${get('similarityPercent')}
+Words Analyzed: ${get('wordCount')}
+Sources Checked: ${get('sourceCount')}
+Matches Found: ${get('matchedSources')}
+Processing Time: ${get('processingTime')}
+-----------------------------------
+This is an automated report.`;
+    const blob = new Blob([report], { type: 'text/plain' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = 'plagiarism-report.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Report downloaded!', 'success');
+}
+
+function shareReport() {
+    const report = `Plagiarism Check: ${document.getElementById('originalPercent')?.textContent || '0%'} Original`;
+    if (navigator.share) {
+        navigator.share({ title: 'Plagiarism Report', text: report });
+    } else {
+        copyReport();
+    }
+}
+
+// ==============================
+// 🔹 Toast
+// ==============================
+function showToast(msg, type = 'success') {
+    document.querySelectorAll('.plagiarism-inline-toast').forEach(t => t.remove());
+
+    const icons  = { success: '✓', error: '✗', warning: '⚠' };
+    const colors = { success: '#10b981', error: '#ef4444', warning: '#f59e0b' };
+
+    const toast = document.createElement('div');
+    toast.className = 'plagiarism-inline-toast';
+    toast.innerHTML = `<span style="font-weight:bold;margin-right:8px;">${icons[type] || 'ℹ'}</span><span>${msg}</span>`;
+    toast.style.cssText = `
+        position:fixed; top:20px; left:50%; transform:translateX(-50%);
+        padding:12px 20px; background:${colors[type] || '#3b82f6'};
+        color:white; border-radius:8px; font-size:14px;
+        z-index:10000; font-family:system-ui,sans-serif;
+        box-shadow:0 4px 12px rgba(0,0,0,0.15);
+        display:flex; align-items:center; gap:8px;
+    `;
+    document.body.appendChild(toast);
+
+    toast.animate(
+        [{ transform:'translate(-50%,-20px)', opacity:0 }, { transform:'translate(-50%,0)', opacity:1 }],
+        { duration:300, easing:'ease-out', fill:'forwards' }
+    );
+
+    setTimeout(() => {
+        toast.animate(
+            [{ transform:'translate(-50%,0)', opacity:1 }, { transform:'translate(-50%,-20px)', opacity:0 }],
+            { duration:300, easing:'ease-in', fill:'forwards' }
+        );
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+// ==============================
+// 🔹 Custom Select Builder
+// ==============================
+function buildCustomSelect(selectEl) {
+    const wrapper = selectEl.closest('.select-wrapper.small');
+    if (!wrapper || wrapper.querySelector('.custom-select')) return;
+
+    const container = document.createElement('div');
+    container.className = 'custom-select';
+
+    const trigger = document.createElement('div');
+    trigger.className = 'custom-select-trigger';
+    trigger.setAttribute('tabindex', '0');
+
+    const triggerText = document.createElement('span');
+    triggerText.className = 'custom-select-trigger-text';
+
+    const arrow = document.createElement('i');
+    arrow.className = 'fas fa-chevron-down custom-select-arrow';
+
+    trigger.appendChild(triggerText);
+    trigger.appendChild(arrow);
+
+    const optionsList = document.createElement('div');
+    optionsList.className = 'custom-select-options';
+
+    container.appendChild(trigger);
+    container.appendChild(optionsList);
+    wrapper.appendChild(container);
+
+    function rebuildOptions() {
+        optionsList.innerHTML = '';
+        Array.from(selectEl.options).forEach((opt) => {
+            const item = document.createElement('div');
+            item.className = 'custom-select-option';
+            item.dataset.value = opt.value;
+            item.textContent = opt.text;
+            if (opt.disabled) item.classList.add('disabled');
+            if (opt.selected)  item.classList.add('selected');
+
+            item.addEventListener('click', () => {
+                if (opt.disabled) return;
+                selectEl.value = opt.value;
+                selectEl.dispatchEvent(new Event('change', { bubbles: true }));
+                updateTriggerLabel();
+                rebuildOptions();
+                closeDropdown();
+            });
+            optionsList.appendChild(item);
+        });
+    }
+
+    function updateTriggerLabel() {
+        const sel = selectEl.options[selectEl.selectedIndex];
+        triggerText.textContent = sel ? sel.text : '';
+    }
+
+    function openDropdown() {
+        document.querySelectorAll('.custom-select.open').forEach(el => el.classList.remove('open'));
+        container.classList.add('open');
+    }
+
+    function closeDropdown() {
+        container.classList.remove('open');
+    }
+
+    trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        container.classList.contains('open') ? closeDropdown() : openDropdown();
+    });
+
+    trigger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); container.classList.contains('open') ? closeDropdown() : openDropdown(); }
+        if (e.key === 'Escape') closeDropdown();
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!container.contains(e.target)) closeDropdown();
+    });
+
+    // Sync when code does: selectEl.value = 'something'
+    const origDescriptor = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'value');
+    if (origDescriptor) {
+        Object.defineProperty(selectEl, 'value', {
+            get: () => origDescriptor.get.call(selectEl),
+            set: (val) => {
+                origDescriptor.set.call(selectEl, val);
+                updateTriggerLabel();
+                rebuildOptions();
+            }
+        });
+    }
+
+    // Sync when option text / disabled state changes
+    new MutationObserver(() => {
+        rebuildOptions();
+        updateTriggerLabel();
+    }).observe(selectEl, { childList: true, subtree: true, characterData: true });
+
+    rebuildOptions();
+    updateTriggerLabel();
+}
+
+// ==============================
+// 🔹 Init
+// ==============================
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('🚀 Initializing Plagiarism Checker...');
+    console.log('🔗 API URL:', API_URL);
+
+    fetchUserType();
+    countWords();
+
+    // Build custom dropdowns
+    document.querySelectorAll('.select-wrapper.small select').forEach(buildCustomSelect);
+
+    const inputText = document.getElementById('inputText');
+    if (inputText) {
+        inputText.addEventListener('input', countWords);
+        inputText.addEventListener('paste', () => setTimeout(countWords, 10));
+    }
+
+    const clearBtn = document.getElementById('clearBtn');
+    if (clearBtn) {
+        clearBtn.onclick = () => {
+            const inputEl       = document.getElementById('inputText');
+            const resultsSection = document.getElementById('resultsSection');
+            if (inputEl)        inputEl.value = '';
+            if (resultsSection) resultsSection.style.display = 'none';
+            countWords();
+            showToast('Text cleared', 'success');
+        };
+    }
+
+    const clearAllBtn = document.getElementById('clearAllBtn');
+    if (clearAllBtn) {
+        clearAllBtn.onclick = () => {
+            const inputEl        = document.getElementById('inputText');
+            const resultsSection = document.getElementById('resultsSection');
+            if (inputEl)         inputEl.value = '';
+            if (resultsSection)  resultsSection.style.display = 'none';
+            countWords();
+            showToast('All cleared', 'success');
+        };
+    }
+
+    document.getElementById('copyReportBtn')?.addEventListener('click', copyReport);
+    document.getElementById('downloadReportBtn')?.addEventListener('click', downloadReport);
+    document.getElementById('shareReportBtn')?.addEventListener('click', shareReport);
+
+    console.log('✅ Plagiarism checker ready!');
+});
+
+</script>
+   
+   
+      <script src="js/layout.js"></script>
     <script src="js/main.js"></script>
     <script type="module" src="js/script.js"></script>  
 </body>

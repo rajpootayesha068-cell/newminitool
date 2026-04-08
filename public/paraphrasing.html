@@ -6,7 +6,6 @@
     <title>Paraphraser Pro | AI Writing Assistant - MiniToolBox</title>
     
     <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
@@ -16,8 +15,12 @@
     <link rel="stylesheet" href="css/newstyle.css">
     <link rel="stylesheet" href="css/pages.css">
 
-    <script src="config.js"></script>
-
+ <!-- <script src="config.js"></script> -->
+       <script>
+  window.CONFIG = {
+    API_URL: "https://minitoolbackend-production.up.railway.app/"
+  };
+</script>
 </head>
 
 
@@ -466,7 +469,7 @@
 </script>  -->
 
 
-<script>
+<!--<script>
 
 // ==============================
 // 🔹 Global Variables
@@ -916,8 +919,418 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </script>
 
+
+
    <!-- JavaScript Files  -->
   
+   <script>
+
+// ==============================
+// 🔹 Global Variables
+// ==============================
+window.days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+let currentUserType = 'free';
+
+const API_URL = (typeof CONFIG !== 'undefined' && CONFIG.API_URL)
+    ? CONFIG.API_URL + '/paraphrase'
+    : 'https://minitoolbackend-production.up.railway.app/paraphrase';
+
+// ==============================
+// 🔹 User Type Detection
+// ==============================
+async function fetchUserType() {
+    const cachedUser = localStorage.getItem('user');
+    if (cachedUser) {
+        try {
+            const parsed = JSON.parse(cachedUser);
+            currentUserType = parsed.plan === 'premium' ? 'premium' : 'free';
+        } catch {
+            currentUserType = 'free';
+        }
+    } else {
+        currentUserType = 'free';
+    }
+
+    console.log("✅ User Type:", currentUserType);
+    updateModeOptions();
+    countWords();
+}
+
+function updateModeOptions() {
+    const modeSelect = document.getElementById('mode');
+    if (!modeSelect) return;
+
+    Array.from(modeSelect.options).forEach(option => {
+        option.disabled = false;
+        option.text = option.text.replace(' 🔒', '').replace(' ⭐', '');
+    });
+
+    if (currentUserType !== 'premium') {
+        Array.from(modeSelect.options).forEach(option => {
+            if (['creative', 'academic'].includes(option.value)) {
+                option.disabled = true;
+                option.text += ' 🔒';
+            }
+        });
+    } else {
+        Array.from(modeSelect.options).forEach(option => {
+            if (['creative', 'academic'].includes(option.value)) {
+                option.text += ' ⭐';
+            }
+        });
+    }
+}
+
+// ==============================
+// 🔹 Word Counter
+// ==============================
+function countWords() {
+    const inputEl = document.getElementById('inputText');
+    if (!inputEl) return;
+    const text = inputEl.value;
+    const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+    const chars = text.length;
+
+    const inputWordsEl = document.getElementById('inputWords');
+    const inputCharsEl = document.getElementById('inputChars');
+    if (inputWordsEl) inputWordsEl.innerHTML = `<strong>${words}</strong>/${currentUserType === 'premium' ? '∞' : '500'} words`;
+    if (inputCharsEl) inputCharsEl.innerHTML = `<strong>${chars}</strong> chars`;
+
+    const limitMessage = document.getElementById('limitMessage');
+    const btn = document.getElementById('paraphraseBtn');
+
+    if (words > 500 && currentUserType !== 'premium') {
+        if (limitMessage) limitMessage.style.display = 'flex';
+        if (btn) btn.disabled = true;
+    } else {
+        if (limitMessage) limitMessage.style.display = 'none';
+        if (btn) btn.disabled = false;
+    }
+}
+
+// ==============================
+// 🔹 Mode Restriction
+// ==============================
+function checkModeRestriction() {
+    const modeSelect = document.getElementById('mode');
+    if (!modeSelect) return;
+    const selected = modeSelect.value;
+
+    if (['creative', 'academic'].includes(selected) && currentUserType !== 'premium') {
+        const featureName = modeSelect.options[modeSelect.selectedIndex].text.replace(' 🔒', '');
+        const premiumFeatureNameEl = document.getElementById('premiumFeatureName');
+        if (premiumFeatureNameEl) premiumFeatureNameEl.textContent = featureName;
+        showPremiumModal();
+        modeSelect.value = 'simple';
+        showToast('This mode requires premium subscription', 'warning');
+    }
+}
+
+function showPremiumModal() {
+    const modal = document.getElementById('premiumModal');
+    if (modal) modal.classList.add('show');
+}
+
+function closeModal() {
+    const modal = document.getElementById('premiumModal');
+    if (modal) modal.classList.remove('show');
+}
+
+window.onclick = function(e) {
+    const modal = document.getElementById('premiumModal');
+    if (modal && e.target === modal) closeModal();
+};
+
+// ==============================
+// 🔹 Paraphrase Logic
+// ==============================
+async function paraphraseText() {
+    const inputEl  = document.getElementById('inputText');
+    const outputEl = document.getElementById('outputText');
+    const btn      = document.getElementById('paraphraseBtn');
+    const modeEl   = document.getElementById('mode');
+    const langEl   = document.getElementById('language');
+
+    if (!inputEl || !btn) return;
+
+    const text = inputEl.value.trim();
+    const mode = modeEl ? modeEl.value : 'simple';
+    const lang = langEl ? langEl.value : 'en';
+
+    if (['creative', 'academic'].includes(mode) && currentUserType !== 'premium') {
+        showPremiumModal();
+        return;
+    }
+
+    if (!text) {
+        showToast('Please enter some text to paraphrase', 'error');
+        return;
+    }
+
+    const originalHTML = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+    btn.disabled = true;
+
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text, mode, language: lang })
+        });
+
+        if (!response.ok) throw new Error(`Server error: ${response.status}`);
+
+        const data = await response.json();
+
+        if (data.error) {
+            showToast(data.error, 'error');
+            return;
+        }
+
+        const result = data.paraphrasedText || data.result || generateFallbackText(text, mode);
+        if (outputEl) outputEl.value = result;
+
+        const words = result.trim().split(/\s+/).length;
+        const chars = result.length;
+        const outputWordsEl = document.getElementById('outputWords');
+        const outputCharsEl = document.getElementById('outputChars');
+        if (outputWordsEl) outputWordsEl.innerHTML = `<strong>${words}</strong> words`;
+        if (outputCharsEl) outputCharsEl.innerHTML = `<strong>${chars}</strong> chars`;
+
+        showToast('Paraphrased successfully!', 'success');
+
+    } catch (error) {
+        console.error('❌ Paraphrase API Error:', error);
+        const result = generateFallbackText(text, mode);
+        if (outputEl) outputEl.value = result;
+
+        const words = result.trim().split(/\s+/).length;
+        const chars = result.length;
+        const outputWordsEl = document.getElementById('outputWords');
+        const outputCharsEl = document.getElementById('outputChars');
+        if (outputWordsEl) outputWordsEl.innerHTML = `<strong>${words}</strong> words`;
+        if (outputCharsEl) outputCharsEl.innerHTML = `<strong>${chars}</strong> chars`;
+
+        showToast('Server offline — showing demo result', 'warning');
+    } finally {
+        btn.innerHTML = originalHTML;
+        btn.disabled = false;
+    }
+}
+
+function generateFallbackText(text, mode) {
+    const sentences = text.split(/[.!?]+/).filter(s => s.trim());
+    const modes = {
+        simple:   (s) => s.trim(),
+        formal:   (s) => 'It can be stated that ' + s.trim().toLowerCase(),
+        creative: (s) => 'Imagine this: ' + s.trim(),
+        academic: (s) => 'According to analysis, ' + s.trim() + ', which demonstrates a structured interpretation'
+    };
+    const fn = modes[mode] || modes.simple;
+    return sentences.map(fn).join('. ').trim() + '.';
+}
+
+// ==============================
+// 🔹 Output Actions
+// ==============================
+function copyText() {
+    const text = document.getElementById('outputText')?.value;
+    if (!text || !text.trim()) { showToast('Nothing to copy', 'error'); return; }
+    navigator.clipboard.writeText(text).then(() => showToast('Copied to clipboard!', 'success'));
+}
+
+function downloadText() {
+    const text = document.getElementById('outputText')?.value;
+    if (!text || !text.trim()) { showToast('Nothing to download', 'error'); return; }
+    const blob = new Blob([text], { type: 'text/plain' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'paraphrased-text.txt';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    showToast('Downloaded!', 'success');
+}
+
+function shareText() {
+    const text = document.getElementById('outputText')?.value;
+    if (!text || !text.trim()) { showToast('Nothing to share', 'error'); return; }
+    if (navigator.share) {
+        navigator.share({ title: 'Paraphrased Text', text });
+    } else {
+        copyText();
+    }
+}
+
+// ==============================
+// 🔹 Toast
+// ==============================
+function showToast(msg, type = 'success') {
+    document.querySelectorAll('.paraphrase-inline-toast').forEach(t => t.remove());
+
+    const icons  = { success: '✓', error: '✗', warning: '⚠' };
+    const colors = { success: '#10b981', error: '#ef4444', warning: '#f59e0b' };
+
+    const toast = document.createElement('div');
+    toast.className = 'paraphrase-inline-toast';
+    toast.innerHTML = `<span style="font-weight:bold;margin-right:8px;">${icons[type] || 'ℹ'}</span><span>${msg}</span>`;
+    toast.style.cssText = `
+        position:fixed; top:20px; left:50%; transform:translateX(-50%);
+        padding:12px 20px; background:${colors[type] || '#3b82f6'};
+        color:white; border-radius:8px; font-size:14px;
+        z-index:10000; font-family:system-ui,sans-serif;
+        box-shadow:0 4px 12px rgba(0,0,0,0.15);
+        display:flex; align-items:center; gap:8px;
+    `;
+    document.body.appendChild(toast);
+
+    toast.animate(
+        [{ transform:'translate(-50%,-20px)', opacity:0 }, { transform:'translate(-50%,0)', opacity:1 }],
+        { duration:300, easing:'ease-out', fill:'forwards' }
+    );
+
+    setTimeout(() => {
+        toast.animate(
+            [{ transform:'translate(-50%,0)', opacity:1 }, { transform:'translate(-50%,-20px)', opacity:0 }],
+            { duration:300, easing:'ease-in', fill:'forwards' }
+        );
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+// ==============================
+// 🔹 Custom Select Builder
+// ==============================
+function buildCustomSelect(selectEl) {
+    const wrapper = selectEl.closest('.select-wrapper.small');
+    if (!wrapper || wrapper.querySelector('.custom-select')) return;
+
+    const container = document.createElement('div');
+    container.className = 'custom-select';
+
+    const trigger = document.createElement('div');
+    trigger.className = 'custom-select-trigger';
+    trigger.setAttribute('tabindex', '0');
+
+    const triggerText = document.createElement('span');
+    triggerText.className = 'custom-select-trigger-text';
+
+    const arrow = document.createElement('i');
+    arrow.className = 'fas fa-chevron-down custom-select-arrow';
+
+    trigger.appendChild(triggerText);
+    trigger.appendChild(arrow);
+
+    const optionsList = document.createElement('div');
+    optionsList.className = 'custom-select-options';
+
+    container.appendChild(trigger);
+    container.appendChild(optionsList);
+    wrapper.appendChild(container);
+
+    function rebuildOptions() {
+        optionsList.innerHTML = '';
+        Array.from(selectEl.options).forEach((opt) => {
+            const item = document.createElement('div');
+            item.className = 'custom-select-option';
+            item.dataset.value = opt.value;
+            item.textContent = opt.text;
+            if (opt.disabled) item.classList.add('disabled');
+            if (opt.selected)  item.classList.add('selected');
+
+            item.addEventListener('click', () => {
+                if (opt.disabled) return;
+                selectEl.value = opt.value;
+                selectEl.dispatchEvent(new Event('change', { bubbles: true }));
+                updateTriggerLabel();
+                rebuildOptions();
+                closeDropdown();
+            });
+            optionsList.appendChild(item);
+        });
+    }
+
+    function updateTriggerLabel() {
+        const sel = selectEl.options[selectEl.selectedIndex];
+        triggerText.textContent = sel ? sel.text : '';
+    }
+
+    function openDropdown() {
+        document.querySelectorAll('.custom-select.open').forEach(el => el.classList.remove('open'));
+        container.classList.add('open');
+    }
+
+    function closeDropdown() {
+        container.classList.remove('open');
+    }
+
+    trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        container.classList.contains('open') ? closeDropdown() : openDropdown();
+    });
+
+    trigger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); container.classList.contains('open') ? closeDropdown() : openDropdown(); }
+        if (e.key === 'Escape') closeDropdown();
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!container.contains(e.target)) closeDropdown();
+    });
+
+    // Sync when code does: modeSelect.value = 'simple'
+    const origDescriptor = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'value');
+    if (origDescriptor) {
+        Object.defineProperty(selectEl, 'value', {
+            get: () => origDescriptor.get.call(selectEl),
+            set: (val) => {
+                origDescriptor.set.call(selectEl, val);
+                updateTriggerLabel();
+                rebuildOptions();
+            }
+        });
+    }
+
+    // Sync when updateModeOptions() changes option text / disabled
+    new MutationObserver(() => {
+        rebuildOptions();
+        updateTriggerLabel();
+    }).observe(selectEl, { childList: true, subtree: true, characterData: true });
+
+    rebuildOptions();
+    updateTriggerLabel();
+}
+
+// ==============================
+// 🔹 Init
+// ==============================
+document.addEventListener('DOMContentLoaded', () => {
+    fetchUserType();
+    countWords();
+
+    // Build custom dropdowns
+    document.querySelectorAll('.select-wrapper.small select').forEach(buildCustomSelect);
+
+    const inputText = document.getElementById('inputText');
+    if (inputText) {
+        inputText.addEventListener('input', countWords);
+        inputText.addEventListener('paste', () => setTimeout(countWords, 10));
+    }
+
+    document.getElementById('clearBtn').onclick = () => {
+        const inputEl  = document.getElementById('inputText');
+        const outputEl = document.getElementById('outputText');
+        const outputWordsEl = document.getElementById('outputWords');
+        const outputCharsEl = document.getElementById('outputChars');
+        if (inputEl)  inputEl.value  = '';
+        if (outputEl) outputEl.value = '';
+        if (outputWordsEl) outputWordsEl.innerHTML = '<strong>0</strong> words';
+        if (outputCharsEl) outputCharsEl.innerHTML = '<strong>0</strong> chars';
+        countWords();
+        showToast('Cleared!', 'success');
+    };
+});
+
+</script>
        <script src="js/layout.js"></script>
     <script src="js/main.js"></script>
     <script type="module" src="js/script.js"></script>
