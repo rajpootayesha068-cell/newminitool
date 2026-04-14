@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Mini Tool Box - AI Writing & Editing Tools</title>
+    <meta name="description" content="Mini Tool Box is a complete AI-powered writing and editing platform with 10+ tools. Learn about our mission, team, and commitment to quality content creation.">
+    <meta name="keywords" content="about mini tool box, AI writing tools, paraphrasing tool, grammar checker, content creation, AI humanizer, writing assistant">
+    <meta name="author" content="Mini Tool Box">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://minitoolsbox.com/about.html">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="About Mini Tool Box - AI Writing & Editing Platform">
+    <meta property="og:description" content="Learn about Mini Tool Box - your complete solution for AI-powered writing and editing tools.">
+    <meta property="og:url" content="https://minitoolsbox.com/about.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ========================================
+           MINI TOOL BOX - ABOUT PAGE STYLES
+           Complete Theme Integration
+           ======================================== */
+
+        /* ===== 1. GLOBAL VARIABLES ===== */
+        :root {
+            --sapphire-primary: #0066cc;
+            --sapphire-secondary: #0099ff;
+            --sapphire-accent: #00ccff;
+            --sapphire-deep: #003366;
+            --sapphire-glow: #33ccff;
+            
+            --bg-primary: #f0f9ff;
+            --bg-secondary: #e6f3ff;
+            --bg-gradient: linear-gradient(135deg, #f0f9ff 0%, #e6f3ff 50%, #d9efff 100%);
+            
+            --text-primary: #0a1928;
+            --text-secondary: #1e3a5f;
+            
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-bg-solid: #ffffff;
+            --border-color: rgba(0, 102, 204, 0.2);
+            --header-bg: rgba(255, 255, 255, 0.9);
+            --footer-bg: rgba(255, 255, 255, 0.9);
+            
+            --gradient-primary: linear-gradient(135deg, #0066cc, #0099ff, #00ccff);
+            --gradient-premium: linear-gradient(135deg, #fbbf24, #f59e0b);
+            
+            --shadow-sm: 0 2px 8px rgba(0, 102, 204, 0.08);
+            --shadow-md: 0 4px 12px rgba(0, 102, 204, 0.12);
+            --shadow-lg: 0 8px 24px rgba(0, 102, 204, 0.15);
+            --shadow-xl: 0 20px 40px rgba(0, 102, 204, 0.2);
+            --shadow-strong: 0 10px 25px rgba(0, 102, 204, 0.25);
+            
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            --space-2xl: 4rem;
+            
+            --fs-xs: 0.75rem;
+            --fs-sm: 0.875rem;
+            --fs-base: 1rem;
+            --fs-md: 1.125rem;
+            --fs-lg: 1.25rem;
+            --fs-xl: 1.5rem;
+            --fs-2xl: 2rem;
+            --fs-3xl: 2.5rem;
+            --fs-4xl: 3rem;
+        }
+
+        [data-theme="dark"] {
+            --sapphire-primary: #00a3ff;
+            --sapphire-secondary: #4db8ff;
+            --sapphire-accent: #80ccff;
+            --sapphire-deep: #001a33;
+            
+            --bg-primary: #0a1428;
+            --bg-secondary: #0d1a33;
+            --bg-gradient: linear-gradient(135deg, #0a1428 0%, #0d1a33 50%, #10203d 100%);
+            
+            --text-primary: #ffffff;
+            --text-secondary: #b3d9ff;
+            
+            --card-bg: rgba(10, 25, 45, 0.85);
+            --card-bg-solid: #0f1a2f;
+            --border-color: rgba(0, 163, 255, 0.25);
+            --header-bg: rgba(10, 20, 40, 0.95);
+            --footer-bg: rgba(10, 20, 40, 0.95);
+        }
+
+        /* ===== 2. BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ===== 3. BACKGROUND WRAPPER ===== */
+        #background-wrapper {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.4;
+            animation: floatOrb 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: min(700px, 80vw);
+            height: min(700px, 80vw);
+            background: radial-gradient(circle at 30% 30%, 
+                var(--sapphire-primary) 0%, 
+                var(--sapphire-secondary) 50%, 
+                transparent 80%);
+            top: -200px;
+            left: -200px;
+        }
+
+        .orb-2 {
+            width: min(600px, 70vw);
+            height: min(600px, 70vw);
+            background: radial-gradient(circle at 70% 70%, 
+                var(--sapphire-secondary) 0%, 
+                var(--sapphire-accent) 50%, 
+                transparent 80%);
+            bottom: -200px;
+            right: -200px;
+        }
+
+        @keyframes floatOrb {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(40px, -30px) scale(1.1); }
+        }
+
+        /* ===== 4. MAIN WRAPPER ===== */
+        .main-wrapper {
+            position: relative;
+            min-height: 100vh;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 0 1rem;
+            margin-top: 70px;
+        }
+
+        /* ===== 5. HEADER STYLES ===== */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--header-bg);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            height: 70px;
+        }
+
+        [data-theme="dark"] .site-header {
+            background: rgba(10, 20, 40, 0.95);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .logo-image-wrapper {
+            position: relative;
+            width: 45px;
+            height: 45px;
+        }
+
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--sapphire-primary);
+        }
+
+        .logo-ring {
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            animation: rotate 4s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            white-space: nowrap;
+        }
+
+        .logo-highlight {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link i {
+            color: var(--sapphire-primary);
+        }
+
+        .nav-link:hover {
+            color: var(--sapphire-primary);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.15), rgba(0, 153, 255, 0.15));
+            color: var(--sapphire-primary);
+        }
+
+        .premium-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            background: var(--gradient-premium);
+            border: none;
+            border-radius: 30px;
+            color: #000;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .profile-wrapper {
+            position: relative;
+        }
+
+        .avatar-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: var(--card-bg-solid);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 320px;
+            height: 100vh;
+            background: var(--card-bg-solid);
+            z-index: 2000;
+            transition: right 0.3s ease;
+        }
+
+        .mobile-nav.show {
+            right: 0;
+        }
+
+        @media screen and (max-width: 768px) {
+            .desktop-nav { display: none; }
+            .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
+            .logo-text { font-size: 1.2rem; }
+        }
+
+        /* ===== 6. ABOUT PAGE SPECIFIC STYLES ===== */
+        .about-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-xl) var(--space-sm);
+        }
+
+        /* Hero Section */
+        .about-hero {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .about-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.15), rgba(0, 153, 255, 0.15));
+            color: var(--sapphire-primary);
+            padding: 0.6rem 1.5rem;
+            border-radius: 40px;
+            font-size: var(--fs-xs);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .about-hero h1 {
+            font-size: clamp(var(--fs-2xl), 5vw, var(--fs-4xl));
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+        }
+
+        .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-hero-subtitle {
+            font-size: clamp(var(--fs-base), 2vw, var(--fs-lg));
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Mission Section */
+        .mission-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            margin-bottom: var(--space-2xl);
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 32px;
+            padding: var(--space-xl);
+            border: 1px solid var(--border-color);
+            animation: fadeInUp 0.8s ease 0.1s both;
+        }
+
+        .mission-content h2 {
+            font-size: var(--fs-2xl);
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+        }
+
+        .mission-content p {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-md);
+            line-height: 1.8;
+        }
+
+        .mission-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: var(--space-md);
+            background: rgba(0, 102, 204, 0.05);
+            border-radius: 20px;
+        }
+
+        .stat-number {
+            font-size: var(--fs-3xl);
+            font-weight: 800;
+            color: var(--sapphire-primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: var(--fs-sm);
+            color: var(--text-secondary);
+        }
+
+        .mission-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mission-icon {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            background: var(--gradient-primary);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-xl);
+        }
+
+        .mission-icon i {
+            font-size: 8rem;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .mission-section {
+                grid-template-columns: 1fr;
+            }
+            .mission-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Features Grid */
+        .features-grid-about {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: var(--fs-2xl);
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-xl);
+            font-size: var(--fs-md);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: var(--space-lg);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--sapphire-primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--space-md);
+        }
+
+        .feature-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: var(--fs-lg);
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Tools List */
+        .tools-list-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 32px;
+            padding: var(--space-xl);
+            border: 1px solid var(--border-color);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .tools-grid-about {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+
+        .tool-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm);
+            background: rgba(0, 102, 204, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .tool-item:hover {
+            background: rgba(0, 102, 204, 0.1);
+            transform: translateX(5px);
+        }
+
+        .tool-item i {
+            color: var(--sapphire-primary);
+            font-size: 1.2rem;
+        }
+
+        .tool-item span {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Values Section */
+        .values-section {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .value-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: var(--space-lg);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--sapphire-primary);
+        }
+
+        .value-card i {
+            font-size: 2.5rem;
+            color: var(--sapphire-primary);
+            margin-bottom: var(--space-md);
+        }
+
+        .value-card h3 {
+            font-size: var(--fs-lg);
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+
+        .value-card p {
+            color: var(--text-secondary);
+        }
+
+        /* CTA Section */
+        .about-cta {
+            text-align: center;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            padding: var(--space-xl);
+            border: 1px solid var(--border-color);
+        }
+
+        .about-cta h2 {
+            font-size: var(--fs-2xl);
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+        }
+
+        .about-cta p {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-lg);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            padding: var(--space-sm) var(--space-xl);
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+            padding: var(--space-sm) var(--space-xl);
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--sapphire-primary);
+            color: var(--sapphire-primary);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--footer-bg);
+            border-top: 1px solid var(--border-color);
+            padding: var(--space-xl) var(--space-sm) var(--space-lg);
+            backdrop-filter: blur(10px);
+            margin-top: var(--space-2xl);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .footer-logo span {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .footer-description {
+            color: var(--text-secondary);
+            font-size: var(--fs-sm);
+            margin: var(--space-sm) 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .footer-column h4 {
+            font-size: var(--fs-md);
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            font-size: var(--fs-sm);
+            transition: all 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--sapphire-primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: var(--fs-xs);
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-wrapper {
+                margin-top: 65px;
+            }
+            .about-hero h1 {
+                font-size: var(--fs-2xl);
+            }
+            .tools-grid-about {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background -->
+    <div id="background-wrapper">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+<!-- Header -->
+    <div id="header"></div>
+
+<!-- Main Content -->
+<div class="main-wrapper">
+    
+    <!-- About Hero Section -->
+    <section class="about-section">
+        <div class="about-hero">
+            <span class="about-hero-badge">
+                <i class="fas fa-tools"></i>
+                WHO WE ARE
+            </span>
+            <h1>About <span class="gradient-text">Mini Tool Box</span></h1>
+            <p class="about-hero-subtitle">
+                Your complete AI-powered writing and editing platform. We're on a mission to make 
+                professional content creation accessible to everyone, everywhere.
+            </p>
+        </div>
+
+        <!-- Mission Section -->
+        <div class="mission-section">
+            <div class="mission-content">
+                <h2>Our <span class="gradient-text">Mission</span></h2>
+                <p>Mini Tool Box was born from a simple idea: <strong>powerful writing tools should be accessible to everyone</strong>. We believe that great content shouldn't require expensive software or professional training.</p>
+                <p>Our platform combines <strong>10+ AI-powered tools</strong> into one seamless experience, helping writers, students, marketers, and businesses create better content faster.</p>
+                
+                <div class="mission-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">10+</span>
+                        <span class="stat-label">AI Tools</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100K+</span>
+                        <span class="stat-label">Happy Users</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">4.9</span>
+                        <span class="stat-label">User Rating</span>
+                    </div>
+                </div>
+            </div>
+            <div class="mission-image">
+                <div class="mission-icon">
+                    <i class="fas fa-toolbox"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features-grid-about">
+            <h2 class="section-title">Why Choose <span class="gradient-text">Mini Tool Box</span></h2>
+            <p class="section-subtitle">We combine cutting-edge AI technology with an intuitive user experience</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI-Powered Accuracy</h3>
+                    <p>Our advanced AI models understand context, tone, and meaning to deliver human-like results every time.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Get results in milliseconds. No waiting, no delays - just instant improvements to your content.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>100% Secure</h3>
+                    <p>Your privacy matters. All content is encrypted and never shared with third parties.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <h3>Unlimited Use</h3>
+                    <p>No credit card required for basic features. Upgrade only when you need more power.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Works Everywhere</h3>
+                    <p>Fully responsive design that works perfectly on desktop, tablet, and mobile devices.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>50+ Languages</h3>
+                    <p>Our translator and tools support over 50 languages, connecting you to a global audience.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tools List Section -->
+        <div class="tools-list-section">
+            <h2 class="section-title">Our <span class="gradient-text">Tools</span></h2>
+            <p class="section-subtitle">Everything you need for content creation in one place</p>
+            
+            <div class="tools-grid-about">
+                <div class="tool-item">
+                    <i class="fas fa-robot"></i>
+                    <span>AI Humanizer</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-magic"></i>
+                    <span>Paraphrasing Tool</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-pen-fancy"></i>
+                    <span>Sentence Rewriter</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-language"></i>
+                    <span>Rewording Tool</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-compress-alt"></i>
+                    <span>Summarizer</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-calculator"></i>
+                    <span>Word Counter</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-check-double"></i>
+                    <span>Grammar Checker</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-spell-check"></i>
+                    <span>Spell Checker</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-globe"></i>
+                    <span>Translator</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Plagiarism Checker</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-microchip"></i>
+                    <span>AI Detector</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Values Section -->
+        <div class="values-section">
+            <h2 class="section-title">Our <span class="gradient-text">Values</span></h2>
+            <p class="section-subtitle">The principles that guide everything we do</p>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>User First</h3>
+                    <p>We design every feature with our users' needs in mind, prioritizing simplicity and effectiveness.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Innovation</h3>
+                    <p>We constantly improve our AI models to deliver the best possible results.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-lock"></i>
+                    <h3>Privacy</h3>
+                    <p>Your content belongs to you. We never store or share your data without permission.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-globe-asia"></i>
+                    <h3>Accessibility</h3>
+                    <p>Powerful tools should be available to everyone, regardless of budget or location.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="about-cta">
+            <h2>Ready to <span class="gradient-text">Transform</span> Your Writing?</h2>
+            <p>Join thousands of satisfied users who have already discovered the power of Mini Tool Box.</p>
+            <div class="cta-buttons">
+                <a href="https://minitoolsbox.com" class="btn-primary">
+                    <i class="fas fa-arrow-right"></i>
+                    Start Creating Now
+                </a>
+                <a href="https://minitoolsbox.com/contact.html" class="btn-secondary">
+                    <i class="fas fa-envelope"></i>
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Footer Component -->
+<div id="footer"></div>
+
+<script>
+    // Simple theme toggle and header functionality
+    (function() {
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        // Check for saved user session
+        const user = localStorage.getItem('user');
+        const avatarCircle = document.querySelector('.avatar-circle');
+        if (user && avatarCircle) {
+            const userData = JSON.parse(user);
+            avatarCircle.innerHTML = `<i class="fas fa-user-check"></i>`;
+        }
+        
+        // Mobile menu toggle
+        window.toggleMobileMenu = function() {
+            const mobileNav = document.getElementById('mobileNav');
+            if (mobileNav) {
+                mobileNav.classList.toggle('show');
+                document.body.style.overflow = mobileNav.classList.contains('show') ? 'hidden' : '';
+            }
+        };
+        
+        // Dark mode toggle
+        window.toggleDarkMode = function(event) {
+            if (event) event.preventDefault();
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        };
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileBtn = document.querySelector('.mobile-menu-btn');
+            if (mobileNav && mobileNav.classList.contains('show') && mobileBtn && !mobileBtn.contains(event.target) && !mobileNav.contains(event.target)) {
+                mobileNav.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        });
+    })();
+</script>
+
+<!-- Load header and footer components -->
+<script>
+    async function loadComponent(id, file) {
+        try {
+            const response = await fetch(file);
+            if (!response.ok) throw new Error('Failed to load');
+            document.getElementById(id).innerHTML = await response.text();
+        } catch (error) {
+            console.error('Error loading component:', error);
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        loadComponent('header', 'components/header.html');
+        loadComponent('footer', 'components/footer.html');
+    });
+</script>
+
+</body>
+</html>

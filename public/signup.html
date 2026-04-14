@@ -5,27 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up | Mini Tool Box</title>
     
+    <!-- Preload Critical Resources for better performance -->
+    <link rel="preload" href="css/newstyle.css" as="style">
+    <link rel="preload" href="css/signup-login.css" as="style">
+    
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     
     <!-- CSS Files -->
     <link rel="stylesheet" href="css/newstyle.css">
     <link rel="stylesheet" href="css/signup-login.css">
 
-    <!-- <script src="config.js"></script> -->
-       <script>
-  window.CONFIG = {
-    API_URL: "https://minitoolbackend-production.up.railway.app/"
-  };
-</script>
+    <script>
+        window.CONFIG = {
+            API_URL: "https://minitoolbackend-production.up.railway.app/"
+        };
+    </script>
 </head>
 <body>
     <!-- Header -->
     <div id="header"></div>
 
-    <!-- Background -->
-    <div id="background-wrapper">
+    <!-- Background - Optimized -->
+    <div class="background-wrapper">
         <div class="glow-orb orb-1"></div>
         <div class="glow-orb orb-2"></div>
     </div>
@@ -36,7 +39,7 @@
         <section class="auth-section">
             <div class="auth-container">
                 <!-- Left Side - Hero Text -->
-                <div class="auth-hero animate-on-scroll">
+                <div class="auth-hero">
                     <div class="auth-hero-badge">
                         <i class="fas fa-rocket"></i>
                         <span>Join 100K+ Happy Users</span>
@@ -65,13 +68,13 @@
                 </div>
 
                 <!-- Right Side - Signup Form -->
-                <div class="auth-card animate-on-scroll">
+                <div class="auth-card">
                     <div class="auth-card-header">
                         <h2>Create Account</h2>
                         <p>It only takes a minute</p>
                     </div>
                     
-                    <!--  FIREBASE SIGNUP FORM -->
+                    <!-- SIGNUP FORM -->
                     <form id="signupForm" class="auth-form">
                         <div class="form-group">
                             <label for="fullName">
@@ -148,10 +151,8 @@
                             </label>
                         </div>
                         
-                        <!-- Error Message Display -->
+                        <!-- Messages -->
                         <div id="signupError" class="error-message" style="display: none;"></div>
-                        
-                        <!-- Success Message Display -->
                         <div id="signupSuccess" class="success-message" style="display: none;"></div>
                         
                         <button type="submit" class="auth-btn" id="signupBtn">
@@ -167,7 +168,7 @@
                         <span>or continue with</span>
                     </div>
                     
-                    <!-- 🔥 FIREBASE GOOGLE BUTTON -->
+                    <!-- Google Signup -->
                     <button class="social-btn google-btn" id="googleSignupBtn">
                         <i class="fab fa-google"></i>
                         <span class="btn-text">Google</span>
@@ -184,12 +185,10 @@
         </section>
     </div>
 
-    <!-- JavaScript Files -->
-        <script src="js/layout.js"></script>
-    <script src="js/main.js"></script>
-    <script type="module" src="js/script.js"></script>
-   <script type="module" src="js/auth.js"></script>
- 
-
+    <!-- JavaScript Files - Deferred for better performance -->
+    <script src="js/layout.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script type="module" src="js/script.js" defer></script>
+    <script type="module" src="js/auth.js" defer></script>
 </body>
 </html>
